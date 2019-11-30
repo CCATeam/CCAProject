@@ -4,11 +4,14 @@ import game.application.Command;
 import game.application.Game;
 import game.application.exceptions.InvalidCommandException;
 import game.application.Lookable;
+import game.application.Takeable;
 import game.application.exceptions.LockedExitException;
 import game.application.exceptions.NonExistantPlaceException;
 import game.application.places.Place;
 import game.application.exceptions.NonExistantLookableException;
+import game.application.exceptions.NonExistantTakeableException;
 import game.application.exceptions.NonLookableException;
+import game.application.exceptions.NonTakeableException;
 import java.util.Scanner;
 
 public class IHM {
@@ -88,6 +91,17 @@ public class IHM {
             } catch (NonExistantLookableException ex) {
                 this.refreshConsole(this.game.getHeroPlace().toString()
                         + "\nVous essayez de regarder quelque chose d'innexistant ! (Si vous y arrivez, bravo !)");
+            }
+        }
+        
+        else if(c.equals(Command.TAKE) && tabParameters.length > 1) {
+            try {
+                Takeable taken = this.game.strToItem(tabParameters[1]);
+                this.refreshConsole(taken.taken(this.game.getHero()));
+            } catch (NonTakeableException ex) {
+                this.refreshConsole("\nVous ne pouvez pas ramasser cet objet");
+            } catch (NonExistantTakeableException ex) {
+                this.refreshConsole("\nVous essayez de ramasser un objet qui n'existe pas !");
             }
         }
     }

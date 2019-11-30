@@ -8,7 +8,9 @@ import game.application.character.Character;
 import game.application.exceptions.NonExistantPlaceException;
 import game.application.exceptions.LockedExitException;
 import game.application.exceptions.NonExistantLookableException;
+import game.application.exceptions.NonExistantTakeableException;
 import game.application.exceptions.NonLookableException;
+import game.application.exceptions.NonTakeableException;
 import game.stockage.Stockage;
 import java.util.List;
 
@@ -138,4 +140,23 @@ public class Game {
         return currentHeroPlace;
     }
 
+    /**
+     * Returns game's hero
+     * 
+     * @return this.hero
+     */
+    public Character getHero() {
+        return hero;
+    }
+
+    /**
+     *
+     * @param tabParameter
+     * @return
+     * @throws NonTakeableException
+     * @throws NonExistantTakeableException
+     */
+    public Takeable strToItem(java.lang.String tabParameter) throws NonTakeableException, NonExistantTakeableException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
