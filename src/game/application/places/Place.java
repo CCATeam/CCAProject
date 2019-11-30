@@ -87,4 +87,8 @@ public class Place {
         return this.NAME + "\n"
             + "   Description: " + this.DESCRIPTION;
     }
+
+    public void removeItem(int hashCode) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

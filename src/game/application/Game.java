@@ -8,7 +8,9 @@ import game.application.character.Character;
 import game.application.exceptions.NonExistantPlaceException;
 import game.application.exceptions.LockedExitException;
 import game.application.exceptions.NonExistantLookableException;
+import game.application.exceptions.NonExistantTakeableException;
 import game.application.exceptions.NonLookableException;
+import game.application.exceptions.NonTakeableException;
 import game.stockage.Stockage;
 import java.util.List;
 
@@ -135,4 +137,33 @@ public class Game {
         return currentHeroPlace;
     }
 
+    /**
+     * Returns game's hero
+     * 
+     * @return this.hero
+     */
+    public Character getHero() {
+        return hero;
+    }
+
+    /**
+     *
+     * @param str
+     * @return
+     * @throws NonTakeableException
+     * @throws NonExistantTakeableException
+     */
+    public Takeable take(java.lang.String str) throws NonTakeableException, NonExistantTakeableException {
+        Item item = this.getHeroPlace().getItemByName(str);
+        if (item==null) {
+            throw new NonExistantTakeableException();
+        }
+        else if (item instanceof Takeable){
+            Takeable takeable = (Takeable) item;
+            String taken = takeable.taken(this.getHero());
+            return takeable;
+        } else {
+            throw new NonTakeableException();
+        }
+    }
 }
