@@ -88,7 +88,11 @@ public class Place {
             + "   Description: " + this.DESCRIPTION;
     }
 
-    public void removeItem(int hashCode) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void removeItem(Item item) {
+        for (Map.Entry<String,Item> entry : this.ITEMS.entrySet()) {
+            if (item==entry.getValue()) {
+                this.ITEMS.remove(entry.getKey());
+            }
+        }
     }
 }

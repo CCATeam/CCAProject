@@ -94,6 +94,10 @@ public abstract class Character implements Lookable {
              + "life: " + this.life; 
     }
     
+    /**
+     *
+     * @return
+     */
     public Place getPlace() {
         return this.placeCourante;
     }

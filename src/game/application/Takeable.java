@@ -11,33 +11,20 @@ import game.application.items.Item;
  *
  * @author antoine
  */
-public abstract class Takeable extends Item {
-
-    private boolean stuck;
-
-
-    
-    /**
-     *
-     * @param NAME
-     * @param DESCRIPTION
-     * @param stuck
-     */
-    
-    public Takeable(String NAME, String DESCRIPTION, boolean stuck) {
-        super(NAME, DESCRIPTION);
-        this.stuck = stuck;
-    }
+public interface Takeable {
     
     /**
      *
      * @param chara
      * @return
      */
-    public String taken (game.application.character.Character chara)
+    default String taken (game.application.character.Character chara)
     {
-        chara.addItem(this);
-        chara.getPlace().removeItem(this.hashCode());
-        return("not yet decided string");
+        if (this instanceof Item) {
+            chara.addItem((Item)this);
+            chara.getPlace().removeItem((Item)this);
+        return("String not yet decided");
+        }
+        return("String not yet decided.");
     }
 }
