@@ -60,10 +60,8 @@ public abstract class Character implements Lookable {
         return this.bag.removeItem(nom);
     }
 
-    public void changeWeapon(String nom) {
-        Weapon tmp = (Weapon) removeItem(nom);
-        addItem(weaponCourante);
-        this.weaponCourante = tmp;
+    public void changeWeapon() {
+        
     }
     
     /**
