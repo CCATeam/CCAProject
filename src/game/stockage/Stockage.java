@@ -11,7 +11,9 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
 import game.application.character.Hero;
 import game.application.character.Character;
+import game.application.places.Exit;
 import game.application.places.Place;
+import game.application.places.WoodenDoorExit;
 import java.util.List;
 
 /**
@@ -28,100 +30,107 @@ public class Stockage {
         
         //Défini les sous-types de Character pour pouvoir récupérer tout d'un coup 
         //dans le json
-        RuntimeTypeAdapterFactory<Character> runtimeTypeAdapterFactory;
-        runtimeTypeAdapterFactory = RuntimeTypeAdapterFactory
+        RuntimeTypeAdapterFactory<Character> runtimeTypeAdapterFactoryCharacter;
+        runtimeTypeAdapterFactoryCharacter = RuntimeTypeAdapterFactory
                 .of(Character.class, "type")
+                .registerSubtype(Character.class, "character")
                 .registerSubtype(Hero.class, "hero");
+        
+        //Défini les sous-types de Exit pour pouvoir récupérer tout d'un coup 
+        //dans le json
+        RuntimeTypeAdapterFactory<Exit> runtimeTypeAdapterFactoryExit;
+        runtimeTypeAdapterFactoryExit = RuntimeTypeAdapterFactory
+                .of(Exit.class, "type")
+                .registerSubtype(Exit.class, "exit")
+                .registerSubtype(WoodenDoorExit.class, "wooden door");
 
         Gson g = new GsonBuilder()
-            .registerTypeAdapterFactory(runtimeTypeAdapterFactory)
+            .registerTypeAdapterFactory(runtimeTypeAdapterFactoryCharacter)
+            .registerTypeAdapterFactory(runtimeTypeAdapterFactoryExit)
             .create();
+        
         List<Place> lp = g.fromJson("["
                                     + "{"
                                         +"\"NAME\": \"test\","
                                         +"\"DESCRIPTION\": \"premiere place, il y a un item1 et un item2\","
-                                        +"\"CHARACTERS\": ["
-                                                        + "{"
+                                        +"\"CHARACTERS\": {"
+                                                        + "\"testCharMap1\": {"
                                                                +"\"type\": \"hero\","
                                                                +"\"NAME\": \"testCharMap1\","
                                                                +"\"life\": 100,"
                                                                +"\"location\": \"location1\""
                                                         + "},"
-                                                        + "{"
-                                                               +"\"type\": \"hero\","
+                                                        + " \"test2CharMap1\": {"
+                                                               +"\"type\": \"character\","
                                                                +"\"NAME\": \"test2CharMap1\","
                                                                +"\"life\": 100,"
                                                                +"\"location\": \"location2\""
                                                         + "}"
-                                                       +"],"
+                                                       +"},"
                                         +"\"EXITS\": {"
                                                     + "\"test2\": {"
+                                                           +"\"type\": \"wooden door\","
+                                                           +"\"NAME\": \"woodendoor\","
                                                            +"\"DESCRIPTION\": \"testExit\""
                                                     + "}"
                                                   +"},"
-                                        +"\"ITEMS\": ["
-                                                        + "{"                                                               
+                                        +"\"ITEMS\": {"
+                                                        + "\"item1\": {"                                                               
                                                                +"\"NAME\": \"item1\","
                                                                +"\"DESCRIPTION\": \"blablabla1\""
                                                         + "},"
-                                                        + "{"
+                                                        + "\"item2\": {"
                                                                +"\"NAME\": \"item2\","
                                                                +"\"DESCRIPTION\": \"blablabla2\""
                                                         + "}"
-                                                  +"]"
+                                                  +"}"
                                     + "},"
                                     + "{"
                                         +"\"NAME\": \"test2\","
                                         +"\"DESCRIPTION\": \"deuxieme place\","
-                                        +"\"CHARACTERS\": ["
-                                                        + "{"
-                                                               +"\"type\": \"hero\","
+                                        +"\"CHARACTERS\": {"
+                                                        + " \"testCharMap2\": {"
+                                                               +"\"type\": \"character\","
                                                                +"\"NAME\": \"testCharMap2\","
                                                                +"\"life\": 100"
                                                         + "},"
-                                                        + "{"
-                                                               +"\"type\": \"hero\","
+                                                        + " \"test2CharMap2\": {"
+                                                               +"\"type\": \"character\","
                                                                +"\"NAME\": \"test2CharMap2\","
                                                                +"\"life\": 100"
                                                         + "}"
-                                                       +"],"
+                                                       +"},"
                                         +"\"EXITS\": {"
                                                     + "\"test\":{"
+                                                           +"\"type\": \"exit\","
                                                            +"\"DESCRIPTION\": \"testExit\""
                                                     + "},"
                                                     + "\"sortie\":{"
+                                                           +"\"type\": \"exit\","
                                                            +"\"DESCRIPTION\": \"testExit\""
                                                     + "}"
                                                   +"},"
-                                        +"\"ITEMS\": ["
-                                                        + "{"
+                                        +"\"ITEMS\": {"
+                                                        + "\"item3\": {"
                                                                +"\"NAME\": \"item3\","
                                                                +"\"DESCRIPTION\": \"blabla3\""
                                                         + "},"
-                                                        + "{"
+                                                        + "\"item4\": {"
                                                                +"\"NAME\": \"item4\","
                                                                +"\"DESCRIPTION\": \"blabla4\""
                                                         + "}"
-                                                       +"]"
+                                                       +"}"
                                     + "},"
                                     + "{"
                                         +"\"NAME\": \"sortie\","
                                         +"\"DESCRIPTION\": \"Congratulation, you finished the game ! You can quit now.\","
-                                        +"\"CHARACTERS\": ["
-                                                       +"],"
+                                        +"\"CHARACTERS\": {"
+                                                       +"},"
                                         +"\"EXITS\": {"
                                             
                                                    +"},"
-                                        +"\"ITEMS\": ["
-                                                        + "{"
-                                                               +"\"NAME\": \"item3\","
-                                                               +"\"DESCRIPTION\": \"blabla3\""
-                                                        + "},"
-                                                        + "{"
-                                                               +"\"NAME\": \"item4\","
-                                                               +"\"DESCRIPTION\": \"blabla4\""
-                                                        + "}"
-                                                    +"]"
+                                        +"\"ITEMS\": {"
+                                                    +"}"
                                     + "}"
                                   + "]", new TypeToken<List<Place>>(){}.getType());
         return lp;

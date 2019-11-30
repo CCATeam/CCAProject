@@ -29,7 +29,15 @@ public class Game {
     public void initializeGame() {
         Stockage s = new Stockage();
         this.places = s.getDataGame();
+        
+        //Initialize all the places, i.e. Get the lookables, and other "ables" 
+        //from the data contain in each place.
+        for(Place p : this.places) {
+            p.initialize();
+        }
+        
         this.hero = new Hero("hero", 100);
+        
         this.currentHeroPlace = this.places.get(0);
     }
 
@@ -76,25 +84,15 @@ public class Game {
      *
      * @param s
      * @return 
-     * @throws game.application.exceptions.NonLookableException 
      * @throws game.application.exceptions.NonExistantLookableException 
      */
-    public Lookable lookInPlace(String s) throws NonLookableException, NonExistantLookableException {
-        Lookable l;
-        Item i = this.getHeroPlace().getItemByName(s);
+    public Lookable lookInPlace(String s) throws NonExistantLookableException {
+        Lookable l = this.getHeroPlace().getLookable(s);
         
-        if(i != null) {
-            if(i instanceof Lookable) {
-                l = i;
-            }
-            else {
-                throw new NonLookableException();
-            }
-        }
-        else {
+        if(l == null) {
             throw new NonExistantLookableException();
         }
-        
+     
         return l;
     }
     

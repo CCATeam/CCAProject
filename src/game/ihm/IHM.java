@@ -84,7 +84,7 @@ public class IHM {
         else if(c.equals(Command.LOOK) && tabParameters.length > 1) {     
             try {
                 Lookable l = this.game.lookInPlace(tabParameters[1]);
-                this.refreshConsole(l.look());
+                this.refreshConsole(l.looked());
             } catch (NonLookableException ex) {
                 this.refreshConsole(this.game.getHeroPlace().toString()
                         + "\nIl n'y a rien à voir ici !");
