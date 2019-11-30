@@ -5,13 +5,47 @@
  */
 package game.application;
 
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Stream;
+
 /**
  *
  * @author Fabien
  */
 public interface Lookable {
     
-    public default String look() {
+    public default String looked() {
         return this.toString();
+    }
+    
+    public abstract String getNAME();
+    
+    /**
+     * Static method that says if an object is of type Lookable
+     * @param o
+     * @return 
+     */
+    public static boolean isLookable(Object o) {
+        return o instanceof Lookable;
+    }
+    
+    /**
+     * Recup all the Lookables from a Collection and
+     * construct a Map<String, Lookable> from that object.
+     * @param l
+     * @return 
+     */
+    public static Map<String, Lookable> GetLookables(Collection<? extends Object> l) {
+        Map lookables = new HashMap<>();
+        
+        if(l != null) {        
+            Stream s = l.stream();
+            s = s.filter(e -> Lookable.isLookable(e));
+            s.forEach(e -> lookables.put(((Lookable) e).getNAME(), e));
+        }
+        return lookables;
     }
 }

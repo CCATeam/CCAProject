@@ -1,5 +1,6 @@
 package game.application.places;
 
+import game.application.Lookable;
 import game.application.items.Item;
 import game.application.character.Character;
 import java.util.*;
@@ -8,11 +9,12 @@ public class Place {
     
     private final String NAME;
     private final String DESCRIPTION;
-    private final List<Character> CHARACTERS;
+    private final Map<String, Character> CHARACTERS;
     private final Map<String, Exit> EXITS;
-    private final List<Item> ITEMS;
-
-    public Place(String NAME, String DESCRIPTION, List<Character> CHARACTERS, Map<String, Exit> EXITS, List<Item> ITEMS) {
+    private final Map<String, Item> ITEMS;
+    private Map<String, Lookable>lookables;
+    
+    public Place(String NAME, String DESCRIPTION, Map<String, Character> CHARACTERS, Map<String, Exit> EXITS, Map<String, Item> ITEMS) {
         this.NAME = NAME;
         this.CHARACTERS = CHARACTERS;
         this.EXITS = EXITS;
@@ -20,8 +22,33 @@ public class Place {
         this.DESCRIPTION = DESCRIPTION;
     }
     
-    public Exit getExit(String s) {       
-        return this.EXITS.get(s);
+    /**
+     * Initialize the "ables" Map objects from the data contained in 
+     * CHARACTERS, EXITS, ITEMS
+     */
+    public void initialize() {
+        this.lookables = new HashMap<>();
+        this.lookables.putAll(Lookable.GetLookables(this.EXITS.values()));
+        this.lookables.putAll(Lookable.GetLookables(this.CHARACTERS.values()));
+        this.lookables.putAll(Lookable.GetLookables(this.ITEMS.values()));
+    }
+    
+    /**
+     * Get a Lookable by its name.
+     * @param name String
+     * @return Return null if non found object, else the lookable.
+     */
+    public Lookable getLookable(String name) {
+        return this.lookables.get(name);
+    }
+    
+    /**
+     * Get an Exit by its name.
+     * @param name String
+     * @return Return null if non found object, else the lookable.
+     */
+    public Exit getExit(String name) {   
+        return this.EXITS.get(name);
     }
     
     public List<Item> getItems() {
@@ -35,12 +62,7 @@ public class Place {
      * @return 
      */
     public Item getItemByName(String s) {
-        for(Item i : this.ITEMS) {
-            if(i.getNAME().equalsIgnoreCase(s)) {
-                return i;
-            }
-        }
-        return null;
+        return this.ITEMS.get(s);
     }
 
     /**
@@ -49,16 +71,7 @@ public class Place {
      * @return 
      */
     public Character getCharacterByName(String s) {
-        for(Character c : this.CHARACTERS) {
-            if(c.getNAME().equalsIgnoreCase(s)) {
-                return c;
-            }
-        }
-        return null;
-    }
-    
-    public List<Character> getCharacters() {
-        return this.CHARACTERS;
+       return this.CHARACTERS.get(s);
     }
 
     public String getNAME() {
