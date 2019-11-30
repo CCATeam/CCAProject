@@ -33,7 +33,6 @@ public class Stockage {
         RuntimeTypeAdapterFactory<Character> runtimeTypeAdapterFactoryCharacter;
         runtimeTypeAdapterFactoryCharacter = RuntimeTypeAdapterFactory
                 .of(Character.class, "type")
-                .registerSubtype(Character.class, "character")
                 .registerSubtype(Hero.class, "hero");
         
         //Défini les sous-types de Exit pour pouvoir récupérer tout d'un coup 
@@ -52,7 +51,7 @@ public class Stockage {
         List<Place> lp = g.fromJson("["
                                     + "{"
                                         +"\"NAME\": \"test\","
-                                        +"\"DESCRIPTION\": \"premiere place, il y a un item1 et un item2\","
+                                        +"\"DESCRIPTION\": \"premiere place, il y a un item1,un item2 et une woodendoor\","
                                         +"\"CHARACTERS\": {"
                                                         + "\"testCharMap1\": {"
                                                                +"\"type\": \"hero\","
@@ -61,17 +60,16 @@ public class Stockage {
                                                                +"\"location\": \"location1\""
                                                         + "},"
                                                         + " \"test2CharMap1\": {"
-                                                               +"\"type\": \"character\","
+                                                               +"\"type\": \"hero\","
                                                                +"\"NAME\": \"test2CharMap1\","
-                                                               +"\"life\": 100,"
-                                                               +"\"location\": \"location2\""
+                                                               +"\"life\": 100"
                                                         + "}"
                                                        +"},"
                                         +"\"EXITS\": {"
                                                     + "\"test2\": {"
                                                            +"\"type\": \"wooden door\","
                                                            +"\"NAME\": \"woodendoor\","
-                                                           +"\"DESCRIPTION\": \"testExit\""
+                                                           +"\"DESCRIPTION\": \"Porte en bois qui mène vers la salle test2\""
                                                     + "}"
                                                   +"},"
                                         +"\"ITEMS\": {"
@@ -90,12 +88,12 @@ public class Stockage {
                                         +"\"DESCRIPTION\": \"deuxieme place\","
                                         +"\"CHARACTERS\": {"
                                                         + " \"testCharMap2\": {"
-                                                               +"\"type\": \"character\","
+                                                               +"\"type\": \"hero\","
                                                                +"\"NAME\": \"testCharMap2\","
                                                                +"\"life\": 100"
                                                         + "},"
                                                         + " \"test2CharMap2\": {"
-                                                               +"\"type\": \"character\","
+                                                               +"\"type\": \"hero\","
                                                                +"\"NAME\": \"test2CharMap2\","
                                                                +"\"life\": 100"
                                                         + "}"
