@@ -149,12 +149,22 @@ public class Game {
 
     /**
      *
-     * @param tabParameter
+     * @param str
      * @return
      * @throws NonTakeableException
      * @throws NonExistantTakeableException
      */
-    public Takeable strToItem(java.lang.String tabParameter) throws NonTakeableException, NonExistantTakeableException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Takeable take(java.lang.String str) throws NonTakeableException, NonExistantTakeableException {
+        Item item = this.getHeroPlace().getItemByName(str);
+        if (item==null) {
+            throw new NonExistantTakeableException();
+        }
+        else if (item instanceof Takeable){
+            Takeable takeable = (Takeable) item;
+            String taken = takeable.taken(this.getHero());
+            return takeable;
+        } else {
+            throw new NonTakeableException();
+        }
     }
 }
