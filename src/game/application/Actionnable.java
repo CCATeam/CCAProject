@@ -5,14 +5,14 @@
  */
 package game.application;
 
+import java.util.List;
+
 /**
  *
  * @author fcorso
  */
 public interface Actionnable {
     
-    public void action(Usable u);
-    
-    public void action(Usable u1, Usable u2);
+    public void action(List<Usable> listUsables);
 
 }

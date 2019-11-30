@@ -34,8 +34,7 @@ public class Game {
             p.initialize();
         }
         
-        this.hero = new Hero("hero", 100);
-        
+        this.hero = new Hero("hero", 100);      
         this.currentHeroPlace = this.places.get(0);
     }
 
