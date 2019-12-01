@@ -5,7 +5,7 @@
  */
 package game.application;
 import game.application.items.Item;
-
+import game.application.character.Character;
 
 /**
  *
@@ -18,7 +18,7 @@ public interface Takeable {
      * @param chara
      * @return
      */
-    default String taken (game.application.character.Character chara)
+    default String taken (Character chara)
     {
         if (this instanceof Item) {
             chara.addItem((Item)this);
