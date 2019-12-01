@@ -11,4 +11,6 @@ package game.application;
  */
 public interface Usable {
     
+	public void Use();
+	
 }

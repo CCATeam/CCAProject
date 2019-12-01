@@ -18,7 +18,7 @@ public class Item implements Lookable{
 
     public String getDESCRIPTION() {
         return DESCRIPTION;
-    }    
+    }
     
     @Override
     public String toString() {
