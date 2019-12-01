@@ -4,6 +4,7 @@ import game.application.Lookable;
 import game.application.items.Item;
 import game.application.character.Character;
 import java.util.*;
+import java.util.Map.Entry;
 
 public class Place {
     
@@ -52,8 +53,11 @@ public class Place {
     }
     
     public List<Item> getItems() {
-            // TODO - implement Place.getItems
-            throw new UnsupportedOperationException();
+        List<Item> res = new ArrayList<>();
+        this.ITEMS.values().forEach((item) -> {
+            res.add(item);
+        });
+        return res;
     }
 
     /**
