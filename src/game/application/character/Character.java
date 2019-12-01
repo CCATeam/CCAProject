@@ -17,7 +17,8 @@ public abstract class Character implements Lookable {
     
     /**
      * 
-     * @param name
+     * @param place
+     * @param NAME
      * @param life
      */
     public Character(String name, int life) {
@@ -29,7 +30,8 @@ public abstract class Character implements Lookable {
     
     /**
      * 
-     * @param name
+     * @param place
+     * @param NAME
      * @param life
      * @param weapon
      */
@@ -58,19 +60,28 @@ public abstract class Character implements Lookable {
         return this.bag.removeItem(nom);
     }
 
-    public void changeWeapon() {
-        
+    public void changeWeapon(String nom) {
+        Weapon tmp = (Weapon) removeItem(nom);
+        addItem(weaponCourante);
+        this.weaponCourante = tmp;
+    }
+    
+    public Place getPlace() {
+        return this.placeCourante;
     }
     
     /**
      *
      * @return
      */
-    @Override
     public String getNAME() {
         return NAME;
     }
 
+    public void attaque(Character chara) {
+    	chara.takeDamage(this.weaponCourante.getDamage());
+    }
+    
     /**
      *
      * @return
@@ -87,19 +98,14 @@ public abstract class Character implements Lookable {
         this.life = life;
     }
     
+    public void takeDamage(int damage) {
+    	this.life -= damage;
+    }
     
     @Override
     public String toString() {
         return this.NAME + " \n"
              + "life: " + this.life; 
-    }
-    
-    /**
-     *
-     * @return
-     */
-    public Place getPlace() {
-        return this.placeCourante;
     }
     
 }

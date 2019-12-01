@@ -18,4 +18,8 @@ public class Weapon extends Item{
         super(null, null);
     }
     
+    public int getDamage() {
+    	return 0; //TODO
+    }
+    
 }
