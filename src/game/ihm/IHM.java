@@ -89,7 +89,7 @@ public class IHM {
                         + "\nVous essayez de regarder quelque chose d'innexistant ! (Si vous y arrivez, bravo !)");
             }
         }
-        
+        //TAKE
         else if(c.equals(Command.TAKE) && tabParameters.length > 1) {
             try {
                 Takeable taken = this.game.take(tabParameters[1]);

@@ -108,4 +108,8 @@ public abstract class Character implements Lookable {
              + "life: " + this.life; 
     }
     
+    public Item getItemFromBag (String S) {
+        return this.bag.findItem(S);
+    }
+    
 }

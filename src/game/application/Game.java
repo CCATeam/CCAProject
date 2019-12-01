@@ -103,15 +103,21 @@ public class Game {
      * @throws game.application.exceptions.NonLookableException 
      * @throws game.application.exceptions.NonExistantLookableException 
      */
-    public Lookable lookInBag(String s) throws NonLookableException, NonExistantLookableException {
-        return null;
+    public Lookable searchInBag(String s) throws NonLookableException, NonExistantLookableException {
+        Item item = this.hero.getItemFromBag(s);
+        if (item==null){
+            throw new NonExistantLookableException();
+        } else if (item instanceof Lookable) {
+            return item;
+        }
+        throw new NonLookableException();
     }
 
     /**
      * 
      * @param s
      */
-    private boolean existsPlace(String s) {
+    private boolean searchPlace(String s) {
             // TODO - implement Game.existsPlace
             throw new UnsupportedOperationException();
     }
