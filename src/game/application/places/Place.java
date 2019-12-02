@@ -53,7 +53,7 @@ public class Place {
     
     public List<Item> getItems() {
             // TODO - implement Place.getItems
-            throw new UnsupportedOperationException();
+            throw new UnsupportedOperationException();           
     }
 
     /**
