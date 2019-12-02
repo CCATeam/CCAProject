@@ -20,6 +20,7 @@ import java.util.logging.Logger;
 public class IHM {
 
     private Game game;
+    private boolean quit = false;
     private final Scanner SCANNER;
 
     public IHM() {
@@ -101,7 +102,44 @@ public class IHM {
                 this.refreshConsole(ex.getMessage());
             } 
         }
+        //HELP
+        else if(c.equals(Command.HELP)) {
+            this.refreshConsole("Les commandes suivantes sont disponibles :\n "
+                    + "GO <lieu> : se déplacer\n"
+                    + "LOOK <lieu / objet / personnage> : examiner\n"
+                    + "BAG : lister le contenu de votre sac\n"
+                    + "TAKE <objet> : ramasser un objet\n"
+                    + "USE <objet> : utiliser un objet\n"
+                    + "USE <objet> <objet> : utiliser un objet sur quelque-chose\n"
+                    + "QUIT : quitter le jeu");
+        }
+        //QUIT 
+        else if(c.equals(Command.QUIT)) {
+            this.refreshConsole("Êtes-vous sûr ?\n");
+            tabParameters[0]=this.scan();
+            try {
+                c = Command.getCommand(tabParameters[0]);
+            }catch (InvalidCommandException ex) {
+                c = null;
+            }
+            if (c==Command.YES) {
+                this.refreshConsole("Voulez-vous sauvegarder ?");
+                tabParameters[0]=this.scan();
+                try {
+                    c = Command.getCommand(tabParameters[0]);
+                }
+                catch (InvalidCommandException ex){
+                    c = null;
+                }
+                if (c.equals(Command.YES)) {
+                    ;  //Fonction de sauvegarde
+                }
+                this.quit=true;
+            }    
+        }
     }
+    
+    
     
     /**
      * Main function of our IHM, here show what need to be shouw and wait for 
@@ -128,7 +166,8 @@ public class IHM {
                         + "\nCommande invalide");
             }  
             
-        } while(c != Command.QUIT);
+        } while(this.quit == false);
+        this.quit = false;
     }
 
 }
