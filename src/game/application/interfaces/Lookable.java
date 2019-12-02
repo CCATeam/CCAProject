@@ -3,18 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package game.application;
+package game.application.interfaces;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
-/**
- *
- * @author Fabien
- */
 public interface Lookable {
     
     public default String looked() {

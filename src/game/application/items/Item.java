@@ -1,6 +1,6 @@
 package game.application.items;
 
-import game.application.Lookable;
+import game.application.interfaces.Lookable;
 
 public class Item implements Lookable{
 
@@ -18,7 +18,7 @@ public class Item implements Lookable{
 
     public String getDESCRIPTION() {
         return DESCRIPTION;
-    }    
+    }
     
     @Override
     public String toString() {

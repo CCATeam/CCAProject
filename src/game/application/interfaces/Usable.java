@@ -3,12 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package game.application;
+package game.application.interfaces;
 
-/**
- *
- * @author fcorso
- */
 public interface Usable {
     
 }

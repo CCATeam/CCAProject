@@ -1,6 +1,7 @@
 package game.application;
 
 import game.application.exceptions.InvalidCommandException;
+import java.util.Arrays;
 
 public enum Command {
     GO,
@@ -50,7 +51,7 @@ public enum Command {
                 c = Command.QUIT;
                 break;
             case "USE":
-                c = Command.QUIT;
+                c = Command.USE;
                 break;    
             case "YES":
                 c = Command.YES;  
@@ -77,6 +78,7 @@ public enum Command {
      * @return 
      */
     public static String[] getParameters(String s){
-       return s.split(" ");
+       String[] tabParams = s.split(" ");
+       return Arrays.copyOfRange(tabParams, 1, tabParams.length);
     }
 }

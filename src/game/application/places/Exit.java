@@ -6,9 +6,11 @@ import game.application.exceptions.LockedExitException;
 public class Exit {
     
     private final String DESCRIPTION;
+    private final String NAME;
 
-    public Exit(String Description) {
+    public Exit(String Description, String name) {
         this.DESCRIPTION = Description;
+        this.NAME = name;
     }
     
     public boolean canPass(Character c) throws LockedExitException {
@@ -21,4 +23,10 @@ public class Exit {
     public String getDescription() {
         return DESCRIPTION;
     }
+
+    public String getNAME() {
+        return NAME;
+    }
+    
+    
 }

@@ -11,6 +11,9 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
 import game.application.character.Hero;
 import game.application.character.Character;
+import game.application.items.DoorKey;
+import game.application.items.Item;
+import game.application.places.ClosedDoorExit;
 import game.application.places.Exit;
 import game.application.places.Place;
 import game.application.places.WoodenDoorExit;
@@ -41,17 +44,27 @@ public class Stockage {
         runtimeTypeAdapterFactoryExit = RuntimeTypeAdapterFactory
                 .of(Exit.class, "type")
                 .registerSubtype(Exit.class, "exit")
-                .registerSubtype(WoodenDoorExit.class, "wooden door");
+                .registerSubtype(WoodenDoorExit.class, "wooden door")
+                .registerSubtype(ClosedDoorExit.class, "closed door");
 
+        //Défini les sous-types de Exit pour pouvoir récupérer tout d'un coup 
+        //dans le json
+        RuntimeTypeAdapterFactory<Item> runtimeTypeAdapterFactoryItem;
+        runtimeTypeAdapterFactoryItem = RuntimeTypeAdapterFactory
+                .of(Item.class, "type")
+                .registerSubtype(Item.class, "item")
+                .registerSubtype(DoorKey.class, "door key");
+        
         Gson g = new GsonBuilder()
             .registerTypeAdapterFactory(runtimeTypeAdapterFactoryCharacter)
             .registerTypeAdapterFactory(runtimeTypeAdapterFactoryExit)
+            .registerTypeAdapterFactory(runtimeTypeAdapterFactoryItem)
             .create();
         
         List<Place> lp = g.fromJson("["
                                     + "{"
-                                        +"\"NAME\": \"test\","
-                                        +"\"DESCRIPTION\": \"premiere place, il y a un item1,un item2 et une woodendoor\","
+                                        +"\"NAME\": \"chambre\","
+                                        +"\"DESCRIPTION\": \"premiere place, il y a un item1,une doorkey et une woodendoor\","
                                         +"\"CHARACTERS\": {"
                                                         + "\"testCharMap1\": {"
                                                                +"\"type\": \"hero\","
@@ -66,25 +79,27 @@ public class Stockage {
                                                         + "}"
                                                        +"},"
                                         +"\"EXITS\": {"
-                                                    + "\"test2\": {"
+                                                    + "\"couloir\": {"
                                                            +"\"type\": \"wooden door\","
                                                            +"\"NAME\": \"woodendoor\","
                                                            +"\"DESCRIPTION\": \"Porte en bois qui mène vers la salle test2\""
                                                     + "}"
                                                   +"},"
                                         +"\"ITEMS\": {"
-                                                        + "\"item1\": {"                                                               
+                                                        + "\"item1\": {"             
+                                                               +"\"type\": \"item\","
                                                                +"\"NAME\": \"item1\","
                                                                +"\"DESCRIPTION\": \"blablabla1\""
                                                         + "},"
-                                                        + "\"item2\": {"
-                                                               +"\"NAME\": \"item2\","
+                                                        + "\"doorkey\": {"
+                                                               +"\"type\": \"door key\","
+                                                               +"\"NAME\": \"doorkey\","
                                                                +"\"DESCRIPTION\": \"blablabla2\""
                                                         + "}"
                                                   +"}"
                                     + "},"
                                     + "{"
-                                        +"\"NAME\": \"test2\","
+                                        +"\"NAME\": \"couloir\","
                                         +"\"DESCRIPTION\": \"deuxieme place\","
                                         +"\"CHARACTERS\": {"
                                                         + " \"testCharMap2\": {"
@@ -99,21 +114,26 @@ public class Stockage {
                                                         + "}"
                                                        +"},"
                                         +"\"EXITS\": {"
-                                                    + "\"test\":{"
+                                                    + "\"chambre\":{"
                                                            +"\"type\": \"exit\","
+                                                           +"\"NAME\": \"exittest\","
                                                            +"\"DESCRIPTION\": \"testExit\""
                                                     + "},"
                                                     + "\"sortie\":{"
-                                                           +"\"type\": \"exit\","
-                                                           +"\"DESCRIPTION\": \"testExit\""
+                                                           +"\"type\": \"closed door\","
+                                                           +"\"NAME\": \"closeddoor\","
+                                                           +"\"DESCRIPTION\": \"testExit\","
+                                                           +"\"closed\": true"
                                                     + "}"
                                                   +"},"
                                         +"\"ITEMS\": {"
                                                         + "\"item3\": {"
+                                                               +"\"type\": \"item\","
                                                                +"\"NAME\": \"item3\","
                                                                +"\"DESCRIPTION\": \"blabla3\""
                                                         + "},"
                                                         + "\"item4\": {"
+                                                               +"\"type\": \"item\","
                                                                +"\"NAME\": \"item4\","
                                                                +"\"DESCRIPTION\": \"blabla4\""
                                                         + "}"

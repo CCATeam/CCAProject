@@ -14,8 +14,9 @@ public class Bag {
     /**
      * 
      * @param nom
+     * @return 
      */
-    public Item existsItem(int nom) {
+    public Item findItem(String nom) {
         return this.items.get(nom);
     }
     

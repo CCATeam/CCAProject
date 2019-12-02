@@ -1,6 +1,6 @@
 package game.application.character;
 
-import game.application.Lookable;
+import game.application.interfaces.Lookable;
 import game.application.items.Item;
 import game.application.items.weapon.Weapon;
 import game.application.places.Place;
@@ -17,7 +17,8 @@ public abstract class Character implements Lookable {
     
     /**
      * 
-     * @param name
+     * @param place
+     * @param NAME
      * @param life
      */
     public Character(String name, int life) {
@@ -29,7 +30,8 @@ public abstract class Character implements Lookable {
     
     /**
      * 
-     * @param name
+     * @param place
+     * @param NAME
      * @param life
      * @param weapon
      */
@@ -58,19 +60,33 @@ public abstract class Character implements Lookable {
         return this.bag.removeItem(nom);
     }
 
-    public void changeWeapon() {
-        
+    public void changeWeapon(String nom) {
+        Weapon tmp = (Weapon) removeItem(nom);
+        addItem(weaponCourante);
+        this.weaponCourante = tmp;
     }
+    
+    public Place getPlace() {
+        return this.placeCourante;
+    }
+
+    public void setPlaceCourante(Place placeCourante) {
+        this.placeCourante = placeCourante;
+    }
+    
     
     /**
      *
      * @return
      */
-    @Override
     public String getNAME() {
         return NAME;
     }
 
+    public void attaque(Character chara) {
+    	chara.takeDamage(this.weaponCourante.getDamage());
+    }
+    
     /**
      *
      * @return
@@ -87,6 +103,9 @@ public abstract class Character implements Lookable {
         this.life = life;
     }
     
+    public void takeDamage(int damage) {
+    	this.life -= damage;
+    }
     
     @Override
     public String toString() {
@@ -94,8 +113,8 @@ public abstract class Character implements Lookable {
              + "life: " + this.life; 
     }
     
-    public Place getPlace() {
-        return this.placeCourante;
+    public Item getItemFromBag (String S) {
+        return this.bag.findItem(S);
     }
     
 }

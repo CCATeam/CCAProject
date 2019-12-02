@@ -3,15 +3,19 @@ package game.ihm;
 import game.application.Command;
 import game.application.Game;
 import game.application.exceptions.InvalidCommandException;
-import game.application.Lookable;
-import game.application.Takeable;
+import game.application.interfaces.Lookable;
+import game.application.interfaces.Takeable;
 import game.application.exceptions.LockedExitException;
+import game.application.exceptions.NonAvailableActionException;
+import game.application.exceptions.NonExistantActionnableException;
 import game.application.exceptions.NonExistantPlaceException;
 import game.application.places.Place;
 import game.application.exceptions.NonExistantLookableException;
 import game.application.exceptions.NonExistantTakeableException;
 import game.application.exceptions.NonTakeableException;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class IHM {
 
@@ -66,9 +70,9 @@ public class IHM {
      */
     public void action(Command c, String[] tabParameters) {     
         //GO
-        if(c.equals(Command.GO) && tabParameters.length > 1) {
+        if(c.equals(Command.GO) && tabParameters.length > 0) {
             try {
-                Place p = this.game.go(tabParameters[1]);
+                Place p = this.game.go(tabParameters[0]);
                 this.refreshConsole(p.toString());
                 
             } catch (NonExistantPlaceException ex) {
@@ -80,19 +84,19 @@ public class IHM {
             }
         }
         //LOOK
-        else if(c.equals(Command.LOOK) && tabParameters.length > 1) {     
+        else if(c.equals(Command.LOOK) && tabParameters.length > 0) {     
             try {
-                Lookable l = this.game.lookInPlace(tabParameters[1]);
+                Lookable l = this.game.lookInPlace(tabParameters[0]);
                 this.refreshConsole(l.looked());
             } catch (NonExistantLookableException ex) {
                 this.refreshConsole(this.game.getHeroPlace().toString()
                         + "\nVous essayez de regarder quelque chose d'innexistant ! (Si vous y arrivez, bravo !)");
             }
         }
-        
-        else if(c.equals(Command.TAKE) && tabParameters.length > 1) {
+        //TAKE
+        else if(c.equals(Command.TAKE) && tabParameters.length > 0) {
             try {
-                Takeable taken = this.game.take(tabParameters[1]);
+                Takeable taken = this.game.take(tabParameters[0]);
                 this.refreshConsole("Vous avez ramassé" + taken.toString());
                 this.refreshConsole(taken.taken(this.game.getHero()));
             } catch (NonTakeableException ex) {
@@ -100,6 +104,17 @@ public class IHM {
             } catch (NonExistantTakeableException ex) {
                 this.refreshConsole("\nVous essayez de ramasser un objet qui n'existe pas !");
             }
+        }
+        //USE
+        else if(c.equals(Command.USE) && tabParameters.length > 1) {     
+            try {
+                Lookable l = this.game.use(tabParameters);
+                this.refreshConsole(l.looked());
+            } catch (NonExistantActionnableException ex) {
+                this.refreshConsole("Rien ne se produit ...\n");
+            } catch (NonAvailableActionException ex) {
+                this.refreshConsole(ex.getMessage());
+            } 
         }
     }
     
@@ -121,7 +136,6 @@ public class IHM {
             try {
                 c = Command.getCommand(line);
                 parameters = Command.getParameters(line);
-                System.out.println(c);
                 this.action(c, parameters);
             }
             catch(InvalidCommandException ex) {

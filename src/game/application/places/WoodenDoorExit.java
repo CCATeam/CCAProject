@@ -5,7 +5,7 @@
  */
 package game.application.places;
 
-import game.application.Lookable;
+import game.application.interfaces.Lookable;
 
 /**
  *
@@ -13,23 +13,15 @@ import game.application.Lookable;
  */
 public class WoodenDoorExit extends Exit implements Lookable {
     
-    private final String NAME;
     
     public WoodenDoorExit(String Description, String name) {
-        super(Description);
-        this.NAME = name;
-    }
-
-    @Override
-    public String getNAME() {
-        return NAME;
+        super(Description, name);
     }
 
     @Override
     public String toString() {
-         return "Exit: " + this.NAME + "\n "
+         return "Exit: " + this.getNAME() + "\n "
              + "Description: " + this.getDescription();
     }
-    
-    
+
 }

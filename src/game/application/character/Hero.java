@@ -5,29 +5,20 @@
  */
 package game.application.character;
 
-import game.application.Actionnable;
-import game.application.Usable;
+import game.application.interfaces.Actionnable;
+import game.application.interfaces.Usable;
+import game.application.exceptions.NonAvailableActionException;
 import game.application.items.Consumable;
 import java.util.List;
 
-/**
- *
- * @author Fabien
- */
 public class Hero extends Character implements Actionnable{
     
-    private String location;
     public Hero(String NAME, int life) {
         super(NAME, life);
     }
-    
-    @Override
-    public String toString() {
-        return super.toString() + this.location;
-    }
 
     @Override
-    public void action(List<Usable> listUsables) {
+    public void action(List<Usable> listUsables) throws NonAvailableActionException{
         for(Usable u: listUsables) {
             if (Consumable.isConsumable(u)) {
                 Consumable cons = (Consumable) u;

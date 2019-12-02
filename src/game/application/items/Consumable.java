@@ -5,13 +5,13 @@
  */
 package game.application.items;
 
-import game.application.Usable;
+import game.application.interfaces.Usable;
 
 /**
  *
  * @author Fabien
  */
-public class Consumable extends Item implements Usable{
+public class Consumable extends Item {
     
     private int nbEffect;
     private boolean available;
