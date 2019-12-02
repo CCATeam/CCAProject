@@ -117,4 +117,18 @@ public abstract class Character implements Lookable {
         return this.bag.findItem(S);
     }
     
+    public Lookable lookedBag() {
+        return new Lookable() {
+            @Override
+            public String getNAME() {
+                return "Bag";
+            }
+
+            @Override
+            public String looked() {
+                return bag.toString(); //To change body of generated methods, choose Tools | Templates.
+            }
+        };
+    }
+    
 }

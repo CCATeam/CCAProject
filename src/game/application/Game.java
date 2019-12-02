@@ -92,6 +92,10 @@ public class Game {
         return l;
     }
     
+    public Lookable lookBag() {
+        return this.getHero().lookedBag();
+    }
+    
     /**
      *
      * @param s

@@ -23,29 +23,8 @@ public class IHM {
     private final Scanner SCANNER;
 
     public IHM() {
-       /* List<Place> places = new ArrayList();
-        List<Character> ch = new ArrayList();
-        List<Item> it = new ArrayList();
-        Map<String, Exit> exits = new HashMap<>();
-        
-        exits.put("test2", new Exit("exit2"));
-        exits.put("test3", new Exit());
-        
-        places.add(new Place("test", "testd", ch, exits, it));
-        exits = new HashMap<>();
-        exits.put("test", new Exit());
-        exits.put("test3", new Exit());
-        
-        places.add(new Place("test2", "testd", ch, exits, it));
-        exits = new HashMap<>();
-        exits.put("test", new Exit());
-        exits.put("test2", new Exit());
-        
-        places.add(new Place("test3", "testd", ch, exits, it));*/
-        
         this.game = new Game();
-        this.game.initializeGame();
-        
+        this.game.initializeGame();      
         this.SCANNER = new Scanner(System.in);
     }
         
@@ -92,6 +71,12 @@ public class IHM {
                 this.refreshConsole(this.game.getHeroPlace().toString()
                         + "\nVous essayez de regarder quelque chose d'innexistant ! (Si vous y arrivez, bravo !)");
             }
+        }
+        //LOOK IN BAG
+        else if(c.equals(Command.LOOKBAG) && tabParameters.length >= 0) {     
+            Lookable l = this.game.lookBag();
+            this.refreshConsole(l.looked());
+            
         }
         //TAKE
         else if(c.equals(Command.TAKE) && tabParameters.length > 0) {

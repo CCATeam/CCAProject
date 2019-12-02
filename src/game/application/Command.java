@@ -7,6 +7,7 @@ public enum Command {
     GO,
     HELP,
     LOOK,
+    LOOKBAG,
     TAKE,
     QUIT,
     USE,
@@ -16,21 +17,22 @@ public enum Command {
 
     /**
      * 
-     * @param sCommand
+     * @param strScanned
      * @return Command
-     * @throws game.application.InvalidCommandException
+     * @throws game.application.exceptions.InvalidCommandException
      */
-    public static Command getCommand(String sCommand) throws InvalidCommandException{
+    public static Command getCommand(String strScanned) throws InvalidCommandException{
         
-        String s;
-        if(sCommand.split(" ")[0].length() > 3) {
-            s = sCommand.split(" ")[0].substring(0, 3);
+        String[] tabScanned = strScanned.split(" ");
+        String sCommand;
+        if(tabScanned[0].length() > 3) {
+            sCommand = tabScanned[0].substring(0, 3);
         }
         else {
-            s = sCommand.split(" ")[0];
+            sCommand = tabScanned[0];
         }
         
-        String cmd = s.toUpperCase();
+        String cmd = sCommand.toUpperCase();
         Command c;
         
         switch(cmd) {
@@ -43,6 +45,9 @@ public enum Command {
                 break;
             case "LOO":
                 c = Command.LOOK;
+                break;
+            case "BAG":
+                c = Command.LOOKBAG;
                 break;
             case "TAK":
                 c = Command.TAKE;

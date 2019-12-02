@@ -36,5 +36,16 @@ public class Bag {
     public void addItem(Item item) {
         this.items.put(item.getNAME(), item);
     }
+    
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for(Item i : this.items.values()) {
+            sb.append(" ")
+              .append(i.toString())
+              .append("\n");
+        }
+        return sb.toString();
+    }
 
 }
