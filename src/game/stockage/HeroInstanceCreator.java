@@ -9,15 +9,11 @@ import com.google.gson.InstanceCreator;
 import game.application.character.Hero;
 import java.lang.reflect.Type;
 
-/**
- *
- * @author Fabien
- */
 class HeroInstanceCreator implements InstanceCreator<Hero>
 {
 
     @Override
     public Hero createInstance(Type type) {
-        return new Hero(null, 0, null);
+        return new Hero(null, 0, null, null);
     }
 }

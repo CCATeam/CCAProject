@@ -27,6 +27,4 @@ public class Exit {
     public String getNAME() {
         return NAME;
     }
-    
-    
 }

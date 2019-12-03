@@ -3,12 +3,12 @@ package game.application.character.ennemy;
 import game.application.character.Hero;
 import game.application.character.ennemy.special.StrongHit;
 import game.application.items.weapon.Axe;
-import game.application.items.weapon.Weapon;
+import game.application.places.Place;
 
 public class Orc extends Ennemy {
 	
-	public Orc(Hero hero) {
-		super("Orc", 10, new Axe(), new StrongHit(hero, new Axe()));
+	public Orc(String name, Hero hero, Place p) {
+            super(name, 10, new Axe(), new StrongHit(hero, new Axe()), p);
 	}
 
 	@Override

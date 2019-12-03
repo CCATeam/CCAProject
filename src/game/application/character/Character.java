@@ -12,20 +12,21 @@ public abstract class Character implements Lookable {
     private int life;
     private final int MAX_LIFE;
 
-    private Weapon weaponCourante;
+    private Weapon currentWeapon;
     private Place currentPlace;
     
     /**
      * 
+     * @param name
      * @param place
-     * @param NAME
      * @param life
      */
-    public Character(String name, int life, Place p) {
+    public Character(String name, int life, Weapon w, Place place) {
         this.NAME = name;
         this.life = life;
         this.MAX_LIFE = life;
-        this.currentPlace = p;
+        this.currentPlace = place;
+        this.currentWeapon = w;
         this.bag = new Bag();
     }
     
@@ -54,8 +55,8 @@ public abstract class Character implements Lookable {
     
     public void changeWeapon(String name) {
         Weapon tmp = (Weapon) removeItem(name);
-        addItem(weaponCourante);
-        this.weaponCourante = tmp;
+        addItem(currentWeapon);
+        this.currentWeapon = tmp;
     }
 
     /*
@@ -86,8 +87,8 @@ public abstract class Character implements Lookable {
      * @param Character
      */
     public int attack(Character chara) {
-    	chara.takeDamage(this.weaponCourante.getDamage());
-    	return this.weaponCourante.getDamage();
+    	chara.takeDamage(this.currentWeapon.getDamage());
+    	return this.currentWeapon.getDamage();
     }
     
     /**

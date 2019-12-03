@@ -9,12 +9,13 @@ import game.application.interfaces.Actionnable;
 import game.application.interfaces.Usable;
 import game.application.exceptions.NonAvailableActionException;
 import game.application.items.Consumable;
+import game.application.items.weapon.Weapon;
 import game.application.places.Place;
 
 public class Hero extends Character implements Actionnable{
     
-    public Hero(String NAME, int life, Place p) {
-        super(NAME, life, p);
+    public Hero(String NAME, int life, Weapon currentWeapon, Place p) {
+        super(NAME, life, currentWeapon, p);
     }
 
     @Override

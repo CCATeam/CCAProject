@@ -6,18 +6,14 @@
 package game.stockage;
 
 import com.google.gson.InstanceCreator;
-import game.application.character.Character;
+import game.application.character.ennemy.Orc;
 import java.lang.reflect.Type;
 
-/**
- *
- * @author Fabien
- */
-class CharacterInstanceCreator implements InstanceCreator<Character>
+class OrcInstanceCreator implements InstanceCreator<Orc>
 {
 
     @Override
-    public Character createInstance(Type type) {
-        return new Character(null, 0, null) { };
+    public Orc createInstance(Type type) {
+        return new Orc(null, null, null);
     }
 }

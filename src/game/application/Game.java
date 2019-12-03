@@ -153,20 +153,10 @@ public class Game {
         if(item == null || !Usable.isUsable(item)) {
             throw new NonAvailableActionException("Il n'y a pas d'item utilisable avec ce nom");
         }
-        usable = ((Usable)item);
+        usable = (Usable)item;
            
         actionnable.action(usable);
         return (Lookable)actionnable;
-    }
-
-    /**
-     * 
-     * @param item1
-     * @param item2
-     */
-    public void use(String item1, String item2) {
-            // TODO - implement Game.use
-            throw new UnsupportedOperationException();
     }
 
     public Place getHeroPlace() {
