@@ -7,19 +7,22 @@ import game.application.items.weapon.Weapon;
 
 public class Orc extends Ennemy {
 	
-	public Orc(Hero hero) {
-		super("Orc", 10, new Axe(), new StrongHit(hero, new Axe()));
+	public Orc() {
+		super("Orc", 10, new Axe(), new StrongHit(new Axe()));
 	}
 
 	@Override
 	public String action(Hero h) {
+		int damage;
 		if (Math.random() < 0.6 || !this.canUseSpecial()) {
-			int damage = this.attack(h);				
+			damage = this.attack(h);				
+			h.takeDamage(damage);
 			return "L'orc effectue une attaque et vous perdez " + damage + "poin de vie";
 		}
 		else {
-			this.special();
-			return "L'orc effectue son special : " + this.getSpecial();
+			damage = this.special();
+			h.takeDamage(damage);
+			return "L'orc effectue son special : " + this.getSpecial() + "vous perdez " + damage + "point de vie !" ;
 		}
 	}
 }
