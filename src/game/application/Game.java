@@ -186,7 +186,9 @@ public class Game {
     public Item ennemyDie(String nameEnnemy) {
     	Character ennemy = this.hero.getPlace().getCharacterByName(nameEnnemy);
     	this.hero.getPlace().removeCharacter(ennemy);
-      	return ((Ennemy)ennemy).loot();
+    	Item i = ((Ennemy)ennemy).loot();
+    	this.hero.addItem(i);;
+    	return i;
     }
     
     public String EnnemyAttack(String nameEnnemy) {
