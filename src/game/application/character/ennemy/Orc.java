@@ -15,13 +15,17 @@ public class Orc extends Ennemy {
 	public String action(Hero h) {
 		int damage;
 		if (Math.random() < 0.6 || !this.canUseSpecial()) {
-			damage = this.attack(h);				
-			h.takeDamage(damage);
+			damage = this.attack(h);
 			return "L'orc effectue une attaque et vous perdez " + damage + "poin de vie";
 		}
 		else {
 			damage = this.special();
-			h.takeDamage(damage);
+			if (damage == -1) {
+				damage = this.attack(h);
+			}
+			else {
+				h.takeDamage(damage);
+			}
 			return "L'orc effectue son special : " + this.getSpecial() + "vous perdez " + damage + "point de vie !" ;
 		}
 	}
