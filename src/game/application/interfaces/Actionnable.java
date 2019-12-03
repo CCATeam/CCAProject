@@ -6,11 +6,10 @@
 package game.application.interfaces;
 
 import game.application.exceptions.NonAvailableActionException;
-import java.util.List;
 
 public interface Actionnable {
     
-    public void action(List<Usable> listUsables) throws NonAvailableActionException;
+    public void action(Usable u) throws NonAvailableActionException;
 
     public static boolean isActionnable(Object o) {
         return o instanceof Actionnable;

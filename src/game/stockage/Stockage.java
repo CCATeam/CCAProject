@@ -7,13 +7,16 @@ package game.stockage;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.graph.GraphAdapterBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
 import game.application.character.Hero;
 import game.application.character.Character;
+import game.application.items.Chest;
+import game.application.items.ChestKey;
 import game.application.items.DoorKey;
 import game.application.items.Item;
-import game.application.places.ClosedDoorExit;
+import game.application.places.LockedExit;
 import game.application.places.Exit;
 import game.application.places.Place;
 import game.application.places.WoodenDoorExit;
@@ -45,7 +48,7 @@ public class Stockage {
                 .of(Exit.class, "type")
                 .registerSubtype(Exit.class, "exit")
                 .registerSubtype(WoodenDoorExit.class, "wooden door")
-                .registerSubtype(ClosedDoorExit.class, "closed door");
+                .registerSubtype(LockedExit.class, "locked exit");
 
         //Défini les sous-types de Exit pour pouvoir récupérer tout d'un coup 
         //dans le json
@@ -53,102 +56,127 @@ public class Stockage {
         runtimeTypeAdapterFactoryItem = RuntimeTypeAdapterFactory
                 .of(Item.class, "type")
                 .registerSubtype(Item.class, "item")
-                .registerSubtype(DoorKey.class, "door key");
+                .registerSubtype(DoorKey.class, "door key")
+                .registerSubtype(ChestKey.class, "chest key")
+                .registerSubtype(Chest.class, "chest");
         
-        Gson g = new GsonBuilder()
+        GsonBuilder gb = new GsonBuilder()
             .registerTypeAdapterFactory(runtimeTypeAdapterFactoryCharacter)
             .registerTypeAdapterFactory(runtimeTypeAdapterFactoryExit)
             .registerTypeAdapterFactory(runtimeTypeAdapterFactoryItem)
-            .create();
+            .registerTypeAdapter(Hero.class, new HeroInstanceCreator());
+        
+        new GraphAdapterBuilder()
+            .addType(Place.class)
+            .registerOn(gb);
+        
+        Gson g = gb.create();
         
         List<Place> lp = g.fromJson("["
                                     + "{"
-                                        +"\"NAME\": \"chambre\","
-                                        +"\"DESCRIPTION\": \"premiere place, il y a un item1,une doorkey et une woodendoor\","
-                                        +"\"CHARACTERS\": {"
-                                                        + "\"testCharMap1\": {"
-                                                               +"\"type\": \"hero\","
-                                                               +"\"NAME\": \"testCharMap1\","
-                                                               +"\"life\": 100,"
-                                                               +"\"location\": \"location1\""
-                                                        + "},"
-                                                        + " \"test2CharMap1\": {"
-                                                               +"\"type\": \"hero\","
-                                                               +"\"NAME\": \"test2CharMap1\","
-                                                               +"\"life\": 100"
+                                        +"'0x1': {"
+                                            +"\"NAME\": \"chambre\","
+                                            +"\"DESCRIPTION\": \"premiere place, il y a un chest,une chestkey et une woodendoor\","
+                                            +"\"CHARACTERS\": {"
+                                                            + "\"Me\": {"
+                                                                   +"\"type\": \"hero\","
+                                                                   +"\"NAME\": \"Me\","
+                                                                   +"\"life\": 100,"
+                                                                   +"\"currentPlace\": '0x1'"
+                                                            + "},"
+                                                            + " \"test2CharMap1\": {"
+                                                                   +"\"type\": \"hero\","
+                                                                   +"\"NAME\": \"test2CharMap1\","
+                                                                   +"\"life\": 100,"
+                                                                   +"\"currentPlace\": '0x1'"
+                                                            + "}"
+                                                           +"},"
+                                            +"\"EXITS\": {"
+                                                        + "\"couloir\": {"
+                                                               +"\"type\": \"wooden door\","
+                                                               +"\"NAME\": \"woodendoor\","
+                                                               +"\"DESCRIPTION\": \"Porte en bois qui mène vers la salle test2\""
                                                         + "}"
-                                                       +"},"
-                                        +"\"EXITS\": {"
-                                                    + "\"couloir\": {"
-                                                           +"\"type\": \"wooden door\","
-                                                           +"\"NAME\": \"woodendoor\","
-                                                           +"\"DESCRIPTION\": \"Porte en bois qui mène vers la salle test2\""
-                                                    + "}"
-                                                  +"},"
-                                        +"\"ITEMS\": {"
-                                                        + "\"item1\": {"             
-                                                               +"\"type\": \"item\","
-                                                               +"\"NAME\": \"item1\","
-                                                               +"\"DESCRIPTION\": \"blablabla1\""
-                                                        + "},"
-                                                        + "\"doorkey\": {"
-                                                               +"\"type\": \"door key\","
-                                                               +"\"NAME\": \"doorkey\","
-                                                               +"\"DESCRIPTION\": \"blablabla2\""
-                                                        + "}"
-                                                  +"}"
+                                                      +"},"
+                                            +"\"ITEMS\": {"
+                                                            + "\"chestkey\": {"             
+                                                                   +"\"type\": \"chest key\","
+                                                                   +"\"NAME\": \"chestkey\","
+                                                                   +"\"DESCRIPTION\": \"Chest Key\""
+                                                            + "},"
+                                                            + "\"chest\": {"
+                                                                   +"\"type\": \"chest\","
+                                                                   +"\"NAME\": \"chest\","
+                                                                   +"\"DESCRIPTION\": \"blablabla2\","
+                                                                   +"\"locked\": true,"
+                                                                   + "\"containedItem\": {"             
+                                                                        +"\"type\": \"door key\","
+                                                                        +"\"NAME\": \"doorkey\","
+                                                                        +"\"DESCRIPTION\": \"Key of a door\""
+                                                                   + "},"
+                                                                   +"\"place\": '0x1'"
+                                                                   
+                                                            + "}"
+                                                      +"}"
+                                     + "}"
                                     + "},"
                                     + "{"
-                                        +"\"NAME\": \"couloir\","
-                                        +"\"DESCRIPTION\": \"deuxieme place\","
-                                        +"\"CHARACTERS\": {"
-                                                        + " \"testCharMap2\": {"
-                                                               +"\"type\": \"hero\","
-                                                               +"\"NAME\": \"testCharMap2\","
-                                                               +"\"life\": 100"
+                                        + "'0x2': {"
+                                            +"\"NAME\": \"couloir\","
+                                            +"\"DESCRIPTION\": \"deuxieme place\","
+                                            +"\"CHARACTERS\": {"
+                                                            + " \"testCharMap2\": {"
+                                                                   +"\"type\": \"hero\","
+                                                                   +"\"NAME\": \"testCharMap2\","
+                                                                   +"\"life\": 100,"
+                                                                   +"\"currentPlace\": '0x2'"
+                                                            + "},"
+                                                            + " \"test2CharMap2\": {"
+                                                                   +"\"type\": \"hero\","
+                                                                   +"\"NAME\": \"test2CharMap2\","
+                                                                   +"\"life\": 100,"
+                                                                   +"\"currentPlace\": '0x2'"
+                                                            + "}"
+                                                           +"},"
+                                            +"\"EXITS\": {"
+                                                        + "\"chambre\":{"
+                                                               +"\"type\": \"exit\","
+                                                               +"\"NAME\": \"exittest\","
+                                                               +"\"DESCRIPTION\": \"testExit\""
                                                         + "},"
-                                                        + " \"test2CharMap2\": {"
-                                                               +"\"type\": \"hero\","
-                                                               +"\"NAME\": \"test2CharMap2\","
-                                                               +"\"life\": 100"
+                                                        + "\"sortie\":{"
+                                                               +"\"type\": \"locked exit\","
+                                                               +"\"NAME\": \"closeddoor\","
+                                                               +"\"DESCRIPTION\": \"testExit\","
+                                                               +"\"locked\": true"
                                                         + "}"
-                                                       +"},"
-                                        +"\"EXITS\": {"
-                                                    + "\"chambre\":{"
-                                                           +"\"type\": \"exit\","
-                                                           +"\"NAME\": \"exittest\","
-                                                           +"\"DESCRIPTION\": \"testExit\""
-                                                    + "},"
-                                                    + "\"sortie\":{"
-                                                           +"\"type\": \"closed door\","
-                                                           +"\"NAME\": \"closeddoor\","
-                                                           +"\"DESCRIPTION\": \"testExit\","
-                                                           +"\"closed\": true"
-                                                    + "}"
-                                                  +"},"
-                                        +"\"ITEMS\": {"
-                                                        + "\"item3\": {"
-                                                               +"\"type\": \"item\","
-                                                               +"\"NAME\": \"item3\","
-                                                               +"\"DESCRIPTION\": \"blabla3\""
-                                                        + "},"
-                                                        + "\"item4\": {"
-                                                               +"\"type\": \"item\","
-                                                               +"\"NAME\": \"item4\","
-                                                               +"\"DESCRIPTION\": \"blabla4\""
-                                                        + "}"
-                                                       +"}"
+                                                      +"},"
+                                            +"\"ITEMS\": {"
+                                                            + "\"item3\": {"
+                                                                   +"\"type\": \"item\","
+                                                                   +"\"NAME\": \"item3\","
+                                                                   +"\"DESCRIPTION\": \"blabla3\""
+                                                            + "},"
+                                                            + "\"item4\": {"
+                                                                   +"\"type\": \"item\","
+                                                                   +"\"NAME\": \"item4\","
+                                                                   +"\"DESCRIPTION\": \"blabla4\""
+                                                            + "}"
+                                                           +"}"
+                                        + "}"
                                     + "},"
                                     + "{"
-                                        +"\"NAME\": \"sortie\","
-                                        +"\"DESCRIPTION\": \"Congratulation, you finished the game ! You can quit now.\","
-                                        +"\"CHARACTERS\": {"
+                                        + "'0x3': {"
+                                            +"\"NAME\": \"sortie\","
+                                            +"\"DESCRIPTION\": \"Congratulation, you finished the game ! You can quit now.\","
+                                            +"\"CHARACTERS\": {"
+                                                           +"},"
+                                            +"\"EXITS\": {"
+
                                                        +"},"
-                                        +"\"EXITS\": {"
-                                            
-                                                   +"},"
-                                        +"\"ITEMS\": {"
-                                                    +"}"
+                                            +"\"ITEMS\": {"
+                                                        +"}"
+                                        + "}"
                                     + "}"
                                   + "]", new TypeToken<List<Place>>(){}.getType());
         return lp;

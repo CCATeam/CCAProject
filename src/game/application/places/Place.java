@@ -31,11 +31,6 @@ public class Place {
      * CHARACTERS, EXITS, ITEMS and attribute the current map to the Characters
      */
     public void initialize() {
-        
-        for(Character c : this.CHARACTERS.values()) {
-            c.setPlaceCourante(this);
-        }
-        
         this.lookables = new HashMap<>();
         this.actionnables = new HashMap<>();
 
@@ -89,6 +84,10 @@ public class Place {
         return this.EXITS.get(name);
     }
     
+    public void addItem(Item i) {
+        this.ITEMS.put(i.getNAME(), i);
+    }
+    
     public List<Item> getItems() {
         List<Item> res = new ArrayList<>();
         this.ITEMS.values().forEach((item) -> {
@@ -136,6 +135,7 @@ public class Place {
         for (Map.Entry<String,Item> entry : this.ITEMS.entrySet()) {
             if (item==entry.getValue()) {
                 this.ITEMS.remove(entry.getKey());
+                break;
             }
         }
     }

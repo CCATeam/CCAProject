@@ -7,4 +7,7 @@ package game.application.interfaces;
 
 public interface Usable {
     
+    public static boolean isUsable(Object o) {
+        return o instanceof Usable;
+    }
 }

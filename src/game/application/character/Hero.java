@@ -9,23 +9,22 @@ import game.application.interfaces.Actionnable;
 import game.application.interfaces.Usable;
 import game.application.exceptions.NonAvailableActionException;
 import game.application.items.Consumable;
-import java.util.List;
+import game.application.places.Place;
 
 public class Hero extends Character implements Actionnable{
     
-    public Hero(String NAME, int life) {
-        super(NAME, life);
+    public Hero(String NAME, int life, Place p) {
+        super(NAME, life, p);
     }
 
     @Override
-    public void action(List<Usable> listUsables) throws NonAvailableActionException{
-        for(Usable u: listUsables) {
-            if (Consumable.isConsumable(u)) {
-                Consumable cons = (Consumable) u;
-                this.setLife(this.getLife() + cons.getNbEffect());
-                this.removeItem(cons.getNAME());
-            }
+    public void action(Usable u) throws NonAvailableActionException{
+        if (Consumable.isConsumable(u)) {
+            Consumable cons = (Consumable) u;
+            this.setLife(this.getLife() + cons.getNbEffect());
+            this.removeItem(cons.getNAME());
         }
+        
     }
 
 }

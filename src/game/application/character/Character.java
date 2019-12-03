@@ -7,13 +7,16 @@ import game.application.places.Place;
 
 public abstract class Character implements Lookable {
 
+    //The GSON library doesn't use the constructor so for
+    //now the bag is created here. Atttribute transient to be ignore by 
+    //gson
     private Bag bag;
     private final String NAME;
     private int life;
     private final int MAX_LIFE;
 
     private Weapon weaponCourante;
-    private Place placeCourante;
+    private Place currentPlace;
     
     /**
      * 
@@ -21,25 +24,12 @@ public abstract class Character implements Lookable {
      * @param NAME
      * @param life
      */
-    public Character(String name, int life) {
+    public Character(String name, int life, Place p) {
         this.NAME = name;
         this.life = life;
         this.MAX_LIFE = life;
+        this.currentPlace = p;
         this.bag = new Bag();
-    }
-    
-    /**
-     * 
-     * @param place
-     * @param NAME
-     * @param life
-     * @param weapon
-     */
-    public Character(String name, int life, Weapon weapon) {
-        this.NAME = name;
-        this.life = life;
-        this.MAX_LIFE = life;
-        this.weaponCourante = weapon;
     }
     
 
@@ -67,11 +57,11 @@ public abstract class Character implements Lookable {
     }
     
     public Place getPlace() {
-        return this.placeCourante;
+        return this.currentPlace;
     }
 
     public void setPlaceCourante(Place placeCourante) {
-        this.placeCourante = placeCourante;
+        this.currentPlace = placeCourante;
     }
     
     

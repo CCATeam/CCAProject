@@ -12,24 +12,23 @@ import game.application.character.Character;
 import game.application.exceptions.LockedExitException;
 import game.application.exceptions.NonAvailableActionException;
 import game.application.items.DoorKey;
-import java.util.List;
 
-public class ClosedDoorExit extends Exit implements Lookable, Actionnable {
+public class LockedExit extends Exit implements Lookable, Actionnable {
     
-    private boolean closed;
+    private boolean locked;
     
-    public ClosedDoorExit(String Description, String name, boolean closed) {
+    public LockedExit(String Description, String name, boolean locked) {
         super(Description, name);
-        this.closed = closed;
+        this.locked = locked;
     }
 
     @Override
-    public void action(List<Usable> listUsables) throws NonAvailableActionException {
-        if(listUsables.size() > 1 || !DoorKey.isDoorKey(listUsables.get(0))) {
+    public void action(Usable u) throws NonAvailableActionException {
+        if(!DoorKey.isDoorKey(u)) {
             throw new NonAvailableActionException("Action impossible !");
         }
         
-        if(this.closed == false) {
+        if(this.locked == false) {
             throw new NonAvailableActionException("Vous essayez d'ouvrir une porte déjà ouverte ...");
         }
         else {
@@ -39,29 +38,27 @@ public class ClosedDoorExit extends Exit implements Lookable, Actionnable {
 
     @Override
     public boolean canPass(Character c) throws LockedExitException {
-        if(this.closed) {
+        if(this.locked) {
             throw new LockedExitException();
         }
         
         return true;
     }
     
-    
-    
     public void open() {
-        this.closed = false;
+        this.locked = false;
     }
     
     public void close() {
-        this.closed = true;
+        this.locked = true;
     }
     
     @Override
     public String toString() {
-        String open = this.closed ? "Non" : "Oui";
+        String open = this.locked ? "Non" : "Oui";
          return "Exit: " + this.getNAME() + "\n "
               + "Description: " + this.getDescription() +"\n "
-              + "Ouvert: " + open;
+              + "Ouverte: " + open;
               
     }
 }

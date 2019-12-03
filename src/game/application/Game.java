@@ -18,13 +18,12 @@ import game.application.exceptions.NonExistantTakeableException;
 import game.application.exceptions.NonLookableException;
 import game.application.exceptions.NonTakeableException;
 import game.stockage.Stockage;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
 
     private List<Place> places;
-    private Character hero;
+    private Hero hero;
 
     public Game() {
     }
@@ -35,8 +34,7 @@ public class Game {
     public void initializeGame() {
         Stockage s = new Stockage();
         this.places = s.getDataGame();
-        this.hero = new Hero("Hero", 100);
-        this.places.get(0).addCharacter(hero);
+        this.hero = (Hero)this.places.get(0).getCharacterByName("Me");
         
         //Initialize all the places, i.e. Get the lookables, and other "ables" 
         //from the data contain in each place.
@@ -123,35 +121,40 @@ public class Game {
     }
 
     /**
-     * Triggered an Actionnable that needs a List of Usable to its action
-     * @param params The last case of the array is the actionnable on which
-     * we want to do an action.
+     * Triggered an Actionnable that needs an Usable to its action.
+     * @param params params[0] -> The Usable's name
+     * params[1] -> The Actionnable name
      * @return 
      * @throws game.application.exceptions.NonExistantActionnableException
      * @throws game.application.exceptions.NonAvailableActionException
      */
     public Lookable use(String params[]) throws NonExistantActionnableException, NonAvailableActionException{
         
-        List<Usable> usables = new ArrayList<>(params.length - 1);
-        String nameActionnable = params[params.length - 1]; 
+        Usable usable;
+        Actionnable actionnable;
+       
+        if(params.length > 1) {
+            //Get the actionnable from the place
+            String nameActionnable = params[params.length - 1];    
         
-        Actionnable a = this.getHeroPlace().getActionnable(nameActionnable);
-        
-        if(a == null) {
-            throw new NonExistantActionnableException();
-        }
-        
-        //Get the usables from the bag, if none is found throw an exception
-        for(int i = 0; i < params.length - 1; i++) {
-            Item item = this.getHero().getItemFromBag(params[i]);
-            if(item == null) {
-                throw new NonAvailableActionException();
+            actionnable = this.getHeroPlace().getActionnable(nameActionnable);    
+            if(actionnable == null) {
+                throw new NonExistantActionnableException();
             }
-            usables.add((Usable)item);
+        }
+        else {
+            actionnable = this.hero;
         }
         
-        a.action(usables);
-        return (Lookable)a;
+        //Get the usable from the bag, if none is found throw an exception
+        Item item = this.getHero().getItemFromBag(params[0]);
+        if(item == null || !Usable.isUsable(item)) {
+            throw new NonAvailableActionException("Il n'y a pas d'item utilisable avec ce nom");
+        }
+        usable = ((Usable)item);
+           
+        actionnable.action(usable);
+        return (Lookable)actionnable;
     }
 
     /**
@@ -184,7 +187,7 @@ public class Game {
      * @throws NonTakeableException
      * @throws NonExistantTakeableException
      */
-    public Takeable take(java.lang.String str) throws NonTakeableException, NonExistantTakeableException {
+    public Takeable take(String str) throws NonTakeableException, NonExistantTakeableException {
         Item item = this.getHeroPlace().getItemByName(str);
         if (item==null) {
             throw new NonExistantTakeableException();
