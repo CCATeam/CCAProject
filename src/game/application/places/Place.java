@@ -4,6 +4,8 @@ import game.application.interfaces.Actionnable;
 import game.application.interfaces.Lookable;
 import game.application.items.Item;
 import game.application.character.Character;
+import game.application.character.ennemy.Ennemy;
+
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.stream.Stream;
@@ -15,15 +17,17 @@ public class Place {
     private final Map<String, Character> CHARACTERS;
     private final Map<String, Exit> EXITS;
     private final Map<String, Item> ITEMS;
+    private final Ennemy ENNEMY; // if is null don't have ennemy in the place
     private Map<String, Lookable>lookables;
     private Map<String, Actionnable>actionnables;
     
-    public Place(String NAME, String DESCRIPTION, Map<String, Character> CHARACTERS, Map<String, Exit> EXITS, Map<String, Item> ITEMS) {
+    public Place(String NAME, String DESCRIPTION, Map<String, Character> CHARACTERS, Map<String, Exit> EXITS, Map<String, Item> ITEMS, Ennemy ennemy) {
         this.NAME = NAME;
         this.CHARACTERS = CHARACTERS;
         this.EXITS = EXITS;
         this.ITEMS = ITEMS;
         this.DESCRIPTION = DESCRIPTION;
+        this.ENNEMY = ennemy;
     }
     
     /**
@@ -97,6 +101,13 @@ public class Place {
         return res;
     }
 
+    /*
+     * @return ENNEMY
+     */
+    public Ennemy getEnnemy() {
+    	return this.ENNEMY;
+    }
+    
     /**
      * 
      * @param s
