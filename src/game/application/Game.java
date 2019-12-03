@@ -8,8 +8,10 @@ import game.application.items.Item;
 import game.application.places.Place;
 import game.application.places.Exit;
 import game.application.character.Hero;
+import game.application.character.ennemy.Ennemy;
 import game.application.character.Character;
 import game.application.exceptions.NonExistantPlaceException;
+import game.application.exceptions.InvalidTaget;
 import game.application.exceptions.LockedExitException;
 import game.application.exceptions.NonAvailableActionException;
 import game.application.exceptions.NonExistantActionnableException;
@@ -171,6 +173,22 @@ public class Game {
         return this.hero.getPlace();
     }
 
+    
+    public int attack(String nameEnnemy) throws InvalidTaget {
+    	Ennemy ennemy = this.hero.getPlace().getEnnemy();
+    	if (ennemy != null && ennemy.getNAME().equalsIgnoreCase(nameEnnemy)) {
+    		return this.hero.attack(ennemy);
+		}
+    	else {
+    		throw new InvalidTaget();
+    	}
+    }
+    
+    public String EnnemyAttack() {
+    	Ennemy ennemy = this.hero.getPlace().getEnnemy();
+    	return ennemy.action((Hero)this.hero);
+    }
+    
     /**
      * Returns game's hero
      * 

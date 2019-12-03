@@ -13,6 +13,7 @@ public enum Command {
     USE,
     YES,
     NO,
+    ATTACK,
     INVALID;
 
     /**
@@ -64,6 +65,9 @@ public enum Command {
             case "NO":
                 c = Command.NO;
                 break;
+            case "ATT":
+            	c = Command.ATTACK;
+            	break;
             default:
                 c = Command.INVALID;
                 break;

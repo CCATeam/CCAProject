@@ -3,6 +3,7 @@ package game.ihm;
 import game.application.Command;
 import game.application.Game;
 import game.application.exceptions.InvalidCommandException;
+import game.application.exceptions.InvalidTaget;
 import game.application.interfaces.Lookable;
 import game.application.interfaces.Takeable;
 import game.application.exceptions.LockedExitException;
@@ -103,7 +104,7 @@ public class IHM {
             } 
         }
         //HELP
-        else if(c.equals(Command.HELP)) {
+        else if(c.equals(Command.HELP) && tabParameters.length > 1) {
             this.refreshConsole("Les commandes suivantes sont disponibles :\n "
                     + "GO <lieu> : se déplacer\n"
                     + "LOOK <lieu / objet / personnage> : examiner\n"
@@ -111,7 +112,18 @@ public class IHM {
                     + "TAKE <objet> : ramasser un objet\n"
                     + "USE <objet> : utiliser un objet\n"
                     + "USE <objet> <objet> : utiliser un objet sur quelque-chose\n"
+                    + "ATTACK <ennemy> : attaque l'ennemy\n"
                     + "QUIT : quitter le jeu");
+        }
+        //ATTACK
+        else if(c.equals(Command.ATTACK) && tabParameters.length > 1) {
+        	try {
+            	int damage = this.game.attack(tabParameters[0]);
+				this.refreshConsole("Vous attaque " + tabParameters[0] + " et il perd " + damage);
+				this.refreshConsole(this.game.EnnemyAttack());
+			} catch (InvalidTaget e) {
+				this.refreshConsole("la cible de votre attaque n'existe pas");
+			}
         }
         //QUIT 
         else if(c.equals(Command.QUIT)) {
