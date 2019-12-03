@@ -10,9 +10,10 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.graph.GraphAdapterBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
+
+import game.stockage.instancecreator.*;
 import game.application.character.Hero;
 import game.application.character.Character;
-import game.application.character.ennemy.Ennemy;
 import game.application.character.ennemy.Orc;
 import game.application.items.Chest;
 import game.application.items.ChestKey;
@@ -24,7 +25,14 @@ import game.application.places.LockedExit;
 import game.application.places.Exit;
 import game.application.places.Place;
 import game.application.places.WoodenDoorExit;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -37,7 +45,17 @@ public class Stockage {
      * @return List of Place that conatains all the data
      */
     public List<Place> getDataGame() {
+        BufferedReader br = null;
+        final String NAMEFILE = "./src/datas/datasJson.js";
         
+        try{
+            InputStream ips = new FileInputStream(NAMEFILE); 
+            InputStreamReader ipsr = new InputStreamReader(ips);
+            br = new BufferedReader(ipsr);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Stockage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+   
         //Défini les sous-types de Character pour pouvoir récupérer tout d'un coup 
         //dans le json
         RuntimeTypeAdapterFactory<Character> runtimeTypeAdapterFactoryCharacter;
@@ -80,114 +98,8 @@ public class Stockage {
             .registerOn(gb);
         
         Gson g = gb.create();
-        
-        List<Place> lp = g.fromJson("["
-                                    + "{"
-                                        +"'0x1': {"
-                                            +"\"NAME\": \"chambre\","
-                                            +"\"DESCRIPTION\": \"premiere place, il y a un chest,une chestkey, une woodendoor et orc1\","
-                                            +"\"CHARACTERS\": {"
-                                                            + "\"Me\": {"
-                                                                   +"\"type\": \"hero\","
-                                                                   +"\"NAME\": \"Me\","
-                                                                   +"\"life\": 100,"
-                                                                   +"\"currentWeapon\": {"
-                                                                        +"\"type\": \"axe\""
-                                                                   + "},"
-                                                                   +"\"currentPlace\": '0x1'"
-                                                            + "},"
-                                                            + " \"orc1\": {"
-                                                                   +"\"type\": \"orc\","
-                                                                   +"\"NAME\": \"orc1\","
-                                                                   +"\"currentPlace\": \"0x1\""
-                                                            + "}"
-                                                           +"},"
-                                            +"\"EXITS\": {"
-                                                        + "\"couloir\": {"
-                                                               +"\"type\": \"wooden door\","
-                                                               +"\"NAME\": \"woodendoor\","
-                                                               +"\"DESCRIPTION\": \"Porte en bois qui mène vers la salle test2\""
-                                                        + "}"
-                                                      +"},"
-                                            +"\"ITEMS\": {"
-                                                            + "\"chestkey\": {"             
-                                                                   +"\"type\": \"chest key\","
-                                                                   +"\"NAME\": \"chestkey\","
-                                                                   +"\"DESCRIPTION\": \"Chest Key\""
-                                                            + "},"
-                                                            + "\"chest\": {"
-                                                                   +"\"type\": \"chest\","
-                                                                   +"\"NAME\": \"chest\","
-                                                                   +"\"DESCRIPTION\": \"blablabla2\","
-                                                                   +"\"locked\": true,"
-                                                                   + "\"containedItem\": {"             
-                                                                        +"\"type\": \"door key\","
-                                                                        +"\"NAME\": \"doorkey\","
-                                                                        +"\"DESCRIPTION\": \"Key of a door\""
-                                                                   + "},"
-                                                                   +"\"place\": '0x1'"
-                                                                   
-                                                            + "}"
-                                                      +"}"
-                                     + "}"
-                                    + "},"
-                                    + "{"
-                                        + "'0x2': {"
-                                            +"\"NAME\": \"couloir\","
-                                            +"\"DESCRIPTION\": \"deuxieme place\","
-                                            +"\"CHARACTERS\": {"
-                                                            + " \"orc2\": {"
-                                                                   +"\"type\": \"orc\","
-                                                                   +"\"NAME\": \"orc2\","
-                                                                   +"\"currentPlace\": \"0x2\""
-                                                            + "},"
-                                                            + " \"orc3\": {"
-                                                                   +"\"type\": \"orc\","
-                                                                   +"\"NAME\": \"orc3\","
-                                                                   +"\"currentPlace\": \"0x2\""
-                                                            + "}"
-                                                           +"},"
-                                            +"\"EXITS\": {"
-                                                        + "\"chambre\":{"
-                                                               +"\"type\": \"exit\","
-                                                               +"\"NAME\": \"exittest\","
-                                                               +"\"DESCRIPTION\": \"testExit\""
-                                                        + "},"
-                                                        + "\"sortie\":{"
-                                                               +"\"type\": \"locked exit\","
-                                                               +"\"NAME\": \"closeddoor\","
-                                                               +"\"DESCRIPTION\": \"testExit\","
-                                                               +"\"locked\": true"
-                                                        + "}"
-                                                      +"},"
-                                            +"\"ITEMS\": {"
-                                                            + "\"item3\": {"
-                                                                   +"\"type\": \"item\","
-                                                                   +"\"NAME\": \"item3\","
-                                                                   +"\"DESCRIPTION\": \"blabla3\""
-                                                            + "},"
-                                                            + "\"item4\": {"
-                                                                   +"\"type\": \"item\","
-                                                                   +"\"NAME\": \"item4\","
-                                                                   +"\"DESCRIPTION\": \"blabla4\""
-                                                            + "}"
-                                                           +"}"
-                                        + "}"
-                                    + "},"
-                                    + "{"
-                                        + "'0x3': {"
-                                            +"\"NAME\": \"sortie\","
-                                            +"\"DESCRIPTION\": \"Congratulation, you finished the game ! You can quit now.\","
-                                            +"\"CHARACTERS\": {"
-                                                           +"},"
-                                            +"\"EXITS\": {"
-
-                                                       +"},"
-                                            +"\"ITEMS\": {"
-                                                        +"}"
-                                        + "}"
-                                    + "}"
-                                  + "]", new TypeToken<List<Place>>(){}.getType());
+        List<Place> lp = g.fromJson(br , new TypeToken<List<Place>>(){}.getType());
+       
         return lp;
     }
     

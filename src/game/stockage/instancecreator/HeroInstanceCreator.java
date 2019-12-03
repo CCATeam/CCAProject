@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package game.stockage;
+package game.stockage.instancecreator;
 
 import com.google.gson.InstanceCreator;
-import game.application.character.ennemy.Orc;
+import game.application.character.Hero;
 import java.lang.reflect.Type;
 
-class OrcInstanceCreator implements InstanceCreator<Orc>
+public class HeroInstanceCreator implements InstanceCreator<Hero>
 {
 
     @Override
-    public Orc createInstance(Type type) {
-        return new Orc(null, null);
+    public Hero createInstance(Type type) {
+        return new Hero(null, 0, null, null);
     }
 }

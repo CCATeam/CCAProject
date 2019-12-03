@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package game.stockage;
+package game.stockage.instancecreator;
 
 import com.google.gson.InstanceCreator;
 import game.application.character.Hero;
