@@ -73,9 +73,15 @@ public class IHM {
                 this.refreshConsole(this.game.getHeroPlace().toString()
                         + "\nVous essayez de regarder quelque chose d'innexistant ! (Si vous y arrivez, bravo !)");
             }
+        } 
+        else if(c.equals(Command.LOOK) && tabParameters.length == 0) {
+            this.refreshConsole("Vous voyez autour de vous : ");
+            for (String s : this.game.getHeroPlace().listLookables().keySet()) {
+                this.refreshConsole(s);
+            }  
         }
         //LOOK IN BAG
-        else if(c.equals(Command.LOOKBAG) && tabParameters.length >= 0) {     
+        else if(c.equals(Command.BAG) && tabParameters.length >= 0) {     
             Lookable l = this.game.lookBag();
             this.refreshConsole(l.looked());
             

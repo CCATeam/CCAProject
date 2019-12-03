@@ -59,6 +59,10 @@ public class Place {
         }
     }
     
+    public Map<String,Lookable> listLookables() {
+        return this.lookables;
+    }
+    
     /**
      * Get a Lookable by its name.
      * @param name String

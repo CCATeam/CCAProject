@@ -22,8 +22,7 @@ public class Item implements Lookable{
     
     @Override
     public String toString() {
-        return "Item: " + this.NAME + "\n "
-             + "Description: " + this.DESCRIPTION;
+        return this.NAME + " : " +this.DESCRIPTION;
     }
 
 }
