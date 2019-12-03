@@ -7,9 +7,6 @@ import game.application.places.Place;
 
 public abstract class Character implements Lookable {
 
-    //The GSON library doesn't use the constructor so for
-    //now the bag is created here. Atttribute transient to be ignore by 
-    //gson
     private Bag bag;
     private final String NAME;
     private int life;
