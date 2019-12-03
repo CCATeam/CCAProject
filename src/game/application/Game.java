@@ -172,7 +172,23 @@ public class Game {
             throw new InvalidTaget();           
         }
         ennemy = (Ennemy)this.hero.getPlace().getCharacterByName(nameEnnemy);
-        return this.hero.attack(ennemy);
+        int resu = this.hero.attack(ennemy);
+        return resu;
+    }
+    
+    public boolean ennemyIsDie(String nameEnnemy) {
+    	Character ennemy = this.hero.getPlace().getCharacterByName(nameEnnemy);
+        if (ennemy.getLife() <= 0)
+        	return true;
+        return false;
+    }
+    
+    public Item ennemyDie(String nameEnnemy) {
+    	Character ennemy = this.hero.getPlace().getCharacterByName(nameEnnemy);
+    	this.hero.getPlace().removeCharacter(ennemy);
+    	Item i = ((Ennemy)ennemy).loot();
+    	this.hero.addItem(i);;
+    	return i;
     }
     
     public String EnnemyAttack(String nameEnnemy) {

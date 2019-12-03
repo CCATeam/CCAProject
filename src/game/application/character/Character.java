@@ -87,6 +87,7 @@ public abstract class Character implements Lookable {
      * @param Character
      */
     public int attack(Character chara) {
+    	System.out.println(this.currentWeapon);
     	chara.takeDamage(this.currentWeapon.getDamage());
     	return this.currentWeapon.getDamage();
     }
@@ -112,6 +113,7 @@ public abstract class Character implements Lookable {
      * @param damage
      */
     public void takeDamage(int damage) {
+    	System.out.println(damage);
     	this.life -= damage;
     }
     

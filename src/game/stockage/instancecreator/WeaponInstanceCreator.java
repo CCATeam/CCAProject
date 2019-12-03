@@ -15,7 +15,7 @@ public class WeaponInstanceCreator implements InstanceCreator<Weapon>
 
     @Override
     public Weapon createInstance(Type type) {
-        return new Weapon(null, null) {};
+        return new Weapon(null, null, 0) {};
     }
 
 }
