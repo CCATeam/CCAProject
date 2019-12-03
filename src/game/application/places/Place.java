@@ -143,4 +143,13 @@ public class Place {
         }
     }
     
+    public void removeCharacter(Character chara) {
+    	for (Map.Entry<String, Character> entry : this.CHARACTERS.entrySet()) {
+    		if(chara == entry.getValue()) {
+    			this.CHARACTERS.remove(entry.getKey());
+    			break;
+    		}
+    	}
+    }
+    
 }
