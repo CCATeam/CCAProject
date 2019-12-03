@@ -165,17 +165,18 @@ public class Game {
 
     
     public int attack(String nameEnnemy) throws InvalidTaget {
-    	Ennemy ennemy = this.hero.getPlace().getEnnemy();
-    	if (ennemy != null && ennemy.getNAME().equalsIgnoreCase(nameEnnemy)) {
-    		return this.hero.attack(ennemy);
-		}
-    	else {
-    		throw new InvalidTaget();
-    	}
+    	Ennemy ennemy;
+        Character c = this.hero.getPlace().getCharacterByName(nameEnnemy);
+        
+        if(!Ennemy.isEnnemy(c) || !c.getNAME().equalsIgnoreCase(nameEnnemy)) {
+            throw new InvalidTaget();           
+        }
+        ennemy = (Ennemy)this.hero.getPlace().getCharacterByName(nameEnnemy);
+        return this.hero.attack(ennemy);
     }
     
-    public String EnnemyAttack() {
-    	Ennemy ennemy = this.hero.getPlace().getEnnemy();
+    public String EnnemyAttack(String nameEnnemy) {
+    	Ennemy ennemy = (Ennemy)this.hero.getPlace().getCharacterByName(nameEnnemy);
     	return ennemy.action((Hero)this.hero);
     }
     

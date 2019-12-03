@@ -93,7 +93,7 @@ public class IHM {
             }
         }
         //USE
-        else if(c.equals(Command.USE) && tabParameters.length > 1) {     
+        else if(c.equals(Command.USE) && tabParameters.length > 0) {     
             try {
                 Lookable l = this.game.use(tabParameters);
                 this.refreshConsole(l.looked());
@@ -104,7 +104,7 @@ public class IHM {
             } 
         }
         //HELP
-        else if(c.equals(Command.HELP) && tabParameters.length > 1) {
+        else if(c.equals(Command.HELP)) {
             this.refreshConsole("Les commandes suivantes sont disponibles :\n "
                     + "GO <lieu> : se déplacer\n"
                     + "LOOK <lieu / objet / personnage> : examiner\n"
@@ -116,11 +116,11 @@ public class IHM {
                     + "QUIT : quitter le jeu");
         }
         //ATTACK
-        else if(c.equals(Command.ATTACK) && tabParameters.length > 1) {
+        else if(c.equals(Command.ATTACK) && tabParameters.length > 0) {
         	try {
             	int damage = this.game.attack(tabParameters[0]);
 				this.refreshConsole("Vous attaque " + tabParameters[0] + " et il perd " + damage);
-				this.refreshConsole(this.game.EnnemyAttack());
+				this.refreshConsole(this.game.EnnemyAttack(tabParameters[0]));
 			} catch (InvalidTaget e) {
 				this.refreshConsole("la cible de votre attaque n'existe pas");
 			}

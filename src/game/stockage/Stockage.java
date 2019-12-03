@@ -12,10 +12,14 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
 import game.application.character.Hero;
 import game.application.character.Character;
+import game.application.character.ennemy.Ennemy;
+import game.application.character.ennemy.Orc;
 import game.application.items.Chest;
 import game.application.items.ChestKey;
 import game.application.items.DoorKey;
 import game.application.items.Item;
+import game.application.items.weapon.Axe;
+import game.application.items.weapon.Weapon;
 import game.application.places.LockedExit;
 import game.application.places.Exit;
 import game.application.places.Place;
@@ -39,7 +43,8 @@ public class Stockage {
         RuntimeTypeAdapterFactory<Character> runtimeTypeAdapterFactoryCharacter;
         runtimeTypeAdapterFactoryCharacter = RuntimeTypeAdapterFactory
                 .of(Character.class, "type")
-                .registerSubtype(Hero.class, "hero");
+                .registerSubtype(Hero.class, "hero")
+                .registerSubtype(Orc.class, "orc");
         
         //Défini les sous-types de Exit pour pouvoir récupérer tout d'un coup 
         //dans le json
@@ -58,13 +63,17 @@ public class Stockage {
                 .registerSubtype(Item.class, "item")
                 .registerSubtype(DoorKey.class, "door key")
                 .registerSubtype(ChestKey.class, "chest key")
-                .registerSubtype(Chest.class, "chest");
+                .registerSubtype(Chest.class, "chest")
+                .registerSubtype(Axe.class, "axe");
         
         GsonBuilder gb = new GsonBuilder()
             .registerTypeAdapterFactory(runtimeTypeAdapterFactoryCharacter)
             .registerTypeAdapterFactory(runtimeTypeAdapterFactoryExit)
             .registerTypeAdapterFactory(runtimeTypeAdapterFactoryItem)
-            .registerTypeAdapter(Hero.class, new HeroInstanceCreator());
+            .registerTypeAdapter(Hero.class, new HeroInstanceCreator())
+            .registerTypeAdapter(Axe.class, new AxeInstanceCreator())
+            .registerTypeAdapter(Weapon.class, new WeaponInstanceCreator())
+            .registerTypeAdapter(Orc.class, new OrcInstanceCreator());
         
         new GraphAdapterBuilder()
             .addType(Place.class)
@@ -76,19 +85,21 @@ public class Stockage {
                                     + "{"
                                         +"'0x1': {"
                                             +"\"NAME\": \"chambre\","
-                                            +"\"DESCRIPTION\": \"premiere place, il y a un chest,une chestkey et une woodendoor\","
+                                            +"\"DESCRIPTION\": \"premiere place, il y a un chest,une chestkey, une woodendoor et orc1\","
                                             +"\"CHARACTERS\": {"
                                                             + "\"Me\": {"
                                                                    +"\"type\": \"hero\","
                                                                    +"\"NAME\": \"Me\","
                                                                    +"\"life\": 100,"
+                                                                   +"\"currentWeapon\": {"
+                                                                        +"\"type\": \"axe\""
+                                                                   + "},"
                                                                    +"\"currentPlace\": '0x1'"
                                                             + "},"
-                                                            + " \"test2CharMap1\": {"
-                                                                   +"\"type\": \"hero\","
-                                                                   +"\"NAME\": \"test2CharMap1\","
-                                                                   +"\"life\": 100,"
-                                                                   +"\"currentPlace\": '0x1'"
+                                                            + " \"orc1\": {"
+                                                                   +"\"type\": \"orc\","
+                                                                   +"\"NAME\": \"orc1\","
+                                                                   +"\"currentPlace\": \"0x1\""
                                                             + "}"
                                                            +"},"
                                             +"\"EXITS\": {"
@@ -125,17 +136,15 @@ public class Stockage {
                                             +"\"NAME\": \"couloir\","
                                             +"\"DESCRIPTION\": \"deuxieme place\","
                                             +"\"CHARACTERS\": {"
-                                                            + " \"testCharMap2\": {"
-                                                                   +"\"type\": \"hero\","
-                                                                   +"\"NAME\": \"testCharMap2\","
-                                                                   +"\"life\": 100,"
-                                                                   +"\"currentPlace\": '0x2'"
+                                                            + " \"orc2\": {"
+                                                                   +"\"type\": \"orc\","
+                                                                   +"\"NAME\": \"orc2\","
+                                                                   +"\"currentPlace\": \"0x2\""
                                                             + "},"
-                                                            + " \"test2CharMap2\": {"
-                                                                   +"\"type\": \"hero\","
-                                                                   +"\"NAME\": \"test2CharMap2\","
-                                                                   +"\"life\": 100,"
-                                                                   +"\"currentPlace\": '0x2'"
+                                                            + " \"orc3\": {"
+                                                                   +"\"type\": \"orc\","
+                                                                   +"\"NAME\": \"orc3\","
+                                                                   +"\"currentPlace\": \"0x2\""
                                                             + "}"
                                                            +"},"
                                             +"\"EXITS\": {"

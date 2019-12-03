@@ -6,14 +6,16 @@
 package game.stockage;
 
 import com.google.gson.InstanceCreator;
-import game.application.character.ennemy.Orc;
+import game.application.items.weapon.Axe;
+import game.application.items.weapon.Weapon;
 import java.lang.reflect.Type;
 
-class OrcInstanceCreator implements InstanceCreator<Orc>
+class WeaponInstanceCreator implements InstanceCreator<Weapon>
 {
 
     @Override
-    public Orc createInstance(Type type) {
-        return new Orc(null, null);
+    public Weapon createInstance(Type type) {
+        return new Weapon(null, null) {};
     }
+
 }

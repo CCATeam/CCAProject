@@ -29,4 +29,7 @@ public abstract class Ennemy extends Character{
 	
 	public abstract String action(Hero h);
 	
+        public static boolean isEnnemy(Object o) {
+            return o instanceof Ennemy;
+        }
 }

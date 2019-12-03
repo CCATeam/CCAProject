@@ -7,8 +7,8 @@ import game.application.places.Place;
 
 public class Orc extends Ennemy {
 	
-	public Orc(Place p) {
-		super("Orc", 10, new Axe(), new StrongHit(new Axe()), p);
+	public Orc(String name, Place p) {
+		super(name, 10, new Axe(), new StrongHit(new Axe()), p);
 	}
 
 	@Override
