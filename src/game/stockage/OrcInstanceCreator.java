@@ -14,6 +14,6 @@ class OrcInstanceCreator implements InstanceCreator<Orc>
 
     @Override
     public Orc createInstance(Type type) {
-        return new Orc(null, null, null);
+        return new Orc(null);
     }
 }

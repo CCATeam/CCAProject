@@ -15,7 +15,7 @@ public abstract class Ennemy extends Character{
 		this.skill = skill;
 	}
 	
-	public boolean special() {
+	public int special() {
 		return this.skill.specialSkill();
 	}
 	

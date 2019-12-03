@@ -14,7 +14,7 @@ public abstract class Special {
 		return usable;
 	}
 	
-	public abstract boolean specialSkill();
+	public abstract int specialSkill();
 	
 	
 	public abstract String toString();
