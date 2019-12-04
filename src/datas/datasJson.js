@@ -2,7 +2,7 @@
  {
     '0x1': {
         'NAME': 'chambre',
-        'DESCRIPTION': 'premiere place, il y a un chest,une chestkey, une woodendoor et orc1',
+        'DESCRIPTION': 'premiere place, il y a un chest,une clef, une porte ouverte et un orc1',
         'CHARACTERS': {
                          'Me': {
                                'type': 'hero',
@@ -23,19 +23,19 @@
                      'couloir': {
                            'type': 'wooden door',
                            'NAME': 'woodendoor',
-                           'DESCRIPTION': 'Porte en bois qui mène vers la salle test2'
+                           'DESCRIPTION': 'porte en bois qui mène vers un couloir.'
                      }
                   },
         'ITEMS': {
                          'chestkey': {             
                                'type': 'chest key',
-                               'NAME': 'chestkey',
-                               'DESCRIPTION': 'Chest Key'
+                               'NAME': 'clef',
+                               'DESCRIPTION': 'A première vue la clef d\'un coffre'
                          },
                          'chest': {
                                'type': 'chest',
                                'NAME': 'chest',
-                               'DESCRIPTION': 'blablabla2',
+                               'DESCRIPTION': 'un coffre au trésor',
                                'locked': true,
                                 'containedItem': {             
                                     'type': 'door key',
@@ -72,8 +72,8 @@
                      },
                      'sortie':{
                            'type': 'locked exit',
-                           'NAME': 'closeddoor',
-                           'DESCRIPTION': 'testExit',
+                           'NAME': 'porte',
+                           'DESCRIPTION': 'Porte de sortie test fermee',
                            'locked': true
                      }
                   },

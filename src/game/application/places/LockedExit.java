@@ -56,9 +56,15 @@ public class LockedExit extends Exit implements Lookable, Actionnable {
     @Override
     public String toString() {
         String open = this.locked ? "Non" : "Oui";
-         return "Exit: " + this.getNAME() + "\n "
-              + "Description: " + this.getDescription() +"\n "
-              + "Ouverte: " + open;
+        if (this.locked){
+            return "Cette " + this.getNAME() + "est vérouillée.";
+        } else  {
+            return "Cette " + this.getNAME() + "est ouvete.\n"
+                    + this.getDescription();
+        }
+//         return "Exit: " + this.getNAME() + "\n "
+//              + "Description: " + this.getDescription() +"\n "
+//              + "Ouverte: " + open;
               
     }
 }

@@ -6,6 +6,7 @@ import game.application.exceptions.InvalidCommandException;
 import game.application.exceptions.InvalidTaget;
 import game.application.interfaces.Lookable;
 import game.application.interfaces.Takeable;
+import game.application.items.Item;
 import game.application.exceptions.LockedExitException;
 import game.application.exceptions.NonAvailableActionException;
 import game.application.exceptions.NonExistantActionnableException;
@@ -73,9 +74,15 @@ public class IHM {
                 this.refreshConsole(this.game.getHeroPlace().toString()
                         + "\nVous essayez de regarder quelque chose d'innexistant ! (Si vous y arrivez, bravo !)");
             }
+        } 
+        else if(c.equals(Command.LOOK) && tabParameters.length == 0) {
+            this.refreshConsole("Vous voyez autour de vous : ");
+            for (String s : this.game.getHeroPlace().listLookables().keySet()) {
+                this.refreshConsole(s);
+            }  
         }
         //LOOK IN BAG
-        else if(c.equals(Command.LOOKBAG) && tabParameters.length >= 0) {     
+        else if(c.equals(Command.BAG) && tabParameters.length >= 0) {     
             Lookable l = this.game.lookBag();
             this.refreshConsole(l.looked());
             
@@ -119,8 +126,20 @@ public class IHM {
         else if(c.equals(Command.ATTACK) && tabParameters.length > 0) {
         	try {
             	int damage = this.game.attack(tabParameters[0]);
-				this.refreshConsole("Vous attaque " + tabParameters[0] + " et il perd " + damage);
-				this.refreshConsole(this.game.EnnemyAttack(tabParameters[0]));
+				this.refreshConsole("Vous attaque " + tabParameters[0] + " et il perd " + damage + " point de vie");
+				if (!this.game.ennemyIsDie(tabParameters[0])) {
+					this.refreshConsole(this.game.EnnemyAttack(tabParameters[0]));
+				}
+				else {
+					Item loot = this.game.ennemyDie(tabParameters[0]);
+					if (loot == null) {
+						this.refreshConsole(tabParameters[0] + " meure et ne loot rien");
+					}
+					else {
+						this.refreshConsole(tabParameters[0] + "meure et loot : \n"
+								+ loot);
+					}
+				}
 			} catch (InvalidTaget e) {
 				this.refreshConsole("la cible de votre attaque n'existe pas");
 			}

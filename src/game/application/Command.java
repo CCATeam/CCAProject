@@ -7,7 +7,7 @@ public enum Command {
     GO,
     HELP,
     LOOK,
-    LOOKBAG,
+    BAG,
     TAKE,
     QUIT,
     USE,
@@ -48,7 +48,7 @@ public enum Command {
                 c = Command.LOOK;
                 break;
             case "BAG":
-                c = Command.LOOKBAG;
+                c = Command.BAG;
                 break;
             case "TAK":
                 c = Command.TAKE;

@@ -59,6 +59,10 @@ public class Place {
         }
     }
     
+    public Map<String,Lookable> listLookables() {
+        return this.lookables;
+    }
+    
     /**
      * Get a Lookable by its name.
      * @param name String
@@ -141,6 +145,15 @@ public class Place {
                 break;
             }
         }
+    }
+    
+    public void removeCharacter(Character chara) {
+    	for (Map.Entry<String, Character> entry : this.CHARACTERS.entrySet()) {
+    		if(chara == entry.getValue()) {
+    			this.CHARACTERS.remove(entry.getKey());
+    			break;
+    		}
+    	}
     }
     
 }
