@@ -2,29 +2,26 @@ package underthebeam.application.characters.enemies.special;
 
 import game.application.items.weapon.Weapon;
 
-public class StrongHit extends Special{
-	
+public class WingShot extends Special {
+
 	private Weapon weapon;
 	
-	public StrongHit(Weapon weapon) {
-		super(1);
+	public WingShot(Weapon weapon) {
+		super(4);
 		this.weapon = weapon;
 	}
-	
+
 	@Override
 	public int specialSkill() {
 		if (Use()) {
-			if (Math.random() < 0.5) {
-				return weapon.getDamage()*2;
-			}
-			else {
-				return weapon.getDamage() / 2;
-			}
+			return 5; 
 		}
-		return -1;
+		return this.weapon.getDamage();
 	}
+
 	@Override
 	public String toString() {
-		return "Coup puissant";
+		return "Coup d'aile";
 	}
+	
 }

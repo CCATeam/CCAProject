@@ -11,7 +11,7 @@ import underthebeam.application.characters.Hero;
 import underthebeam.application.characters.enemies.Orc;
 import underthebeam.application.items.Chest;
 import game.application.items.ChestKey;
-import underthebeam.application.items.DoorKey;
+import game.application.items.DoorKey;
 import game.application.items.Item;
 import underthebeam.application.items.weapons.Axe;
 import game.application.places.Exit;

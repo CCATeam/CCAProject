@@ -12,7 +12,11 @@ import java.util.stream.Stream;
 
 public interface Lookable {
     
-    public default String looked() {
+    public default String lookedInPlace() {
+        return this.toString();
+    }
+    
+    public default String lookedInBag() {
         return this.toString();
     }
     

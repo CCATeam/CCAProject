@@ -38,4 +38,14 @@ public abstract class Container extends Item implements Actionnable{
     public boolean isLocked() {
         return this.locked;
     }
+
+    public Place getPlace() {
+        return place;
+    }
+
+    public Item getContainedItem() {
+        return containedItem;
+    }
+    
+    
 }

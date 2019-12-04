@@ -11,13 +11,14 @@ import game.application.interfaces.Usable;
  *
  * @author Fabien
  */
-public class Consumable extends Item implements Usable{
+public class Consumable extends TakeableItem implements Usable{
+
     
     private int nbEffect;
     private boolean available;
     
-    public Consumable(String NAME, String DESCRIPTION, int nbEffect) {
-        super(NAME, DESCRIPTION);
+    public Consumable(String NAME, String DESCRIPTION, String BAGDESCRIPTION, int nbEffect) {
+        super(NAME, DESCRIPTION, BAGDESCRIPTION);
         this.nbEffect = nbEffect;
         this.available = true;
     }

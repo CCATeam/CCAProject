@@ -19,10 +19,6 @@ import game.application.places.Place;
  */
 public class Chest extends Container {
     
-    private Place place;
-    private Item containedItem;
-    private boolean locked;
-    
     public Chest(String NAME, String DESCRIPTION, boolean locked, Item i, Place p) {
         super(NAME, DESCRIPTION, locked, i, p);
     }
@@ -32,12 +28,12 @@ public class Chest extends Container {
             throw new NonAvailableActionException("Action impossible !");
         }
         
-        if(this.locked == false) {
+        if(this.isLocked() == false) {
             throw new NonAvailableActionException("Vous essayez d'ouvrir une porte déjà ouverte ...");
         }
         else {
             this.unlock();
-            this.place.addItem(containedItem);
+            this.getPlace().addItem(this.getContainedItem());
         }
     }
     
@@ -48,7 +44,7 @@ public class Chest extends Container {
             message = "Un coffre fermé.";
         }
         else {
-            message = "Un coffre ouvert, il contient: \n " + this.containedItem.looked();
+            message = "Un coffre ouvert, il contient: \n " + this.getContainedItem().lookedInPlace();
         }
         return message;
     }

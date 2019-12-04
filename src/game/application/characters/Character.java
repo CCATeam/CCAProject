@@ -2,7 +2,6 @@ package game.application.characters;
 
 import game.application.interfaces.Lookable;
 import game.application.items.Item;
-import game.application.items.weapon.Weapon;
 import game.application.places.Place;
 
 public abstract class Character implements Lookable {
@@ -116,7 +115,7 @@ public abstract class Character implements Lookable {
             }
 
             @Override
-            public String looked() {
+            public String lookedInBag() {
                 return bag.toString(); //To change body of generated methods, choose Tools | Templates.
             }
         };

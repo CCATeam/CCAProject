@@ -1,18 +1,26 @@
 package underthebeam.application.characters.enemies.special;
 /*
  * 
- * class pour les coup special utilisable une fois.
+ * class pour les coups speciaux utilisable une fois.
  * 
  */
 public abstract class Special {
 	
-	private boolean usable = true; 
+	private int usable; 
+	
+	public Special(int usable) {
+		this.usable = usable;
+	}
+	
+	public boolean Use() {
+		boolean tmp = this.usable > 0;
+		if (tmp)
+			this.usable--;
+		return tmp;
+	}
 	
 	public boolean getUse() {
-		boolean tmp = this.usable;
-		if (this.usable)
-			this.usable = !usable;
-		return tmp;
+		return this.usable > 0;
 	}
 	
 	public abstract int specialSkill();

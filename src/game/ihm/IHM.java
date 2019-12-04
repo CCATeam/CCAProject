@@ -74,15 +74,8 @@ public class IHM {
     }
     
     public void lookAround() {
-        String s = this.game.lookAround();
-        if (s.equalsIgnoreCase("")) {
-            this.refreshConsole("Il n'y a rien dans cette pièce.");
-        } else {
-            this.refreshConsole("Vous voyez autour de vous : ");
-            this.refreshConsole(s);
-        }
+        this.refreshConsole(this.game.getHeroPlace().toString());
     }
-    
     public void take (String param) {
             try {
                 String taken = this.game.take(param);
@@ -97,7 +90,7 @@ public class IHM {
     public void use (String tabParameters[]) {
             try {
                 Lookable l = this.game.use(tabParameters);
-                this.refreshConsole(l.looked());
+                this.refreshConsole(l.lookedInBag());
             } catch (NonExistantActionnableException ex) {
                 this.refreshConsole("Rien ne se produit ...\n");
             } catch (NonAvailableActionException ex) {
@@ -143,6 +136,33 @@ public class IHM {
                 this.quit=true;
             }    
         }
+
+
+    public void Die() {
+    	this.refreshConsole("Vous �tes mort....");
+    	Command c;
+        String answer=this.scan();
+        try {
+            c = Command.getCommand(answer);
+        }catch (InvalidCommandException ex) {
+            c = null;
+        }
+        if (c==Command.YES) {
+            this.refreshConsole("Voulez-vous charger une sauvegard ?");
+            answer=this.scan();
+            try {
+                c = Command.getCommand(answer);
+            }
+            catch (InvalidCommandException ex){
+                c = null;
+            }
+            if (c.equals(Command.YES)) {
+            	// chargement d'un sauvegard
+            }
+            this.quit=true;
+        }    
+    	
+    }
     
     /**
      * Ask to game the datas corresponding to the command c and its parameters.
@@ -169,7 +189,7 @@ public class IHM {
         //LOOK IN BAG
         else if(c.equals(Command.BAG) && tabParameters.length >= 0) {     
             Lookable l = this.game.lookBag();
-            this.refreshConsole(l.looked());
+            this.refreshConsole(l.lookedInBag());
         }
         //TAKE
         else if(c.equals(Command.TAKE)) {
@@ -219,8 +239,8 @@ public class IHM {
                 this.action(c, parameters);
             }
             catch(InvalidCommandException ex) {
-                refreshConsole(this.game.getHeroPlace().toString() 
-                        + "\nCommande invalide");
+                refreshConsole("Commande invalide\n" 
+                        + this.game.getHeroPlace().toString());
             }  
             
         } while(this.quit == false);
