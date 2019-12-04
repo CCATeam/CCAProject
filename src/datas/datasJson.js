@@ -3,41 +3,38 @@
     '0x1': {
         'NAME': 'chambre',
         'DESCRIPTION': 'premiere place, il y a un chest,une clef, une porte ouverte et un orc1',
-        'CHARACTERS': {
+        'characters': {
                          'Me': {
                                'type': 'hero',
                                'NAME': 'Me',
                                'life': 100,
-                               'currentWeapon': {
-                                    'type': 'axe'
-                                },
                                'currentPlace': '0x1'
                          },
                           'orc1': {
                                'type': 'orc',
                                'NAME': 'orc1',
-                               'currentPlace': '0x1'
+                               'currentPlace': '0x1',
+                               'loot': {            
+                                    'type': 'chest key',
+                                    'NAME': 'clef',
+                                    'DESCRIPTION': 'A première vue la clef d\'un coffre'                                
+                               }
                          }
                        },
-        'EXITS': {
+        'exits': {
                      'couloir': {
                            'type': 'wooden door',
                            'NAME': 'woodendoor',
                            'DESCRIPTION': 'porte en bois qui mène vers un couloir.'
                      }
                   },
-        'ITEMS': {
-                         'chestkey': {             
-                               'type': 'chest key',
-                               'NAME': 'clef',
-                               'DESCRIPTION': 'A première vue la clef d\'un coffre'
-                         },
+        'items': {
                          'chest': {
                                'type': 'chest',
                                'NAME': 'chest',
                                'DESCRIPTION': 'un coffre au trésor',
                                'locked': true,
-                                'containedItem': {             
+                               'containedItem': {             
                                     'type': 'door key',
                                     'NAME': 'doorkey',
                                     'DESCRIPTION': 'Key of a door'
@@ -52,7 +49,7 @@
      '0x2': {
         'NAME': 'couloir',
         'DESCRIPTION': 'deuxieme place',
-        'CHARACTERS': {
+        'characters': {
                           'orc2': {
                                'type': 'orc',
                                'NAME': 'orc2',
@@ -64,7 +61,7 @@
                                'currentPlace': '0x2'
                          }
                        },
-        'EXITS': {
+        'exits': {
                      'chambre':{
                            'type': 'exit',
                            'NAME': 'exittest',
@@ -77,7 +74,7 @@
                            'locked': true
                      }
                   },
-        'ITEMS': {
+        'items': {
                          'item3': {
                                'type': 'item',
                                'NAME': 'item3',
@@ -95,13 +92,13 @@
      '0x3': {
         'NAME': 'sortie',
         'DESCRIPTION': 'Congratulation, you finished the game ! You can quit now.',
-        'CHARACTERS': {
+        'characters': {
                        },
-        'EXITS': {
+        'exits': {
 
                    },
-        'ITEMS': {
+        'items': {
                     }
      }
  }
- ]
+]

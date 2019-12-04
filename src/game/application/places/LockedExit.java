@@ -32,7 +32,7 @@ public class LockedExit extends Exit implements Lookable, Actionnable {
             throw new NonAvailableActionException("Vous essayez d'ouvrir une porte déjà ouverte ...");
         }
         else {
-            this.open();
+            this.unlock();
         }
     }
 
@@ -45,11 +45,11 @@ public class LockedExit extends Exit implements Lookable, Actionnable {
         return true;
     }
     
-    public void open() {
+    public void unlock() {
         this.locked = false;
     }
     
-    public void close() {
+    public void lock() {
         this.locked = true;
     }
     

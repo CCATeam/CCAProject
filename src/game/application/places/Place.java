@@ -14,52 +14,60 @@ public class Place {
     
     private final String NAME;
     private final String DESCRIPTION;
-    private final Map<String, Character> CHARACTERS;
-    private final Map<String, Exit> EXITS;
-    private final Map<String, Item> ITEMS;
+    private Map<String, Character> characters;
+    private Map<String, Exit> exits;
+    private Map<String, Item> items;
     private Map<String, Lookable>lookables;
     private Map<String, Actionnable>actionnables;
     
-    public Place(String NAME, String DESCRIPTION, Map<String, Character> CHARACTERS, Map<String, Exit> EXITS, Map<String, Item> ITEMS) {
-        this.NAME = NAME;
-        this.CHARACTERS = CHARACTERS;
-        this.EXITS = EXITS;
-        this.ITEMS = ITEMS;
-        this.DESCRIPTION = DESCRIPTION;
+    public Place(String name, String description, Map<String, Character> characters, Map<String, Exit> exits, Map<String, Item> items) {
+        this.NAME = name;
+        this.characters = characters;
+        this.exits = exits;
+        this.items = items;
+        this.DESCRIPTION = description;
     }
     
     /**
      * Initialize the "ables" Map objects from the data contained in 
-     * CHARACTERS, EXITS, ITEMS and attribute the current map to the Characters
+     * CHARACTERS, EXITS, ITEMS 
      */
-    public void initialize() {
+    public void initialize() {      
+        //If one of the map is null, initialize it
+        this.characters = this.characters == null ? new HashMap<>() : this.characters;
+        this.exits = this.exits == null ? new HashMap<>() : this.exits;
+        this.items = this.items == null ? new HashMap<>() : this.items;
+        
         this.lookables = new HashMap<>();
         this.actionnables = new HashMap<>();
-
+        
         //Get the lookables from data
-        for(Item i : this.ITEMS.values()) {
+        for(Item i : this.items.values()) {
             if(Lookable.isLookable(i)) {
                 this.lookables.put(i.getNAME(), i);
-            }
-            
+            }           
             if(Actionnable.isActionnable(i)) {
                 this.actionnables.put(i.getNAME(), (Actionnable)i);
             }
         }
         
         //Get the actionnable from data
-        for(Exit ex : this.EXITS.values()) {
+        for(Exit ex : this.exits.values()) {
             if(Lookable.isLookable(ex)) {
                 this.lookables.put(((Lookable)ex).getNAME(), (Lookable)ex);
-            }
-            
+            }   
             if(Actionnable.isActionnable(ex)) {
                 this.actionnables.put(ex.getNAME(), (Actionnable)ex);
             }
         }
     }
     
-    public Map<String,Lookable> listLookables() {
+    /**
+     * Get the lookables
+     * @return a Map<String,Lookable> the string being the name of the 
+     * Lookable
+     */
+    public Map<String,Lookable> getLookables() {
         return this.lookables;
     }
     
@@ -87,43 +95,64 @@ public class Place {
      * @return Return null if non found object, else the lookable.
      */
     public Exit getExit(String name) {   
-        return this.EXITS.get(name);
+        return this.exits.get(name);
     }
     
     public void addItem(Item i) {
-        this.ITEMS.put(i.getNAME(), i);
+        this.items.put(i.getNAME(), i);
     }
     
     public List<Item> getItems() {
-        List<Item> res = new ArrayList<>();
-        this.ITEMS.values().forEach((item) -> {
-            res.add(item);
-        });
-        return res;
+        return (List)this.items.values();
     }
 
     
     /**
-     * 
+     * Get an item by its name
      * @param s
      * @return 
      */
     public Item getItemByName(String s) {
-        return this.ITEMS.get(s);
+        return this.items.get(s);
     }
 
+    /**
+     * Add a character to the characters map
+     * @param c 
+     */
     public void addCharacter(Character c) {
-        this.CHARACTERS.put(c.getNAME(), c);
+        if(c != null) {
+            this.characters.put(c.getNAME(), c);
+        }
     }
+    
     /**
      * 
      * @param s
      * @return 
      */
     public Character getCharacterByName(String s) {
-       return this.CHARACTERS.get(s);
+       return this.characters.get(s);
     }
 
+    public void removeItem(Item item) {
+        for (Map.Entry<String,Item> entry : this.items.entrySet()) {
+            if (item==entry.getValue()) {
+                this.items.remove(entry.getKey());
+                break;
+            }
+        }
+    }
+    
+    public void removeCharacter(Character chara) {
+    	for (Map.Entry<String, Character> entry : this.characters.entrySet()) {
+    		if(chara == entry.getValue()) {
+    			this.characters.remove(entry.getKey()).setPlaceCourante(null);
+    			break;
+    		}
+    	}
+    }
+    
     public String getNAME() {
         return NAME;
     }
@@ -137,23 +166,4 @@ public class Place {
         return this.NAME + "\n"
             + "   Description: " + this.DESCRIPTION;
     }
-
-    public void removeItem(Item item) {
-        for (Map.Entry<String,Item> entry : this.ITEMS.entrySet()) {
-            if (item==entry.getValue()) {
-                this.ITEMS.remove(entry.getKey());
-                break;
-            }
-        }
-    }
-    
-    public void removeCharacter(Character chara) {
-    	for (Map.Entry<String, Character> entry : this.CHARACTERS.entrySet()) {
-    		if(chara == entry.getValue()) {
-    			this.CHARACTERS.remove(entry.getKey());
-    			break;
-    		}
-    	}
-    }
-    
 }

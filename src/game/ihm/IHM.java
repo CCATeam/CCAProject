@@ -16,8 +16,6 @@ import game.application.exceptions.NonExistantLookableException;
 import game.application.exceptions.NonExistantTakeableException;
 import game.application.exceptions.NonTakeableException;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class IHM {
 
@@ -30,7 +28,14 @@ public class IHM {
         this.game.initializeGame();      
         this.SCANNER = new Scanner(System.in);
     }
+
+    public IHM(Game game) {
+        this.game = game;
+        this.game.initializeGame();      
+        this.SCANNER = new Scanner(System.in);
+    }
         
+    
 
     public String scan() {
         return this.SCANNER.nextLine();
@@ -77,7 +82,7 @@ public class IHM {
         } 
         else if(c.equals(Command.LOOK) && tabParameters.length == 0) {
             this.refreshConsole("Vous voyez autour de vous : ");
-            for (String s : this.game.getHeroPlace().listLookables().keySet()) {
+            for (String s : this.game.getHeroPlace().getLookables().keySet()) {
                 this.refreshConsole(s);
             }  
         }
