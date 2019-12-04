@@ -12,6 +12,7 @@ public class Item implements Lookable{
         this.DESCRIPTION = DESCRIPTION;
     }
 
+    @Override
     public String getNAME() {
         return NAME;
     }

@@ -42,7 +42,7 @@ public class Bag {
         StringBuilder sb = new StringBuilder();
         for(Item i : this.items.values()) {
             sb.append(" ")
-              .append(i.toString())
+              .append(i.lookedInBag())
               .append("\n");
         }
         return sb.toString();

@@ -8,10 +8,10 @@ package game.application.items;
 import game.application.interfaces.Takeable;
 import game.application.interfaces.Usable;
 
-public class DoorKey extends Item implements Takeable, Usable{
+public class DoorKey extends TakeableItem implements Takeable, Usable{
     
-    public DoorKey(String NAME, String DESCRIPTION) {
-        super(NAME, DESCRIPTION);
+    public DoorKey(String NAME, String DESCRIPTION, String BAGDESCRIPTION) {
+        super(NAME, DESCRIPTION,BAGDESCRIPTION);
     }
     
     public static boolean isDoorKey(Object o) {

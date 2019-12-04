@@ -12,10 +12,10 @@ import game.application.interfaces.Usable;
  *
  * @author Fabien
  */
-public class ChestKey extends Item implements Takeable, Usable {
+public class ChestKey extends TakeableItem implements Takeable, Usable {
     
-    public ChestKey(String NAME, String DESCRIPTION) {
-        super(NAME, DESCRIPTION);
+    public ChestKey(String NAME, String DESCRIPTION, String BAGDESCRIPTION) {
+        super(NAME, DESCRIPTION,BAGDESCRIPTION);
     }
     
     public static boolean isChestKey(Object o) {

@@ -57,7 +57,7 @@ public class Chest extends Item implements Actionnable {
             message = "Un coffre fermé.";
         }
         else {
-            message = "Un coffre ouvert, il contient: \n " + this.containedItem.looked();
+            message = "Un coffre ouvert, il contient: \n " + this.containedItem.lookedInBag();
         }
         return message;
     }

@@ -89,7 +89,7 @@ public class Game {
             throw new NonExistantLookableException();
         }
      
-        return l.looked();
+        return l.lookedInPlace();
     }
     
     public Lookable lookBag() {
@@ -197,11 +197,8 @@ public class Game {
     }
     
     public String lookAround () {
-        String res = "";
-        for (String s : this.getHeroPlace().getLookables().keySet()) {
-                res=res + "-" + s + "\n";
-        }  
-        return res;
+        return this.getHeroPlace().toString();
+
     }
     
     /**
