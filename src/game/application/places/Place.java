@@ -166,4 +166,5 @@ public class Place {
         return this.NAME + "\n"
             + "   Description: " + this.DESCRIPTION;
     }
+    
 }

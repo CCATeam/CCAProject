@@ -19,13 +19,15 @@ import game.application.exceptions.NonExistantLookableException;
 import game.application.exceptions.NonExistantTakeableException;
 import game.application.exceptions.NonLookableException;
 import game.application.exceptions.NonTakeableException;
+import game.application.places.FinalPlace;
 import game.stockage.Stockage;
 import java.util.List;
 
 public class Game {
 
     private List<Place> places;
-    private Hero hero;
+    private Place finalPlace; // the last place in the list.
+    private Hero hero; // int the first place in the list.
 
     public Game() {
     }
@@ -37,6 +39,8 @@ public class Game {
         Stockage s = new Stockage();
         this.places = s.getDataGame();
         this.hero = (Hero)this.places.get(0).getCharacterByName("player");
+        this.finalPlace = new FinalPlace(); //TODO
+        //this.finalPlace = (FinalPlace)this.places.get(this.places.size());
         
         //Initialize all the places, i.e. Get the lookables, and other "ables" 
         //from the data contain in each place.
@@ -185,5 +189,9 @@ public class Game {
         } else {
             throw new NonTakeableException();
         }
+    }
+    
+    public boolean isWin() {
+    	return this.getHeroPlace().getNAME().equals(this.finalPlace.getNAME());
     }
 }

@@ -53,7 +53,7 @@ public class IHM {
         try {
                 String newP = this.game.go(param);
                 this.refreshConsole(newP);
-            } catch (NonExistantPlaceException ex) {
+        } catch (NonExistantPlaceException ex) {
                 this.refreshConsole(this.game.getHeroPlace().toString()
                         + "\nIl n'y a pas d'endroit avec le nom indiquié à proximité !");
             } catch (LockedExitException ex) {
@@ -162,6 +162,13 @@ public class IHM {
             this.quit=true;
         }    
     	
+    }
+
+    public void Win() {
+    	if (this.game.isWin()) {
+    		this.quit = true;
+    		this.refreshConsole("Bravo vous avez fini le jeu !!");
+    	}
     }
     
     /**
