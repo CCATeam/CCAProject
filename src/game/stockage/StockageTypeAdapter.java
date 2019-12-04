@@ -5,7 +5,6 @@ import underthebeam.application.characters.Hero;
 import underthebeam.application.characters.enemies.Orc;
 import underthebeam.application.items.weapons.Axe;
 import underthebeam.application.items.weapons.Sword;
-import game.application.items.weapon.Weapon;
 import game.stockage.instancecreator.*;
 
 public class StockageTypeAdapter {
