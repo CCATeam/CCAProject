@@ -6,7 +6,7 @@ import underthebeam.application.characters.enemies.Orc;
 import game.application.interfaces.Actionnable;
 import game.application.interfaces.Lookable;
 import underthebeam.application.items.Chest;
-import game.application.items.ChestKey;
+import underthebeam.application.items.ChestKey;
 import game.application.items.Item;
 import underthebeam.application.items.weapons.Sword;
 import game.application.characters.Character;

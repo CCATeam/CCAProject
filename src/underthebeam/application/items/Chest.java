@@ -8,7 +8,6 @@ package underthebeam.application.items;
 import game.application.exceptions.NonAvailableActionException;
 import game.application.interfaces.Actionnable;
 import game.application.interfaces.Usable;
-import game.application.items.ChestKey;
 import game.application.items.Container;
 import game.application.items.Item;
 import game.application.places.Place;
