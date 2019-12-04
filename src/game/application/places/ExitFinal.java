@@ -4,7 +4,7 @@ import game.application.exceptions.NonAvailableActionException;
 import game.application.interfaces.Actionnable;
 import game.application.interfaces.Lookable;
 import game.application.interfaces.Usable;
-import game.application.items.DoorKey;
+import underthebeam.application.items.DoorKey;
 import underthebeam.application.items.FinalKey;
 
 public class ExitFinal extends LockedExit implements Lookable, Actionnable{

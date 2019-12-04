@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package game.application.items;
+package underthebeam.application.items;
 
 import game.application.interfaces.Takeable;
 import game.application.interfaces.Usable;
+import game.application.items.Item;
 
 public class DoorKey extends Item implements Takeable, Usable{
     

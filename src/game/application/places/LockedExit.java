@@ -11,7 +11,7 @@ import game.application.interfaces.Usable;
 import game.application.characters.Character;
 import game.application.exceptions.LockedExitException;
 import game.application.exceptions.NonAvailableActionException;
-import game.application.items.DoorKey;
+import underthebeam.application.items.DoorKey;
 
 public class LockedExit extends Exit implements Lookable, Actionnable {
     
