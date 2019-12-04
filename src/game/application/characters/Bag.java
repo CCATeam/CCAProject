@@ -1,4 +1,4 @@
-package game.application.character;
+package game.application.characters;
 
 import game.application.items.Item;
 import java.util.*;

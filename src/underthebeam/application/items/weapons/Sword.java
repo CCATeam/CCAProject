@@ -1,4 +1,6 @@
-package game.application.items.weapon;
+package underthebeam.application.items.weapons;
+
+import game.application.items.weapon.Weapon;
 
 public class Sword extends Weapon{
 

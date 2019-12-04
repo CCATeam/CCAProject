@@ -4,9 +4,9 @@
         'NAME': 'chambre',
         'DESCRIPTION': 'premiere place, il y a un chest,une clef, une porte ouverte et un orc1',
         'characters': {
-                         'Me': {
+                         'player': {
                                'type': 'hero',
-                               'NAME': 'Player',
+                               'NAME': 'player',
                                'life': 30,
                                'currentPlace': '0x1'
                          },

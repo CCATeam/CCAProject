@@ -1,8 +1,8 @@
-package game.application.character.ennemy;
+package underthebeam.application.characters.enemies;
 
-import game.application.character.Hero;
-import game.application.character.ennemy.special.StrongHit;
-import game.application.items.weapon.Axe;
+import underthebeam.application.characters.Hero;
+import underthebeam.application.characters.enemies.special.StrongHit;
+import underthebeam.application.items.weapons.Axe;
 import game.application.places.Place;
 
 public class Orc extends Ennemy {
@@ -16,7 +16,7 @@ public class Orc extends Ennemy {
 		int damage;
 		if (Math.random() < 0.6 || !this.canUseSpecial()) {
 			damage = this.attack(h);
-			return "L'orc effectue une attaque et vous perdez " + damage + "point de vie";
+			return "L'orc effectue une attaque et vous perdez " + damage + " point de vie";
 		}
 		else {
 			damage = this.special();
@@ -26,7 +26,7 @@ public class Orc extends Ennemy {
 			else {
 				h.takeDamage(damage);
 			}
-			return "L'orc effectue son special : " + this.getSpecial() + "vous perdez " + damage + "point de vie !" ;
+			return "L'orc effectue son special : " + this.getSpecial() + " vous perdez " + damage + " point de vie !" ;
 		}
 	}
 }

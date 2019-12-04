@@ -3,16 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package game.application.character;
+package underthebeam.application.characters;
 
+import game.application.characters.Warrior;
 import game.application.interfaces.Actionnable;
 import game.application.interfaces.Usable;
 import game.application.exceptions.NonAvailableActionException;
 import game.application.items.Consumable;
-import game.application.items.weapon.Sword;
+import underthebeam.application.items.weapons.Sword;
 import game.application.places.Place;
 
-public class Hero extends Character implements Actionnable{
+public class Hero extends Warrior implements Actionnable{
     
     public Hero(String NAME, int life, Place p) {
         super(NAME, life, new Sword(), p);
@@ -22,8 +23,14 @@ public class Hero extends Character implements Actionnable{
     public void action(Usable u) throws NonAvailableActionException{
         if (Consumable.isConsumable(u)) {
             Consumable cons = (Consumable) u;
-            this.setLife(this.getLife() + cons.getNbEffect());
-            this.removeItem(cons.getNAME());
+            if (this.getLife() + cons.getNbEffect() <= this.getMAXLIFE()) {
+            	this.setLife(this.getLife() + cons.getNbEffect());
+            	this.removeItem(cons.getNAME());
+            }
+            if (this.getLife() < this.getMAXLIFE()) {
+            	this.setLife(this.getMAXLIFE());
+            	this.removeItem(cons.getNAME());
+            }
         }
         
     }

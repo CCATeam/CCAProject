@@ -6,7 +6,7 @@
 package game.stockage.instancecreator;
 
 import com.google.gson.InstanceCreator;
-import game.application.character.ennemy.Orc;
+import underthebeam.application.characters.enemies.Orc;
 import java.lang.reflect.Type;
 
 public class OrcInstanceCreator implements InstanceCreator<Orc>

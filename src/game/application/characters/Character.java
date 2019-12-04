@@ -1,4 +1,4 @@
-package game.application.character;
+package game.application.characters;
 
 import game.application.interfaces.Lookable;
 import game.application.items.Item;
@@ -12,7 +12,6 @@ public abstract class Character implements Lookable {
     private int life;
     private final int MAX_LIFE;
 
-    private Weapon currentWeapon;
     private Place currentPlace;
     
     /**
@@ -21,12 +20,11 @@ public abstract class Character implements Lookable {
      * @param place
      * @param life
      */
-    public Character(String name, int life, Weapon w, Place place) {
+    public Character(String name, int life, Place place) {
         this.NAME = name;
         this.life = life;
         this.MAX_LIFE = life;
         this.currentPlace = place;
-        this.currentWeapon = w;
         this.bag = new Bag();
     }
     
@@ -49,17 +47,6 @@ public abstract class Character implements Lookable {
     }
 
     /*
-     * switch the current weapon with a other weapon in the bag
-     * @param name
-     */
-    
-    public void changeWeapon(String name) {
-        Weapon tmp = (Weapon) removeItem(name);
-        addItem(currentWeapon);
-        this.currentWeapon = tmp;
-    }
-
-    /*
      * @return placeCourant
      */
     public Place getPlace() {
@@ -69,7 +56,7 @@ public abstract class Character implements Lookable {
     /*
      * @param place
      */
-    public void setPlaceCourante(Place placeCourante) {
+    public void setCurrentPlace(Place placeCourante) {
         this.currentPlace = placeCourante;
     }
     
@@ -81,16 +68,6 @@ public abstract class Character implements Lookable {
     public String getNAME() {
         return NAME;
     }
-
-    /*
-     * make an attack
-     * @param Character
-     */
-    public int attack(Character chara) {
-    	System.out.println(this.currentWeapon);
-    	chara.takeDamage(this.currentWeapon.getDamage());
-    	return this.currentWeapon.getDamage();
-    }
     
     /**
      *
@@ -99,7 +76,11 @@ public abstract class Character implements Lookable {
     public int getLife() {
         return life;
     }
-
+    
+    public int getMAXLIFE() {
+    	return this.MAX_LIFE;
+    }
+    
     /**
      *
      * @param life

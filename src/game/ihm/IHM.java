@@ -117,27 +117,7 @@ public class IHM {
                 + "QUIT : quitter le jeu");
     }
     
-    public void attack(String tabParameters[]) {
-            	try {
-            	int damage = this.game.attack(tabParameters[0]);
-				this.refreshConsole("Vous attaque " + tabParameters[0] + " et il perd " + damage + " point de vie");
-				if (!this.game.ennemyIsDie(tabParameters[0])) {
-					this.refreshConsole(this.game.EnnemyAttack(tabParameters[0]));
-				}
-				else {
-					Item loot = this.game.ennemyDie(tabParameters[0]);
-					if (loot == null) {
-						this.refreshConsole(tabParameters[0] + " meure et ne loot rien");
-					}
-					else {
-						this.refreshConsole(tabParameters[0] + "meure et loot : \n"
-								+ loot);
-					}
-				}
-			} catch (InvalidTaget e) {
-				this.refreshConsole("la cible de votre attaque n'existe pas");
-			}
-    }
+    
     
     public void quit() {
             this.refreshConsole("Êtes-vous sûr ?\n");
@@ -211,10 +191,6 @@ public class IHM {
         else if(c.equals(Command.HELP)) {
             this.help();
         }
-        //ATTACK
-        else if(c.equals(Command.ATTACK) && tabParameters.length > 0) {
-            this.attack(tabParameters);
-        }
         //QUIT 
         else if(c.equals(Command.QUIT)) 
             this.quit();
@@ -251,4 +227,7 @@ public class IHM {
         this.quit = false;
     }
 
+    public Game getGame() {
+        return game;
+    }
 }

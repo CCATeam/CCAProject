@@ -1,10 +1,10 @@
 package game.stockage;
 
 import com.google.gson.GsonBuilder;
-import game.application.character.Hero;
-import game.application.character.ennemy.Orc;
-import game.application.items.weapon.Axe;
-import game.application.items.weapon.Sword;
+import underthebeam.application.characters.Hero;
+import underthebeam.application.characters.enemies.Orc;
+import underthebeam.application.items.weapons.Axe;
+import underthebeam.application.items.weapons.Sword;
 import game.application.items.weapon.Weapon;
 import game.stockage.instancecreator.*;
 

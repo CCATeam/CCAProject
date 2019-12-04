@@ -6,7 +6,7 @@
 package game.stockage.instancecreator;
 
 import com.google.gson.InstanceCreator;
-import game.application.character.Hero;
+import underthebeam.application.characters.Hero;
 import java.lang.reflect.Type;
 
 public class HeroInstanceCreator implements InstanceCreator<Hero>

@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package game.ihm;
+package underthebeam.ihm;
+
+import game.ihm.IHM;
 
 /**
  *
@@ -12,7 +14,7 @@ package game.ihm;
 public class Main {
     
     public static void main(String[] args) {
-        IHM ihm = new IHM();
+        IHM ihm = new UtbIHM();
         ihm.run();
     }
 }

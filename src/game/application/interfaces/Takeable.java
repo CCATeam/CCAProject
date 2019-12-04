@@ -5,7 +5,7 @@
  */
 package game.application.interfaces;
 import game.application.items.Item;
-import game.application.character.Character;
+import game.application.characters.Character;
 
 /**
  *

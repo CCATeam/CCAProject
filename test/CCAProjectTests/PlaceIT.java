@@ -1,15 +1,15 @@
 package CCAProjectTests;
 
 
-import game.application.character.Hero;
-import game.application.character.ennemy.Orc;
+import underthebeam.application.characters.Hero;
+import underthebeam.application.characters.enemies.Orc;
 import game.application.interfaces.Actionnable;
 import game.application.interfaces.Lookable;
-import game.application.items.Chest;
+import underthebeam.application.items.Chest;
 import game.application.items.ChestKey;
 import game.application.items.Item;
-import game.application.items.weapon.Sword;
-import game.application.character.Character;
+import underthebeam.application.items.weapons.Sword;
+import game.application.characters.Character;
 import game.application.places.Exit;
 import game.application.places.LockedExit;
 import game.application.places.Place;

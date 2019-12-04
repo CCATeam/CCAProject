@@ -1,13 +1,14 @@
-package game.application.character.ennemy;
+package underthebeam.application.characters.enemies;
 
-import game.application.character.Character;
-import game.application.character.Hero;
-import game.application.character.ennemy.special.Special;
+import game.application.characters.Character;
+import underthebeam.application.characters.Hero;
+import game.application.characters.Warrior;
+import underthebeam.application.characters.enemies.special.Special;
 import game.application.items.Item;
 import game.application.items.weapon.Weapon;
 import game.application.places.Place;
 
-public abstract class Ennemy extends Character{
+public abstract class Ennemy extends Warrior{
 	
     private Special skill; // permet de realiser une capacit� special
     private Item loot; // null si pas de loot

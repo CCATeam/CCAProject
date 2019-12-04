@@ -1,7 +1,7 @@
 package game.stockage.instancecreator;
 
 import com.google.gson.InstanceCreator;
-import game.application.items.weapon.Axe;
+import underthebeam.application.items.weapons.Axe;
 import java.lang.reflect.Type;
 
 public class AxeInstanceCreator implements InstanceCreator<Axe>

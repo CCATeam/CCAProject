@@ -1,6 +1,6 @@
-package game.application.character.ennemy.special;
+package underthebeam.application.characters.enemies.special;
 
-import game.application.character.Hero;
+import underthebeam.application.characters.Hero;
 import game.application.items.weapon.Weapon;
 
 public class StrongHit extends Special{

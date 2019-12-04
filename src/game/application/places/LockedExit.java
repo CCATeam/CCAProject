@@ -8,7 +8,7 @@ package game.application.places;
 import game.application.interfaces.Actionnable;
 import game.application.interfaces.Lookable;
 import game.application.interfaces.Usable;
-import game.application.character.Character;
+import game.application.characters.Character;
 import game.application.exceptions.LockedExitException;
 import game.application.exceptions.NonAvailableActionException;
 import game.application.items.DoorKey;

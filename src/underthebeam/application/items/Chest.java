@@ -3,38 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package game.application.items;
+package underthebeam.application.items;
 
 import game.application.exceptions.NonAvailableActionException;
 import game.application.interfaces.Actionnable;
 import game.application.interfaces.Usable;
+import game.application.items.ChestKey;
+import game.application.items.Container;
+import game.application.items.Item;
 import game.application.places.Place;
 
 /**
  *
  * @author Fabien
  */
-public class Chest extends Item implements Actionnable {
+public class Chest extends Container {
     
     private Place place;
     private Item containedItem;
     private boolean locked;
     
     public Chest(String NAME, String DESCRIPTION, boolean locked, Item i, Place p) {
-        super(NAME, DESCRIPTION);
-        this.locked = locked;
-        this.containedItem = i;
-        this.place = p;
+        super(NAME, DESCRIPTION, locked, i, p);
     }
-
-    public void unlock() {
-        this.locked = false;
-    }
-    
-    public void lock() {
-        this.locked = true;
-    }
-    
     @Override
     public void action(Usable u) throws NonAvailableActionException {
         if(!ChestKey.isChestKey(u)) {
@@ -53,7 +44,7 @@ public class Chest extends Item implements Actionnable {
     @Override
     public String toString() {
         String message;
-        if(this.locked) {
+        if(this.isLocked()) {
             message = "Un coffre fermé.";
         }
         else {

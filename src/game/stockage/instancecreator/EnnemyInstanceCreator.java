@@ -6,9 +6,9 @@
 package game.stockage.instancecreator;
 
 import com.google.gson.InstanceCreator;
-import game.application.character.Hero;
-import game.application.character.ennemy.Ennemy;
-import game.application.character.ennemy.Orc;
+import underthebeam.application.characters.Hero;
+import underthebeam.application.characters.enemies.Ennemy;
+import underthebeam.application.characters.enemies.Orc;
 import java.lang.reflect.Type;
 
 class EnnemyInstanceCreator implements InstanceCreator<Ennemy>

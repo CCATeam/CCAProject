@@ -3,8 +3,8 @@ package game.application.places;
 import game.application.interfaces.Actionnable;
 import game.application.interfaces.Lookable;
 import game.application.items.Item;
-import game.application.character.Character;
-import game.application.character.ennemy.Ennemy;
+import game.application.characters.Character;
+import underthebeam.application.characters.enemies.Ennemy;
 
 import java.util.*;
 import java.util.Map.Entry;
@@ -147,7 +147,7 @@ public class Place {
     public void removeCharacter(Character chara) {
     	for (Map.Entry<String, Character> entry : this.characters.entrySet()) {
     		if(chara == entry.getValue()) {
-    			this.characters.remove(entry.getKey()).setPlaceCourante(null);
+    			this.characters.remove(entry.getKey()).setCurrentPlace(null);
     			break;
     		}
     	}

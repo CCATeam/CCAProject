@@ -7,9 +7,9 @@ import game.application.interfaces.Actionnable;
 import game.application.items.Item;
 import game.application.places.Place;
 import game.application.places.Exit;
-import game.application.character.Hero;
-import game.application.character.ennemy.Ennemy;
-import game.application.character.Character;
+import underthebeam.application.characters.Hero;
+import underthebeam.application.characters.enemies.Ennemy;
+import game.application.characters.Character;
 import game.application.exceptions.NonExistantPlaceException;
 import game.application.exceptions.InvalidTaget;
 import game.application.exceptions.LockedExitException;
@@ -36,7 +36,7 @@ public class Game {
     public void initializeGame() {
         Stockage s = new Stockage();
         this.places = s.getDataGame();
-        this.hero = (Hero)this.places.get(0).getCharacterByName("Player");
+        this.hero = (Hero)this.places.get(0).getCharacterByName("player");
         
         //Initialize all the places, i.e. Get the lookables, and other "ables" 
         //from the data contain in each place.
@@ -69,7 +69,7 @@ public class Game {
                     placeOut = p;
                 }
             }                                               
-            this.getHero().setPlaceCourante(placeOut);
+            this.getHero().setCurrentPlace(placeOut);
         }   
         return placeOut.toString();
     }
@@ -151,39 +151,6 @@ public class Game {
     public Place getHeroPlace() {
         return this.hero.getPlace();
     }
-
-    
-    public int attack(String nameEnnemy) throws InvalidTaget {
-    	Ennemy ennemy;
-        Character c = this.hero.getPlace().getCharacterByName(nameEnnemy);
-        
-        if(!Ennemy.isEnnemy(c) || !c.getNAME().equalsIgnoreCase(nameEnnemy)) {
-            throw new InvalidTaget();           
-        }
-        ennemy = (Ennemy)this.hero.getPlace().getCharacterByName(nameEnnemy);
-        int resu = this.hero.attack(ennemy);
-        return resu;
-    }
-    
-    public boolean ennemyIsDie(String nameEnnemy) {
-    	Character ennemy = this.hero.getPlace().getCharacterByName(nameEnnemy);
-        if (ennemy.getLife() <= 0)
-        	return true;
-        return false;
-    }
-    
-    public Item ennemyDie(String nameEnnemy) {
-    	Character ennemy = this.hero.getPlace().getCharacterByName(nameEnnemy);
-    	this.hero.getPlace().removeCharacter(ennemy);
-    	Item i = ((Ennemy)ennemy).loot();
-    	this.hero.addItem(i);;
-    	return i;
-    }
-    
-    public String EnnemyAttack(String nameEnnemy) {
-    	Ennemy ennemy = (Ennemy)this.hero.getPlace().getCharacterByName(nameEnnemy);
-    	return ennemy.action((Hero)this.hero);
-    }
     
     public String lookAround () {
         String res = "";
@@ -198,7 +165,7 @@ public class Game {
      * 
      * @return this.hero
      */
-    public Character getHero() {
+    public Hero getHero() {
         return hero;
     }
 

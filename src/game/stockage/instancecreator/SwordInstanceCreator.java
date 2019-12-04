@@ -2,7 +2,7 @@ package game.stockage.instancecreator;
 
 
 import com.google.gson.InstanceCreator;
-import game.application.items.weapon.Sword;
+import underthebeam.application.items.weapons.Sword;
 import java.lang.reflect.Type;
 
 public class SwordInstanceCreator implements InstanceCreator<Sword>

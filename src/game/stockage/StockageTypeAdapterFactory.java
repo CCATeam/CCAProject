@@ -7,21 +7,18 @@ package game.stockage;
 
 import com.google.gson.GsonBuilder;
 import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
-import game.application.character.Hero;
-import game.application.character.ennemy.Orc;
-import game.application.items.Chest;
+import underthebeam.application.characters.Hero;
+import underthebeam.application.characters.enemies.Orc;
+import underthebeam.application.items.Chest;
 import game.application.items.ChestKey;
-import game.application.items.DoorKey;
+import underthebeam.application.items.DoorKey;
 import game.application.items.Item;
-import game.application.items.weapon.Axe;
+import underthebeam.application.items.weapons.Axe;
 import game.application.places.Exit;
 import game.application.places.LockedExit;
 import game.application.places.WoodenDoorExit;
-import game.application.character.Character;
-import game.application.items.weapon.Sword;
+import underthebeam.application.items.weapons.Sword;
 import game.application.items.weapon.Weapon;
-import java.util.ArrayList;
-import java.util.List;
 
 public class StockageTypeAdapterFactory {
 
@@ -36,9 +33,8 @@ public class StockageTypeAdapterFactory {
      */
     public void setAdapterFactoriesToGsonBuilder(GsonBuilder gb) {
          //Define subtypes for Character
-       gb.registerTypeAdapterFactory(
-               RuntimeTypeAdapterFactory
-                .of(game.application.character.Character.class, "type")
+       gb.registerTypeAdapterFactory(RuntimeTypeAdapterFactory
+                .of(game.application.characters.Character.class, "type")
                 .registerSubtype(Hero.class, "hero")
                 .registerSubtype(Orc.class, "orc")
        );

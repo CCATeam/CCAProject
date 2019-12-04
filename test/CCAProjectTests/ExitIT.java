@@ -1,7 +1,7 @@
 package CCAProjectTests;
 
-import game.application.character.Hero;
-import game.application.character.Character;
+import underthebeam.application.characters.Hero;
+import game.application.characters.Character;
 import game.application.exceptions.LockedExitException;
 import game.application.places.Exit;
 import game.application.places.LockedExit;
