@@ -116,6 +116,8 @@ public class IHM {
 				this.refreshConsole("Vous attaque " + tabParameters[0] + " et il perd " + damage + " point de vie");
 				if (!this.game.ennemyIsDie(tabParameters[0])) {
 					this.refreshConsole(this.game.EnnemyAttack(tabParameters[0]));
+					if(this.game.heroDie())
+						this.Die();
 				}
 				else {
 					Item loot = this.game.ennemyDie(tabParameters[0]);
@@ -156,6 +158,33 @@ public class IHM {
                 this.quit=true;
             }    
         }
+
+
+    public void Die() {
+    	this.refreshConsole("Vous étes mort....");
+    	Command c;
+        String answer=this.scan();
+        try {
+            c = Command.getCommand(answer);
+        }catch (InvalidCommandException ex) {
+            c = null;
+        }
+        if (c==Command.YES) {
+            this.refreshConsole("Voulez-vous charger une sauvegard ?");
+            answer=this.scan();
+            try {
+                c = Command.getCommand(answer);
+            }
+            catch (InvalidCommandException ex){
+                c = null;
+            }
+            if (c.equals(Command.YES)) {
+            	// chargement d'un sauvegard
+            }
+            this.quit=true;
+        }    
+    	
+    }
     
     /**
      * Ask to game the datas corresponding to the command c and its parameters.

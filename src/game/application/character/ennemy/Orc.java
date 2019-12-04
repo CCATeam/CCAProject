@@ -16,7 +16,7 @@ public class Orc extends Ennemy {
 		int damage;
 		if (Math.random() < 0.6 || !this.canUseSpecial()) {
 			damage = this.attack(h);
-			return "L'orc effectue une attaque et vous perdez " + damage + "point de vie";
+			return "L'orc effectue une attaque et vous perdez " + damage + " point de vie";
 		}
 		else {
 			damage = this.special();
@@ -26,7 +26,7 @@ public class Orc extends Ennemy {
 			else {
 				h.takeDamage(damage);
 			}
-			return "L'orc effectue son special : " + this.getSpecial() + "vous perdez " + damage + "point de vie !" ;
+			return "L'orc effectue son special : " + this.getSpecial() + " vous perdez " + damage + " point de vie !" ;
 		}
 	}
 }

@@ -11,7 +11,8 @@ import game.application.interfaces.Usable;
  *
  * @author Fabien
  */
-public class Consumable extends TakeableItem {
+public class Consumable extends TakeableItem implements Usable{
+
     
     private int nbEffect;
     private boolean available;

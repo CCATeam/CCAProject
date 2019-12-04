@@ -6,16 +6,26 @@ package game.application.character.ennemy.special;
  */
 public abstract class Special {
 	
-	private boolean usable = true; 
+	private int usable; 
+	
+	public Special(int usable) {
+		this.usable = usable;
+	}
+	
+	public boolean Use() {
+		boolean tmp = this.usable > 0;
+		if (tmp)
+			this.usable--;
+		return tmp;
+	}
 	
 	public boolean getUse() {
-		if (this.usable)
-			this.usable = !usable;
-		return usable;
+		return this.usable > 0;
 	}
 	
 	public abstract int specialSkill();
 	
 	
 	public abstract String toString();
+	
 }

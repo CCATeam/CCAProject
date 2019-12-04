@@ -45,6 +45,10 @@ public class LockedExit extends Exit implements Lookable, Actionnable {
         return true;
     }
     
+    public boolean getLock() {
+    	return this.locked;
+    }
+    
     public void unlock() {
         this.locked = false;
     }
