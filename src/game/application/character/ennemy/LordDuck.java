@@ -4,6 +4,7 @@ import game.application.character.Hero;
 import game.application.character.ennemy.special.BeamThrowing;
 import game.application.character.ennemy.special.Special;
 import game.application.character.ennemy.special.WingShot;
+import game.application.items.FinalKey;
 import game.application.items.weapon.Beam;
 import game.application.places.Place;
 
@@ -12,7 +13,7 @@ public class LordDuck extends Ennemy {
 	private final Special secondSkill;
 	
 	public LordDuck(Place p) {
-		super("Lord Canard", 50, new Beam(), new BeamThrowing(), p, null);
+		super("Lord Canard", 50, new Beam(), new BeamThrowing(), p, new FinalKey());
 		this.secondSkill = new WingShot(getCurrentWeapon());
 	}
 
