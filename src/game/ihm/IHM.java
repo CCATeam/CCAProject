@@ -44,19 +44,10 @@ public class IHM {
         System.out.println(text);
     }
     
-    /**
-     * Ask to game the datas corresponding to the command c and its parameters.
-     * 
-     * @param c
-     * @param tabParameters
-     */
-    public void action(Command c, String[] tabParameters) {     
-        //GO
-        if(c.equals(Command.GO) && tabParameters.length > 0) {
-            try {
-                Place p = this.game.go(tabParameters[0]);
-                this.refreshConsole(p.toString());
-                
+    public void go(String param) {
+        try {
+                String newP = this.game.go(param);
+                this.refreshConsole(newP);
             } catch (NonExistantPlaceException ex) {
                 this.refreshConsole(this.game.getHeroPlace().toString()
                         + "\nIl n'y a pas d'endroit avec le nom indiquié à proximité !");
@@ -64,47 +55,41 @@ public class IHM {
                 this.refreshConsole(this.game.getHeroPlace().toString()
                         + "\nVous ne pouvez pas passer par là pour le moment. Peut être n'avez vous pas l'objet adéquat ?");
             }
+    }
+    
+    public void lookSmthg(String param) {
+        try {
+            String l;
+            l = this.game.lookInPlace(param);
+            this.refreshConsole(l);
+        } catch (NonExistantLookableException ex) {
+            this.refreshConsole(this.game.getHeroPlace().toString()
+                    + "\nVous essayez de regarder quelque chose d'innexistant ! (Si vous y arrivez, bravo !)");
         }
-        //LOOK
-        else if(c.equals(Command.LOOK) && tabParameters.length > 0) {     
+    }
+    
+    public void lookAround() {
+        String s = this.game.lookAround();
+        if (s.equalsIgnoreCase("")) {
+            this.refreshConsole("Il n'y a rien dans cette pièce.");
+        } else {
+            this.refreshConsole("Vous voyez autour de vous : ");
+            this.refreshConsole(s);
+        }
+    }
+    
+    public void take (String param) {
             try {
-                Lookable l = this.game.lookInPlace(tabParameters[0]);
-                this.refreshConsole(l.looked());
-            } catch (NonExistantLookableException ex) {
-                this.refreshConsole(this.game.getHeroPlace().toString()
-                        + "\nVous essayez de regarder quelque chose d'innexistant ! (Si vous y arrivez, bravo !)");
-            }
-        } 
-        else if(c.equals(Command.LOOK) && tabParameters.length == 0) {
-            String s = this.game.lookAround();
-            if (s.equalsIgnoreCase("")) {
-                this.refreshConsole("Il n'y a rien dans cette pièce.");
-            }
-            else {
-                this.refreshConsole("Vous voyez autour de vous : ");
-                this.refreshConsole(s);  
-            }
-        }
-        //LOOK IN BAG
-        else if(c.equals(Command.BAG) && tabParameters.length >= 0) {     
-            Lookable l = this.game.lookBag();
-            this.refreshConsole(l.looked());
-            
-        }
-        //TAKE
-        else if(c.equals(Command.TAKE) && tabParameters.length > 0) {
-            try {
-                Takeable taken = this.game.take(tabParameters[0]);
-                this.refreshConsole("Vous avez ramassé" + taken.toString());
-                this.refreshConsole(taken.taken(this.game.getHero()));
+                String taken = this.game.take(param);
+                this.refreshConsole("Vous avez ramassé" + taken);
             } catch (NonTakeableException ex) {
-                this.refreshConsole("\nVous ne pouvez pas ramasser cet objet");
+                this.refreshConsole("\nVous ne pouvez pas ramasser ceci" );
             } catch (NonExistantTakeableException ex) {
                 this.refreshConsole("\nVous essayez de ramasser un objet qui n'existe pas !");
             }
-        }
-        //USE
-        else if(c.equals(Command.USE) && tabParameters.length > 0) {     
+    }
+    
+    public void use (String tabParameters[]) {
             try {
                 Lookable l = this.game.use(tabParameters);
                 this.refreshConsole(l.looked());
@@ -113,22 +98,22 @@ public class IHM {
             } catch (NonAvailableActionException ex) {
                 this.refreshConsole(ex.getMessage());
             } 
-        }
-        //HELP
-        else if(c.equals(Command.HELP)) {
-            this.refreshConsole("Les commandes suivantes sont disponibles :\n "
-                    + "GO <lieu> : se déplacer\n"
-                    + "LOOK <lieu / objet / personnage> : examiner\n"
-                    + "BAG : lister le contenu de votre sac\n"
-                    + "TAKE <objet> : ramasser un objet\n"
-                    + "USE <objet> : utiliser un objet\n"
-                    + "USE <objet> <objet> : utiliser un objet sur quelque-chose\n"
-                    + "ATTACK <ennemy> : attaque l'ennemy\n"
-                    + "QUIT : quitter le jeu");
-        }
-        //ATTACK
-        else if(c.equals(Command.ATTACK) && tabParameters.length > 0) {
-        	try {
+    }
+    
+    public void help() {
+        this.refreshConsole("Les commandes suivantes sont disponibles :\n "
+                + "GO <lieu> : se déplacer\n"
+                + "LOOK <lieu / objet / personnage> : examiner\n"
+                + "BAG : lister le contenu de votre sac\n"
+                + "TAKE <objet> : ramasser un objet\n"
+                + "USE <objet> : utiliser un objet\n"
+                + "USE <objet> <objet> : utiliser un objet sur quelque-chose\n"
+                + "ATTACK <ennemy> : attaque l'ennemy\n"
+                + "QUIT : quitter le jeu");
+    }
+    
+    public void attack(String tabParameters[]) {
+            	try {
             	int damage = this.game.attack(tabParameters[0]);
 				this.refreshConsole("Vous attaque " + tabParameters[0] + " et il perd " + damage + " point de vie");
 				if (!this.game.ennemyIsDie(tabParameters[0])) {
@@ -147,21 +132,22 @@ public class IHM {
 			} catch (InvalidTaget e) {
 				this.refreshConsole("la cible de votre attaque n'existe pas");
 			}
-        }
-        //QUIT 
-        else if(c.equals(Command.QUIT)) {
+    }
+    
+    public void quit() {
             this.refreshConsole("Êtes-vous sûr ?\n");
-            tabParameters[0]=this.scan();
+            Command c;
+            String answer=this.scan();
             try {
-                c = Command.getCommand(tabParameters[0]);
+                c = Command.getCommand(answer);
             }catch (InvalidCommandException ex) {
                 c = null;
             }
             if (c==Command.YES) {
                 this.refreshConsole("Voulez-vous sauvegarder ?");
-                tabParameters[0]=this.scan();
+                answer=this.scan();
                 try {
-                    c = Command.getCommand(tabParameters[0]);
+                    c = Command.getCommand(answer);
                 }
                 catch (InvalidCommandException ex){
                     c = null;
@@ -172,6 +158,61 @@ public class IHM {
                 this.quit=true;
             }    
         }
+    
+    /**
+     * Ask to game the datas corresponding to the command c and its parameters.
+     * 
+     * @param c
+     * @param tabParameters
+     */
+    public void action(Command c, String[] tabParameters) {     
+        //GO
+        if(c.equals(Command.GO)) {
+            if (tabParameters.length > 0) {
+                this.go(tabParameters[0]);
+            } else {
+                this.refreshConsole("Vous n'avez pas indiqué de lieu.");
+            }
+        }
+        //LOOK
+        else if(c.equals(Command.LOOK) && tabParameters.length > 0) {     
+           this.lookSmthg(tabParameters[0]); 
+        }
+        else if(c.equals(Command.LOOK) && tabParameters.length == 0) {
+           this.lookAround();
+        }
+        //LOOK IN BAG
+        else if(c.equals(Command.BAG) && tabParameters.length >= 0) {     
+            Lookable l = this.game.lookBag();
+            this.refreshConsole(l.looked());
+        }
+        //TAKE
+        else if(c.equals(Command.TAKE)) {
+            if (tabParameters.length > 0) {
+                take(tabParameters[0]);
+            }else {
+                this.refreshConsole("Vous n'avez pas indiqué d'objet à ramasser.");
+            }
+        }
+        //USE
+        else if(c.equals(Command.USE)) {
+            if (tabParameters.length > 0) {
+                this.use(tabParameters);
+            } else {
+                this.refreshConsole("Vous n'avez pas indiqué ce que vous souhaitiez utiliser.");
+            }   
+        }
+        //HELP
+        else if(c.equals(Command.HELP)) {
+            this.help();
+        }
+        //ATTACK
+        else if(c.equals(Command.ATTACK) && tabParameters.length > 0) {
+            this.attack(tabParameters);
+        }
+        //QUIT 
+        else if(c.equals(Command.QUIT)) 
+            this.quit();
     }
     
     

@@ -23,8 +23,8 @@ public interface Takeable {
         if (this instanceof Item) {
             chara.addItem((Item)this);
             chara.getPlace().removeItem((Item)this);
-        return("String not yet decided");
+ 
         }
-        return("String not yet decided.");
+        return(this.toString());
     }
 }
