@@ -95,7 +95,6 @@ public abstract class Character implements Lookable {
      * @param damage
      */
     public void takeDamage(int damage) {
-    	System.out.println(damage);
     	this.life -= damage;
     }
     

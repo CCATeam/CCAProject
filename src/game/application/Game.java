@@ -7,6 +7,7 @@ import game.application.interfaces.Actionnable;
 import game.application.items.Item;
 import game.application.places.Place;
 import game.application.places.Exit;
+import game.application.places.FinalPlace;
 import game.application.character.Hero;
 import game.application.character.ennemy.Ennemy;
 import game.application.character.Character;
@@ -25,7 +26,8 @@ import java.util.List;
 public class Game {
 
     private List<Place> places;
-    private Hero hero;
+    private Place finalPlace; // the last place in the list.
+    private Hero hero; // int the first place in the list.
 
     public Game() {
     }
@@ -37,6 +39,8 @@ public class Game {
         Stockage s = new Stockage();
         this.places = s.getDataGame();
         this.hero = (Hero)this.places.get(0).getCharacterByName("Me");
+        this.finalPlace = new FinalPlace(); //TODO
+        //this.finalPlace = (FinalPlace)this.places.get(this.places.size());
         
         //Initialize all the places, i.e. Get the lookables, and other "ables" 
         //from the data contain in each place.
@@ -70,7 +74,7 @@ public class Game {
                 }
             }                                               
             this.getHero().setPlaceCourante(placeOut);
-        }   
+        }
         return placeOut.toString();
     }
     
@@ -236,5 +240,9 @@ public class Game {
         } else {
             throw new NonTakeableException();
         }
+    }
+    
+    public boolean isWin() {
+    	return this.getHeroPlace().getNAME().equals(this.finalPlace.getNAME());
     }
 }
