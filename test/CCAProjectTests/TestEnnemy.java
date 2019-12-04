@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import underthebeam.application.characters.Hero;
-import underthebeam.application.characters.enemies.Ennemy;
+import underthebeam.application.characters.enemies.Enemy;
 import underthebeam.application.characters.enemies.Orc;
 import underthebeam.application.items.weapons.Sword;
 
@@ -16,7 +16,7 @@ public class TestEnnemy {
 	
 	@Test
 	public void testGetUse() {
-		Ennemy orc = new Orc("orc", null);
+		Enemy orc = new Orc("orc", null);
 		assertTrue(orc.canUseSpecial());
 		orc.special();
 		assertFalse(orc.canUseSpecial());
@@ -24,7 +24,7 @@ public class TestEnnemy {
 	
 	@Test
 	public void testSpecial() {
-		Ennemy orc = new Orc("orc", null);
+		Enemy orc = new Orc("orc", null);
 		int damage = orc.special();
 		assertTrue(damage == (orc.getCurrentWeapon().getDamage()*2) || damage == (orc.getCurrentWeapon().getDamage() / 2));
 	}
@@ -32,7 +32,7 @@ public class TestEnnemy {
 	@Test
 	public void testAction() {
 		int life = 10;
-		Ennemy orc = new Orc("orc", null);
+		Enemy orc = new Orc("orc", null);
 		Hero h = new Hero("hero", life, null);
 		String resu = orc.action(h);
 		assertTrue(resu.equals("L'orc effectue son special : " + orc.getSpecial() + " et vous perdez 1 point de vie")
