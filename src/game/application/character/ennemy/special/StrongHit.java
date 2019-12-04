@@ -8,12 +8,13 @@ public class StrongHit extends Special{
 	private Weapon weapon;
 	
 	public StrongHit(Weapon weapon) {
+		super(1);
 		this.weapon = weapon;
 	}
 	
 	@Override
 	public int specialSkill() {
-		if (getUse()) {
+		if (Use()) {
 			if (Math.random() < 0.5) {
 				return weapon.getDamage()*2;
 			}
