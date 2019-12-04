@@ -22,8 +22,14 @@ public class Hero extends Character implements Actionnable{
     public void action(Usable u) throws NonAvailableActionException{
         if (Consumable.isConsumable(u)) {
             Consumable cons = (Consumable) u;
-            this.setLife(this.getLife() + cons.getNbEffect());
-            this.removeItem(cons.getNAME());
+            if (this.getLife() + cons.getNbEffect() <= this.getMAXLIFE()) {
+            	this.setLife(this.getLife() + cons.getNbEffect());
+            	this.removeItem(cons.getNAME());
+            }
+            if (this.getLife() < this.getMAXLIFE()) {
+            	this.setLife(this.getMAXLIFE());
+            	this.removeItem(cons.getNAME());
+            }
         }
         
     }

@@ -9,13 +9,15 @@ public abstract class Special {
 	private boolean usable = true; 
 	
 	public boolean getUse() {
+		boolean tmp = this.usable;
 		if (this.usable)
 			this.usable = !usable;
-		return usable;
+		return tmp;
 	}
 	
 	public abstract int specialSkill();
 	
 	
 	public abstract String toString();
+	
 }

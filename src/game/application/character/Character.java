@@ -58,7 +58,11 @@ public abstract class Character implements Lookable {
         addItem(currentWeapon);
         this.currentWeapon = tmp;
     }
-
+    
+    public Weapon getCurrentWeapon() {
+    	return this.currentWeapon;
+    }
+    
     /*
      * @return placeCourant
      */
@@ -87,7 +91,6 @@ public abstract class Character implements Lookable {
      * @param Character
      */
     public int attack(Character chara) {
-    	System.out.println(this.currentWeapon);
     	chara.takeDamage(this.currentWeapon.getDamage());
     	return this.currentWeapon.getDamage();
     }
@@ -99,7 +102,11 @@ public abstract class Character implements Lookable {
     public int getLife() {
         return life;
     }
-
+    
+    public int getMAXLIFE() {
+    	return this.MAX_LIFE;
+    }
+    
     /**
      *
      * @param life
