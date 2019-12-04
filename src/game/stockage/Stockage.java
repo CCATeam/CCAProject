@@ -56,8 +56,7 @@ public class Stockage {
             Logger.getLogger(Stockage.class.getName()).log(Level.SEVERE, null, ex);
         }
    
-        //Défini les sous-types de Character pour pouvoir récupérer tout d'un coup 
-        //dans le json
+        //Define subtypes 
         RuntimeTypeAdapterFactory<Character> runtimeTypeAdapterFactoryCharacter;
         runtimeTypeAdapterFactoryCharacter = RuntimeTypeAdapterFactory
                 .of(Character.class, "type")
@@ -73,7 +72,7 @@ public class Stockage {
                 .registerSubtype(WoodenDoorExit.class, "wooden door")
                 .registerSubtype(LockedExit.class, "locked exit");
 
-        //Défini les sous-types de Exit pour pouvoir récupérer tout d'un coup 
+        //Défini les sous-types de Item pour pouvoir récupérer tout d'un coup 
         //dans le json
         RuntimeTypeAdapterFactory<Item> runtimeTypeAdapterFactoryItem;
         runtimeTypeAdapterFactoryItem = RuntimeTypeAdapterFactory

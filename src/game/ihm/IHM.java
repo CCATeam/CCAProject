@@ -165,8 +165,8 @@ public class IHM {
         refreshConsole(this.game.getHeroPlace().toString());
         
         do {       
+            System.out.println("------------------------------------------------------------------------");
             System.out.println("");
-            System.out.println("Quelle action effectuer ? (help pour voir la liste des commandes disponibles)");
             line = this.scan();
             try {
                 c = Command.getCommand(line);
