@@ -56,7 +56,7 @@ public class Game {
      * @throws game.application.exceptions.NonExistantPlaceException
      * @throws game.application.exceptions.LockedExitException
      */
-    public Place go(String location) throws NonExistantPlaceException, LockedExitException{
+    public String go(String location) throws NonExistantPlaceException, LockedExitException{
         Place placeOut = null;
         Exit e = this.getHero().getPlace().getExit(location);
         if(e == null) {
@@ -71,7 +71,7 @@ public class Game {
             }                                               
             this.getHero().setPlaceCourante(placeOut);
         }   
-        return placeOut;
+        return placeOut.toString();
     }
     
     
@@ -82,14 +82,14 @@ public class Game {
      * @return 
      * @throws game.application.exceptions.NonExistantLookableException 
      */
-    public Lookable lookInPlace(String s) throws NonExistantLookableException {
+    public String lookInPlace(String s) throws NonExistantLookableException {
         Lookable l = this.getHeroPlace().getLookable(s);
         
         if(l == null) {
             throw new NonExistantLookableException();
         }
      
-        return l;
+        return l.looked();
     }
     
     public Lookable lookBag() {
@@ -196,6 +196,14 @@ public class Game {
     	return ennemy.action((Hero)this.hero);
     }
     
+    public String lookAround () {
+        String res = "";
+        for (String s : this.getHeroPlace().getLookables().keySet()) {
+                res=res + "-" + s + "\n";
+        }  
+        return res;
+    }
+    
     /**
      * Returns game's hero
      * 
@@ -212,7 +220,7 @@ public class Game {
      * @throws NonTakeableException
      * @throws NonExistantTakeableException
      */
-    public Takeable take(String str) throws NonTakeableException, NonExistantTakeableException {
+    public String take(String str) throws NonTakeableException, NonExistantTakeableException {
         Item item = this.getHeroPlace().getItemByName(str);
         if (item==null) {
             throw new NonExistantTakeableException();
@@ -220,7 +228,7 @@ public class Game {
         else if (item instanceof Takeable){
             Takeable takeable = (Takeable) item;
             String taken = takeable.taken(this.getHero());
-            return takeable;
+            return takeable.taken(this.hero);
         } else {
             throw new NonTakeableException();
         }
