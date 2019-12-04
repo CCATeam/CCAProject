@@ -18,6 +18,7 @@ public abstract class Character implements Lookable {
      * 
      * @param name
      * @param place
+     * @param w
      * @param life
      */
     public Character(String name, int life, Place place) {
@@ -65,6 +66,7 @@ public abstract class Character implements Lookable {
      *
      * @return NAME
      */
+    @Override
     public String getNAME() {
         return NAME;
     }
@@ -116,7 +118,7 @@ public abstract class Character implements Lookable {
             }
 
             @Override
-            public String looked() {
+            public String lookedInPlace() {
                 return bag.toString(); //To change body of generated methods, choose Tools | Templates.
             }
         };
