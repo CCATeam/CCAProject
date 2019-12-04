@@ -175,6 +175,10 @@ public class Game {
         int resu = this.hero.attack(ennemy);
         return resu;
     }
+
+    public boolean heroDie() {
+    	return this.hero.getLife() <= 0;
+    }
     
     public boolean ennemyIsDie(String nameEnnemy) {
     	Character ennemy = this.hero.getPlace().getCharacterByName(nameEnnemy);
