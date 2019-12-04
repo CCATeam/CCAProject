@@ -35,20 +35,27 @@ public class IHM {
         this.SCANNER = new Scanner(System.in);
     }
         
-    
-
+    /**
+     * Returns String from user's input. 
+     * @return
+     */
     public String scan() {
         return this.SCANNER.nextLine();
     }
 
     /**
-     * 
+     * Prints String text
      * @param text
      */
     public void refreshConsole(String text) {
         System.out.println(text);
     }
     
+    /**
+     * Calls for game.go() to move player to close location whose name equals param String.
+     * Print informations accordingly. 
+     * @param param
+     */
     public void go(String param) {
         try {
                 String newP = this.game.go(param);
@@ -62,6 +69,11 @@ public class IHM {
             }
     }
     
+    /**
+     * Calls games.lookInPlace() to print returned description of a Lookable in hero's
+     * location whose name equals String param. 
+     * @param param
+     */
     public void lookSmthg(String param) {
         try {
             String l;
@@ -73,12 +85,23 @@ public class IHM {
         }
     }
     
+    /**
+     * Prints descriptions of every Item in hero's location.
+     */
     public void lookAround() {
         this.refreshConsole(this.game.getHeroPlace().toString());
     }
+
+    /**
+     * Calls game.take() to move location's item whose name equals to String 
+     * param to hero's bag and remove it from place, then uses returned
+     * String to print informations accordingly.
+     * accordingly.
+     * @param param
+     */
     public void take (String param) {
             try {
-                String taken = this.game.take(param);
+                String taken = this.game.take(param,this.game.getHero());
                 this.refreshConsole("Vous avez ramassé" + taken);
             } catch (NonTakeableException ex) {
                 this.refreshConsole("\nVous ne pouvez pas ramasser ceci" );
@@ -87,6 +110,11 @@ public class IHM {
             }
     }
     
+    /**
+     * Calls game.use() to use items described in tabParameters and uses returned
+     * String to print informations accordingly.
+     * @param tabParameters
+     */
     public void use (String tabParameters[]) {
             try {
                 Lookable l = this.game.use(tabParameters);
@@ -98,6 +126,9 @@ public class IHM {
             } 
     }
     
+    /**
+     *Prints available commands and their description.
+     */
     public void help() {
         this.refreshConsole("Les commandes suivantes sont disponibles :\n "
                 + "GO <lieu> : se déplacer\n"
@@ -110,8 +141,9 @@ public class IHM {
                 + "QUIT : quitter le jeu");
     }
     
-    
-    
+    /**
+     * Allows player to exit the game
+     */
     public void quit() {
             this.refreshConsole("Êtes-vous sûr ?\n");
             Command c;
@@ -122,24 +154,26 @@ public class IHM {
                 c = null;
             }
             if (c==Command.YES) {
-                this.refreshConsole("Voulez-vous sauvegarder ?");
-                answer=this.scan();
-                try {
-                    c = Command.getCommand(answer);
-                }
-                catch (InvalidCommandException ex){
-                    c = null;
-                }
-                if (c.equals(Command.YES)) {
-                    ;  //Fonction de sauvegarde
-                }
+//                this.refreshConsole("Voulez-vous sauvegarder ?");
+//                answer=this.scan();
+//                try {
+//                    c = Command.getCommand(answer);
+//                }
+//                catch (InvalidCommandException ex){
+//                    c = null;
+//                }
+//                if (c.equals(Command.YES)) {
+//                    ;  //Eventuelle fonction de sauvegarde
+//                }
                 this.quit=true;
             }    
         }
 
-
+    /**
+     * Stops the game.
+     */
     public void Die() {
-    	this.refreshConsole("Vous �tes mort....");
+    	this.refreshConsole("You died....");
     	Command c;
         String answer=this.scan();
         try {
@@ -148,7 +182,7 @@ public class IHM {
             c = null;
         }
         if (c==Command.YES) {
-            this.refreshConsole("Voulez-vous charger une sauvegard ?");
+            this.refreshConsole("Do you wish to load a save ?");
             answer=this.scan();
             try {
                 c = Command.getCommand(answer);
@@ -157,17 +191,20 @@ public class IHM {
                 c = null;
             }
             if (c.equals(Command.YES)) {
-            	// chargement d'un sauvegard
+            	// Load a save
             }
             this.quit=true;
         }    
     	
     }
 
+    /**
+     * Stops the game and prints victory message.
+     */
     public void Win() {
     	if (this.game.isWin()) {
     		this.quit = true;
-    		this.refreshConsole("Bravo vous avez fini le jeu !!");
+    		this.refreshConsole("Congratulations, you have finished this game !");
     	}
     }
     
@@ -254,6 +291,10 @@ public class IHM {
         this.quit = false;
     }
 
+    /**
+     * Returns game associated with instance. 
+     * @return
+     */
     public Game getGame() {
         return game;
     }

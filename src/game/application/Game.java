@@ -177,15 +177,15 @@ public class Game {
      * @throws NonTakeableException
      * @throws NonExistantTakeableException
      */
-    public String take(String str) throws NonTakeableException, NonExistantTakeableException {
+    public String take(String str, Character chara) throws NonTakeableException, NonExistantTakeableException {
         Item item = this.getHeroPlace().getItemByName(str);
         if (item==null) {
             throw new NonExistantTakeableException();
         }
         else if (item instanceof Takeable){
             Takeable takeable = (Takeable) item;
-            String taken = takeable.taken(this.getHero());
-            return takeable.taken(this.hero);
+            String taken = takeable.taken(chara);
+            return takeable.taken(chara);
         } else {
             throw new NonTakeableException();
         }
