@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
+import underthebeam.application.places.LockedDoorExit;
 
 public class ExitIT {
     
@@ -18,8 +19,8 @@ public class ExitIT {
     
     @Before
     public void setUp() {
-        this.e = new LockedExit("a locked exit", "exit", true);
-        this.c = new Hero("player", 15, null);
+        this.e = new LockedDoorExit("a locked exit", "exit", true);
+        this.c = new Hero("player", 15, null, null);
     }
    
     @Test

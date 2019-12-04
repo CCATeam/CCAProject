@@ -7,33 +7,16 @@ package game.application.places;
 
 import game.application.interfaces.Actionnable;
 import game.application.interfaces.Lookable;
-import game.application.interfaces.Usable;
 import game.application.characters.Character;
 import game.application.exceptions.LockedExitException;
-import game.application.exceptions.NonAvailableActionException;
-import underthebeam.application.items.DoorKey;
 
-public class LockedExit extends Exit implements Lookable, Actionnable {
+public abstract class LockedExit extends Exit implements Lookable, Actionnable {
     
     private boolean locked;
     
     public LockedExit(String Description, String name, boolean locked) {
         super(Description, name);
         this.locked = locked;
-    }
-
-    @Override
-    public void action(Usable u) throws NonAvailableActionException {
-        if(!DoorKey.isDoorKey(u)) {
-            throw new NonAvailableActionException("Action impossible !");
-        }
-        
-        if(this.locked == false) {
-            throw new NonAvailableActionException("Vous essayez d'ouvrir une porte déjà ouverte ...");
-        }
-        else {
-            this.unlock();
-        }
     }
 
     @Override
@@ -45,7 +28,7 @@ public class LockedExit extends Exit implements Lookable, Actionnable {
         return true;
     }
     
-    public boolean getLock() {
+    public boolean isLocked() {
     	return this.locked;
     }
     

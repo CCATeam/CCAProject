@@ -1,6 +1,7 @@
 package game.stockage;
 
 import com.google.gson.GsonBuilder;
+import game.application.items.weapon.Weapon;
 import underthebeam.application.characters.Hero;
 import underthebeam.application.characters.enemies.Orc;
 import underthebeam.application.items.weapons.Axe;
@@ -24,6 +25,7 @@ public class StockageTypeAdapter {
         gb.registerTypeAdapter(Hero.class, new HeroInstanceCreator())
         .registerTypeAdapter(Axe.class, new AxeInstanceCreator())
         .registerTypeAdapter(Orc.class, new OrcInstanceCreator())
-        .registerTypeAdapter(Sword.class, new SwordInstanceCreator());
+        .registerTypeAdapter(Sword.class, new SwordInstanceCreator())
+        .registerTypeAdapter(Weapon.class, new WeaponInstanceCreator());
     }
 }

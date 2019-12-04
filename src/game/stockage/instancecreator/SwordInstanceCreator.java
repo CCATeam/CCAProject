@@ -10,7 +10,7 @@ public class SwordInstanceCreator implements InstanceCreator<Sword>
 
     @Override
     public Sword createInstance(Type type) {
-        return new Sword();
+        return new Sword(null, null, null, 0);
     }
 
 }

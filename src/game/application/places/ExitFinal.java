@@ -4,6 +4,7 @@ import game.application.exceptions.NonAvailableActionException;
 import game.application.interfaces.Actionnable;
 import game.application.interfaces.Lookable;
 import game.application.interfaces.Usable;
+import underthebeam.application.items.DoorKey;
 import underthebeam.application.items.FinalKey;
 
 public class ExitFinal extends LockedExit implements Lookable, Actionnable{
@@ -19,7 +20,7 @@ public class ExitFinal extends LockedExit implements Lookable, Actionnable{
             throw new NonAvailableActionException("Action impossible !");
         }
         
-        if(this.getLock() == false) {
+        if(this.isLocked() == false) {
             throw new NonAvailableActionException("Vous essayez d'ouvrir une porte d�ja ouverte ...");
         }
         else {

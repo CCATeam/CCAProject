@@ -9,17 +9,18 @@ import game.application.interfaces.Lookable;
 import game.application.interfaces.Takeable;
 import game.application.interfaces.Usable;
 import game.application.items.Item;
+import game.application.items.TakeableItem;
 
 /**
  *
  * @author cbastin
  */
-public abstract class Weapon extends Item implements Lookable, Takeable {
+public abstract class Weapon extends TakeableItem {
 
 	private int damage;
 	
-    public Weapon(String name, String description, int damage) {
-        super(name, description);
+    public Weapon(String name, String description, String bagDescription, int damage) {
+        super(name, description, bagDescription);
         this.damage = damage;
     }
     

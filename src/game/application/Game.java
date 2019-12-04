@@ -149,6 +149,7 @@ public class Game {
         usable = (Usable)item;
            
         actionnable.action(usable);
+        this.getHero().removeItem(item.getNAME());
         return (Lookable)actionnable;
     }
 

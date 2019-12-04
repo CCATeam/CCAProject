@@ -4,9 +4,12 @@ import game.application.items.weapon.Weapon;
 
 public class Axe extends Weapon {
 	
-	public Axe() {
-		super("Hache", "une hache totalement normale.", 3);
+	public Axe(String name, String description, String bagDescription, int damages) {
+		super(name, description, bagDescription, damages);
 	}
         
+        public Axe() {
+            super("Hache", "Une hache", "Une hache", 3);
+        }
 	
 }
