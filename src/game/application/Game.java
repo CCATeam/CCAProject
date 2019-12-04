@@ -196,6 +196,14 @@ public class Game {
     	return ennemy.action((Hero)this.hero);
     }
     
+    public String lookAround () {
+        String res = "";
+        for (String s : this.getHeroPlace().listLookables().keySet()) {
+                res=res + "-" + s + "\n";
+        }  
+        return res;
+    }
+    
     /**
      * Returns game's hero
      * 

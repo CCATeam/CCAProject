@@ -76,10 +76,14 @@ public class IHM {
             }
         } 
         else if(c.equals(Command.LOOK) && tabParameters.length == 0) {
-            this.refreshConsole("Vous voyez autour de vous : ");
-            for (String s : this.game.getHeroPlace().listLookables().keySet()) {
-                this.refreshConsole(s);
-            }  
+            String s = this.game.lookAround();
+            if (s.equalsIgnoreCase("")) {
+                this.refreshConsole("Il n'y a rien dans cette pièce.");
+            }
+            else {
+                this.refreshConsole("Vous voyez autour de vous : ");
+                this.refreshConsole(s);  
+            }
         }
         //LOOK IN BAG
         else if(c.equals(Command.BAG) && tabParameters.length >= 0) {     

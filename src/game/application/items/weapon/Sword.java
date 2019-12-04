@@ -3,7 +3,7 @@ package game.application.items.weapon;
 public class Sword extends Weapon{
 
 	public Sword() {
-		super("épée", "épée de base plus utilie que belle", 4);
+		super("Ã©pÃ©e", "Ã©pÃ©e de base plus utilie que belle", 4);
 	}
 	
 }
