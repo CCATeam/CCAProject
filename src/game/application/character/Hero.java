@@ -12,7 +12,7 @@ import game.application.items.Consumable;
 import game.application.items.weapon.Sword;
 import game.application.places.Place;
 
-public class Hero extends Character implements Actionnable{
+public class Hero extends Warrior implements Actionnable{
     
     public Hero(String NAME, int life, Place p) {
         super(NAME, life, new Sword(), p);
