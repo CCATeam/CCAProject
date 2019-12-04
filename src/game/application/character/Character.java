@@ -49,7 +49,7 @@ public abstract class Character implements Lookable {
     }
 
     /*
-     * switch the courznt weapon with a other weapon in the bag
+     * switch the current weapon with a other weapon in the bag
      * @param name
      */
     
@@ -83,7 +83,7 @@ public abstract class Character implements Lookable {
     }
 
     /*
-     * make a attack
+     * make an attack
      * @param Character
      */
     public int attack(Character chara) {

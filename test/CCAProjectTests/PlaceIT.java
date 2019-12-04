@@ -1,3 +1,5 @@
+package CCAProjectTests;
+
 
 import game.application.character.Hero;
 import game.application.character.ennemy.Orc;

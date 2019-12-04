@@ -1,3 +1,5 @@
+package CCAProjectTests;
+
 import game.application.character.Hero;
 import game.application.character.Character;
 import game.application.exceptions.LockedExitException;

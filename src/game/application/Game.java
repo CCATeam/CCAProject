@@ -36,7 +36,7 @@ public class Game {
     public void initializeGame() {
         Stockage s = new Stockage();
         this.places = s.getDataGame();
-        this.hero = (Hero)this.places.get(0).getCharacterByName("Me");
+        this.hero = (Hero)this.places.get(0).getCharacterByName("Player");
         
         //Initialize all the places, i.e. Get the lookables, and other "ables" 
         //from the data contain in each place.
@@ -74,8 +74,6 @@ public class Game {
         return placeOut.toString();
     }
     
-    
-    
     /**
      *
      * @param s
@@ -111,15 +109,6 @@ public class Game {
             return item;
         }
         throw new NonLookableException();
-    }
-
-    /**
-     * 
-     * @param s
-     */
-    private boolean searchPlace(String s) {
-            // TODO - implement Game.existsPlace
-            throw new UnsupportedOperationException();
     }
 
     /**

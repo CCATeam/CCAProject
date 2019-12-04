@@ -6,8 +6,8 @@
         'characters': {
                          'Me': {
                                'type': 'hero',
-                               'NAME': 'Me',
-                               'life': 100,
+                               'NAME': 'Player',
+                               'life': 30,
                                'currentPlace': '0x1'
                          },
                           'orc1': {
