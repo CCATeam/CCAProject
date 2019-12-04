@@ -8,7 +8,7 @@ import game.application.items.Item;
 import game.application.places.Place;
 import game.application.places.Exit;
 import underthebeam.application.characters.Hero;
-import underthebeam.application.characters.enemies.Ennemy;
+import underthebeam.application.characters.enemies.Enemy;
 import game.application.characters.Character;
 import game.application.exceptions.NonExistantPlaceException;
 import game.application.exceptions.InvalidTaget;

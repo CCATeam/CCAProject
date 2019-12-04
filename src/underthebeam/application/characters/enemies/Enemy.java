@@ -8,12 +8,12 @@ import game.application.items.Item;
 import game.application.items.weapon.Weapon;
 import game.application.places.Place;
 
-public abstract class Ennemy extends Warrior{
+public abstract class Enemy extends Warrior{
 	
     private Special skill; // permet de realiser une capacit� special
     private Item loot; // null si pas de loot
 
-    public Ennemy(String name, int life, Weapon weapon, Special skill, Place p, Item loot) {
+    public Enemy(String name, int life, Weapon weapon, Special skill, Place p, Item loot) {
         super(name, life, weapon, p);
         this.skill = skill;
         this.loot = loot;
@@ -38,6 +38,6 @@ public abstract class Ennemy extends Warrior{
     }
 	
     public static boolean isEnnemy(Object o) {
-        return o instanceof Ennemy;
+        return o instanceof Enemy;
     }
 }

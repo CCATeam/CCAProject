@@ -7,16 +7,16 @@ package game.stockage.instancecreator;
 
 import com.google.gson.InstanceCreator;
 import underthebeam.application.characters.Hero;
-import underthebeam.application.characters.enemies.Ennemy;
+import underthebeam.application.characters.enemies.Enemy;
 import underthebeam.application.characters.enemies.Orc;
 import java.lang.reflect.Type;
 
-class EnnemyInstanceCreator implements InstanceCreator<Ennemy>
+class EnnemyInstanceCreator implements InstanceCreator<Enemy>
 {
 
     @Override
-    public Ennemy createInstance(Type type) {
-        return new Ennemy(null, 0, null, null, null, null) {
+    public Enemy createInstance(Type type) {
+        return new Enemy(null, 0, null, null, null, null) {
             @Override
             public String action(Hero h) {
                 throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

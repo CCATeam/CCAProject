@@ -8,7 +8,7 @@ import underthebeam.application.items.FinalKey;
 import game.application.items.weapon.Beam;
 import game.application.places.Place;
 
-public class LordDuck extends Ennemy {
+public class LordDuck extends Enemy {
 	
 	private final Special secondSkill;
 	

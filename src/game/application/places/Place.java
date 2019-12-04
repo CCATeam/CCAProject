@@ -4,7 +4,7 @@ import game.application.interfaces.Actionnable;
 import game.application.interfaces.Lookable;
 import game.application.items.Item;
 import game.application.characters.Character;
-import underthebeam.application.characters.enemies.Ennemy;
+import underthebeam.application.characters.enemies.Enemy;
 
 import java.util.*;
 import java.util.Map.Entry;

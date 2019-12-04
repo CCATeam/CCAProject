@@ -5,7 +5,7 @@ import underthebeam.application.characters.enemies.special.StrongHit;
 import underthebeam.application.items.weapons.Axe;
 import game.application.places.Place;
 
-public class Orc extends Ennemy {
+public class Orc extends Enemy {
 	
 	public Orc(String name, Place p) {
 		super(name, 10, new Axe(), new StrongHit(new Axe()), p, null);
