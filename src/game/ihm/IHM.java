@@ -169,42 +169,24 @@ public class IHM {
             }    
         }
 
+    
     /**
-     * Stops the game.
+     * Trigerred if player lose
      */
-    public void Die() {
-    	this.refreshConsole("You died....");
-    	Command c;
-        String answer=this.scan();
-        try {
-            c = Command.getCommand(answer);
-        }catch (InvalidCommandException ex) {
-            c = null;
+    public void hasLosed() {
+        if(this.game.hasLoosed()) {
+            this.quit = true;
+            this.refreshConsole("Game Over, you are dead\nTry again.");	
         }
-        if (c==Command.YES) {
-            this.refreshConsole("Do you wish to load a save ?");
-            answer=this.scan();
-            try {
-                c = Command.getCommand(answer);
-            }
-            catch (InvalidCommandException ex){
-                c = null;
-            }
-            if (c.equals(Command.YES)) {
-            	// Load a save
-            }
-            this.quit=true;
-        }    
-    	
     }
-
-    /**
-     * Stops the game and prints victory message.
-     */
-    public void Win() {
+    
+    
+    public void hasWinned() {
     	if (this.game.isWin()) {
     		this.quit = true;
-    		this.refreshConsole("Congratulations, you have finished this game !");
+    		this.refreshConsole("Bravo vous avez fini le jeu !!");
+            this.quit = true;
+            this.refreshConsole("Bravo vous avez fini le jeu !!");
     	}
     }
     
@@ -286,9 +268,9 @@ public class IHM {
                 refreshConsole("Commande invalide\n" 
                         + this.game.getHeroPlace().toString());
             }  
-            
+            this.hasLosed();
+            this.hasWinned();
         } while(this.quit == false);
-        this.quit = false;
     }
 
     /**

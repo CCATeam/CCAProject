@@ -210,4 +210,8 @@ public class Game {
     public boolean isWin() {
     	return this.getHeroPlace().getNAME().equals(this.finalPlace.getNAME());
     }
+    
+    public boolean hasLoosed() {
+        return this.getHero().getLife() < 1;
+    }
 }
