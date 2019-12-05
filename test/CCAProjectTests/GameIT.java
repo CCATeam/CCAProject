@@ -35,7 +35,7 @@ public class GameIT {
         System.out.println("take test");
         Game gameInstance = new Game();
         gameInstance.initializeGame();
-        gameInstance.take("clef");
+       
         assertEquals(null, gameInstance.getHeroPlace().getItemByName(ob));
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");

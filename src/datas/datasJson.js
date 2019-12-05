@@ -17,13 +17,13 @@
                                },
                                'currentPlace': '0x1'
                          },
-                          'orc1': {
+                          'orc 1': {
                                'type': 'orc',
-                               'NAME': 'orc1',
+                               'NAME': 'orc 1',
                                'currentPlace': '0x1',
                                'loot': {            
                                     'type': 'chest key',
-                                    'NAME': 'clef',
+                                    'NAME': 'chest key',
                                     'DESCRIPTION': 'A première vue la clef d\'un coffre'                                
                                }
                          }
@@ -31,7 +31,7 @@
         'exits': {
                      'couloir': {
                            'type': 'wooden door',
-                           'NAME': 'woodendoor',
+                           'NAME': 'wooden door',
                            'DESCRIPTION': 'porte en bois qui mène vers un couloir.'
                      }
                   },

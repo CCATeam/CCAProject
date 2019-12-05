@@ -7,6 +7,7 @@ import game.application.interfaces.Actionnable;
 import game.application.items.Item;
 import game.application.places.Place;
 import game.application.places.Exit;
+import game.application.characters.Character;
 import underthebeam.application.characters.Hero;
 import game.application.exceptions.NonExistantPlaceException;
 import game.application.exceptions.LockedExitException;
@@ -126,7 +127,7 @@ public class Game {
        
         if(params.length > 1) {
             //Get the actionnable from the place
-            String nameActionnable = params[params.length - 1];    
+            String nameActionnable = params[1];    
         
             actionnable = this.getHeroPlace().getActionnable(nameActionnable);    
             if(actionnable == null) {
@@ -174,15 +175,15 @@ public class Game {
      * @throws NonTakeableException
      * @throws NonExistantTakeableException
      */
-    public String take(String str) throws NonTakeableException, NonExistantTakeableException {
+    public String take(String str, Character chara) throws NonTakeableException, NonExistantTakeableException {
         Item item = this.getHeroPlace().getItemByName(str);
         if (item==null) {
             throw new NonExistantTakeableException();
         }
         else if (item instanceof Takeable){
             Takeable takeable = (Takeable) item;
-            String taken = takeable.taken(this.getHero());
-            return takeable.taken(this.hero);
+            String taken = takeable.taken(chara);
+            return takeable.taken(chara);
         } else {
             throw new NonTakeableException();
         }

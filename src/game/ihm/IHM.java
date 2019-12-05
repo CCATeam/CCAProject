@@ -31,14 +31,16 @@ public class IHM {
         this.SCANNER = new Scanner(System.in);
     }
         
-    
-
+    /**
+     * Returns String from user's input. 
+     * @return
+     */
     public String scan() {
         return this.SCANNER.nextLine();
     }
 
     /**
-     * 
+     * Prints String text
      * @param text
      */
     public void refreshConsole(String text) {
@@ -47,6 +49,11 @@ public class IHM {
         System.out.println("------------------------------------------------------------------------");
     }
     
+    /**
+     * Calls for game.go() to move player to close location whose name equals param String.
+     * Print informations accordingly. 
+     * @param param
+     */
     public void go(String param) {
         try {
                 String newP = this.game.go(param);
@@ -60,6 +67,11 @@ public class IHM {
             }
     }
     
+    /**
+     * Calls games.lookInPlace() to print returned description of a Lookable in hero's
+     * location whose name equals String param. 
+     * @param param
+     */
     public void lookSmthg(String param) {
         try {
             String l;
@@ -71,21 +83,36 @@ public class IHM {
         }
     }
     
+    /**
+     * Prints descriptions of every Item in hero's location.
+     */
     public void lookAround() {
         this.refreshConsole(this.game.getHeroPlace().toString());
     }
-    
+
+    /**
+     * Calls game.take() to move location's item whose name equals to String 
+     * param to hero's bag and remove it from place, then uses returned
+     * String to print informations accordingly.
+     * accordingly.
+     * @param param
+     */
     public void take (String param) {
-        try {
-            String taken = this.game.take(param);
-            this.refreshConsole("Vous avez ramassé" + taken);
-        } catch (NonTakeableException ex) {
-            this.refreshConsole("\nVous ne pouvez pas ramasser ceci" );
-        } catch (NonExistantTakeableException ex) {
-            this.refreshConsole("\nVous essayez de ramasser un objet qui n'existe pas !");
-        }
+            try {
+                String taken = this.game.take(param,this.game.getHero());
+                this.refreshConsole("Vous avez ramassé" + taken);
+            } catch (NonTakeableException ex) {
+                this.refreshConsole("\nVous ne pouvez pas ramasser ceci" );
+            } catch (NonExistantTakeableException ex) {
+                this.refreshConsole("\nVous essayez de ramasser un objet qui n'existe pas !");
+            }
     }
     
+    /**
+     * Calls game.use() to use items described in tabParameters and uses returned
+     * String to print informations accordingly.
+     * @param tabParameters
+     */
     public void use (String tabParameters[]) {
         try {
             Lookable l = this.game.use(tabParameters);
@@ -97,6 +124,9 @@ public class IHM {
         } 
     }
     
+    /**
+     *Prints available commands and their description.
+     */
     public void help() {
         this.refreshConsole("Les commandes suivantes sont disponibles :\n "
                 + "GO <lieu> : se déplacer\n"
@@ -109,8 +139,9 @@ public class IHM {
                 + "QUIT : quitter le jeu");
     }
     
-    
-    
+    /**
+     * Allows player to exit the game
+     */
     public void quit() {
         this.refreshConsole("Êtes-vous sûr ?\n");
         Command c;
@@ -121,7 +152,7 @@ public class IHM {
             c = null;
         }
         if (c==Command.YES) {
-            this.refreshConsole("Voulez-vous sauvegarder ?");
+            this.refreshConsole("Do you wish to load a save ?");
             answer=this.scan();
             try {
                 c = Command.getCommand(answer);
@@ -130,8 +161,7 @@ public class IHM {
                 c = null;
             }
             if (c.equals(Command.YES)) {
-                //Fonction de sauvegarde
-                
+            	// Load a save
             }
             this.quit=true;
         }    
@@ -235,6 +265,10 @@ public class IHM {
 
     }
 
+    /**
+     * Returns game associated with instance. 
+     * @return
+     */
     public Game getGame() {
         return game;
     }
