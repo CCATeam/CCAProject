@@ -19,9 +19,15 @@ import game.application.places.LockedExit;
 import underthebeam.application.places.WoodenDoorExit;
 import underthebeam.application.items.weapons.Sword;
 import game.application.items.weapon.Weapon;
+import game.application.places.FinalPlace;
+import game.application.places.Place;
+import game.application.characters.Character;
+import underthebeam.application.characters.enemies.LordDuck;
 import underthebeam.application.items.Wine;
+import underthebeam.application.items.weapons.BeamWeapon;
 import underthebeam.application.places.FogExit;
 import underthebeam.application.places.LockedDoorExit;
+import underthebeam.application.places.WaterFallExit;
 
 public class StockageTypeAdapterFactory {
 
@@ -37,9 +43,10 @@ public class StockageTypeAdapterFactory {
     public void setAdapterFactoriesToGsonBuilder(GsonBuilder gb) {
          //Define subtypes for Character
        gb.registerTypeAdapterFactory(RuntimeTypeAdapterFactory
-                .of(game.application.characters.Character.class, "type")
+                .of(Character.class, "type")
                 .registerSubtype(Hero.class, "hero")
                 .registerSubtype(Orc.class, "orc")
+                .registerSubtype(LordDuck.class, "lord duck")
        );
         
         //Define subtypes for Exit
@@ -50,6 +57,7 @@ public class StockageTypeAdapterFactory {
                 .registerSubtype(WoodenDoorExit.class, "wooden door")
                 .registerSubtype(LockedDoorExit.class, "locked exit")
                 .registerSubtype(FogExit.class, "fog")
+                .registerSubtype(WaterFallExit.class, "waterfall")
         );
 
         //Define subtypes for Item
@@ -63,6 +71,7 @@ public class StockageTypeAdapterFactory {
                 .registerSubtype(Weapon.class, "weapon")
                 .registerSubtype(Axe.class, "axe")
                 .registerSubtype(Sword.class, "sword")
+                .registerSubtype(BeamWeapon.class, "beam weapon")
                 .registerSubtype(Wine.class, "wine")
         );
     }
