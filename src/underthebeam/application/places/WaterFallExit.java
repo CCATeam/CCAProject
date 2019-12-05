@@ -14,9 +14,9 @@ import underthebeam.application.items.Torch;
  *
  * @author Fabien
  */
-public class WaterFall extends LockedExit {
+public class WaterFallExit extends LockedExit {
     
-     public WaterFall(String Description, String name, boolean locked) {
+     public WaterFallExit(String Description, String name, boolean locked) {
         super(Description, name, locked);
     }
     

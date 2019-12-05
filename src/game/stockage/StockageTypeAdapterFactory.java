@@ -19,6 +19,8 @@ import game.application.places.LockedExit;
 import underthebeam.application.places.WoodenDoorExit;
 import underthebeam.application.items.weapons.Sword;
 import game.application.items.weapon.Weapon;
+import game.application.places.FinalPlace;
+import game.application.places.Place;
 import underthebeam.application.items.Wine;
 import underthebeam.application.places.FogExit;
 import underthebeam.application.places.LockedDoorExit;
@@ -42,6 +44,14 @@ public class StockageTypeAdapterFactory {
                 .registerSubtype(Orc.class, "orc")
        );
         
+       //Define subtypes for Exit
+        gb.registerTypeAdapterFactory( 
+                RuntimeTypeAdapterFactory
+                .of(Place.class, "type")                
+                .registerSubtype(Place.class, "place")
+                .registerSubtype(FinalPlace.class, "final place")
+        );
+       
         //Define subtypes for Exit
         gb.registerTypeAdapterFactory( 
                 RuntimeTypeAdapterFactory

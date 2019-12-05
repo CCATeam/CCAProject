@@ -9,7 +9,7 @@ public class Axe extends Weapon {
 	}
         
         public Axe() {
-            super("Hache", "Une hache", "Une hache", 3);
+            super("Axe", "An axee", "An axe", 3);
         }
 	
 }

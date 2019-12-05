@@ -1,6 +1,7 @@
 [
  {
     '0x1': {
+        'type': 'place',
         'NAME': 'chambre',
         'DESCRIPTION': 'premiere place, il y a un chest,une clef, une porte ouverte et un orc1',
         'characters': {
@@ -60,6 +61,7 @@
  },
  {
      '0x2': {
+        'type': 'place',
         'NAME': 'couloir',
         'DESCRIPTION': 'deuxieme place',
         'characters': {
@@ -103,6 +105,7 @@
  },
  {
      '0x3': {
+        'type': 'final place',
         'NAME': 'sortie',
         'DESCRIPTION': 'Congratulation, you finished the game ! You can quit now.',
         'characters': {

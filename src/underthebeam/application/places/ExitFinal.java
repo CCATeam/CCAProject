@@ -1,10 +1,10 @@
-package game.application.places;
+package underthebeam.application.places;
 
 import game.application.exceptions.NonAvailableActionException;
 import game.application.interfaces.Actionnable;
 import game.application.interfaces.Lookable;
 import game.application.interfaces.Usable;
-import underthebeam.application.items.DoorKey;
+import game.application.places.LockedExit;
 import underthebeam.application.items.FinalKey;
 
 public class ExitFinal extends LockedExit implements Lookable, Actionnable{

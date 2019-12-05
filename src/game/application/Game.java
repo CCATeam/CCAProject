@@ -8,10 +8,7 @@ import game.application.items.Item;
 import game.application.places.Place;
 import game.application.places.Exit;
 import underthebeam.application.characters.Hero;
-import underthebeam.application.characters.enemies.Enemy;
-import game.application.characters.Character;
 import game.application.exceptions.NonExistantPlaceException;
-import game.application.exceptions.InvalidTaget;
 import game.application.exceptions.LockedExitException;
 import game.application.exceptions.NonAvailableActionException;
 import game.application.exceptions.NonExistantActionnableException;
@@ -39,8 +36,7 @@ public class Game {
         Stockage s = new Stockage();
         this.places = s.getDataGame();
         this.hero = (Hero)this.places.get(0).getCharacterByName("player");
-        this.finalPlace = new FinalPlace(); //TODO
-        //this.finalPlace = (FinalPlace)this.places.get(this.places.size());
+        this.finalPlace = (FinalPlace)this.places.get(this.places.size() - 1);
         
         //Initialize all the places, i.e. Get the lookables, and other "ables" 
         //from the data contain in each place.
@@ -194,5 +190,9 @@ public class Game {
     
     public boolean isWin() {
     	return this.getHeroPlace().getNAME().equals(this.finalPlace.getNAME());
+    }
+    
+    public boolean hasLoosed() {
+        return this.getHero().getLife() < 1;
     }
 }
