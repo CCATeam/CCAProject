@@ -3,7 +3,10 @@
     '0x1': {
         'type': 'place',
         'NAME': 'room',
-        'DESCRIPTION': '',
+        'DESCRIPTION': 'This is the room that you rented in a little inn. \n\
+                        All your personnal stuff was stealed while you were sleeping,\n\
+                        including the talisman meant to protect your native town.\n\
+                        You decide to search for it and take it bag !\n\ ',
         'characters': {
                         'player': {
                                'type': 'hero',
