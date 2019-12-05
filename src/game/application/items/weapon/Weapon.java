@@ -15,9 +15,7 @@ import game.application.items.TakeableItem;
  *
  * @author cbastin
  */
-
 public abstract class Weapon extends TakeableItem {
-
 
 	private int damage;
 	
