@@ -203,7 +203,7 @@
                            'NAME': '',
                            'DESCRIPTION': ''
                      },
-                     'cave':{
+                     'boat':{
                            'type': 'waterfall',
                            'NAME': '',
                            'DESCRIPTION': '',
@@ -217,7 +217,7 @@
  {
      '0x10': {
         'type': 'final place',
-        'NAME': 'cave',
+        'NAME': 'boat',
         'DESCRIPTION': '',
         'characters': {
                        },
