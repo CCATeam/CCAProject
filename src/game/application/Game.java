@@ -99,7 +99,7 @@ public class Game {
     }
     
     /**
-     *
+     * Search in bag an item whose name is equal to String s.
      * @param s
      * @return 
      * @throws game.application.exceptions.NonLookableException 
@@ -153,10 +153,18 @@ public class Game {
         return (Lookable)actionnable;
     }
 
+    /**
+     * Returns this game's hero's location.
+     * @return
+     */
     public Place getHeroPlace() {
         return this.hero.getPlace();
     }
     
+    /**
+     * Returns String of this game's hero's location
+     * @return
+     */
     public String lookAround () {
         return this.getHeroPlace().toString();
 
@@ -174,6 +182,7 @@ public class Game {
     /**
      *
      * @param str
+     * @param chara
      * @return
      * @throws NonTakeableException
      * @throws NonExistantTakeableException
@@ -192,6 +201,10 @@ public class Game {
         }
     }
     
+    /**
+     * Returns boolean indicating if the conditions of victory are satisfied.
+     * @return
+     */
     public boolean isWin() {
     	return this.getHeroPlace().getNAME().equals(this.finalPlace.getNAME());
     }

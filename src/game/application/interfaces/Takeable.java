@@ -14,7 +14,7 @@ import game.application.characters.Character;
 public interface Takeable {
     
     /**
-     *
+     * Removes Item from place and adds it to character's bag.
      * @param chara
      * @return
      */
