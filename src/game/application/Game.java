@@ -141,7 +141,7 @@ public class Game {
         //Get the usable from the bag, if none is found throw an exception
         Item item = this.getHero().getItemFromBag(params[0]);
         if(item == null || !Usable.isUsable(item)) {
-            throw new NonAvailableActionException("Il n'y a pas d'item utilisable avec ce nom");
+            throw new NonAvailableActionException("There is no available item with this name");
         }
         usable = (Usable)item;
            

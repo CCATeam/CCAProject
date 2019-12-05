@@ -2,10 +2,10 @@
  {
     '0x1': {
         'type': 'place',
-        'NAME': 'chambre',
-        'DESCRIPTION': 'premiere place, il y a un chest,une clef, une porte ouverte et un orc1',
+        'NAME': 'room',
+        'DESCRIPTION': '',
         'characters': {
-                         'player': {
+                        'player': {
                                'type': 'hero',
                                'NAME': 'player',
                                'life': 30,
@@ -16,98 +16,209 @@
                                    'damage': 4
                                },
                                'currentPlace': '0x1'
-                         },
-                          'orc 1': {
-                               'type': 'orc',
-                               'NAME': 'orc 1',
-                               'currentPlace': '0x1',
-                               'loot': {            
-                                    'type': 'chest key',
-                                    'NAME': 'chest key',
-                                    'DESCRIPTION': 'A première vue la clef d\'un coffre'                                
-                               }
                          }
                        },
         'exits': {
-                     'couloir': {
+                     'corridor': {
                            'type': 'wooden door',
-                           'NAME': 'wooden door',
-                           'DESCRIPTION': 'porte en bois qui mène vers un couloir.'
+                           'NAME': '',
+                           'DESCRIPTION': ''
                      }
                   },
         'items': {
-                    'chest': {
-                          'type': 'chest',
-                          'NAME': 'chest',
-                          'DESCRIPTION': 'un coffre au trésor',
-                          'locked': true,
-                          'containedItem': {             
-                               'type': 'door key',
-                               'NAME': 'doorkey',
-                               'DESCRIPTION': 'Key of a door'
-                           },
-                          'place': '0x1'
-
-                    },
-                    'wine': {
-                               'type': 'wine',
-                               'NAME': 'wine',
-                               'DESCRIPTION': 'A bottle of wine that restore 5 HP',
-                               'nbEffect': 4
-
-                         }
+                    
                   }
   }
  },
  {
      '0x2': {
         'type': 'place',
-        'NAME': 'couloir',
-        'DESCRIPTION': 'deuxieme place',
+        'NAME': 'corridor',
+        'DESCRIPTION': '',
         'characters': {
-                          'orc2': {
-                               'type': 'orc',
-                               'NAME': 'orc2',
-                               'currentPlace': '0x2'
-                         },
-                          'orc3': {
-                               'type': 'orc',
-                               'NAME': 'orc3',
-                               'currentPlace': '0x2'
-                         }
+                        
                        },
         'exits': {
-                     'chambre':{
-                           'type': 'exit',
-                           'NAME': 'exittest',
-                           'DESCRIPTION': 'testExit'
+                     'room':{
+                           'type': 'wooden door',
+                           'NAME': '',
+                           'DESCRIPTION': ''
                      },
-                     'sortie':{
+                     'cellar':{
                            'type': 'locked exit',
-                           'NAME': 'porte',
-                           'DESCRIPTION': 'Porte de sortie test fermee',
+                           'NAME': '',
+                           'DESCRIPTION': '',
                            'locked': true
+                     },
+                     'reception':{
+                           'type': 'wooden door',
+                           'NAME': '',
+                           'DESCRIPTION': ''
                      }
                   },
         'items': {
-                         'item3': {
-                               'type': 'item',
-                               'NAME': 'item3',
-                               'DESCRIPTION': 'blabla3'
-                         },
-                         'item4': {
-                               'type': 'item',
-                               'NAME': 'item4',
-                               'DESCRIPTION': 'blabla4'
-                         }
-                       }
+                     
+                 }
      }
  },
  {
      '0x3': {
-        'type': 'final place',
-        'NAME': 'sortie',
+        'type': 'place',
+        'NAME': 'cellar',
         'DESCRIPTION': 'Congratulation, you finished the game ! You can quit now.',
+        'characters': {
+                       },
+        'exits': {
+                     'corridor':{
+                           'type': 'wooden door',
+                           'NAME': '',
+                           'DESCRIPTION': ''
+                     }
+                  },
+        'items': {
+                    }
+     }
+ },
+ {
+     '0x4': {
+        'type': 'place',
+        'NAME': 'reception',
+        'DESCRIPTION': '',
+        'characters': {
+                       },
+        'exits': {
+                     'corridor':{
+                           'type': 'exit',
+                           'NAME': '',
+                           'DESCRIPTION': ''
+                     },
+                     'trail':{
+                           'type': 'exit',
+                           'NAME': '',
+                           'DESCRIPTION': ''
+                     }
+                  },
+        'items': {
+                    }
+     }
+ },
+ {
+     '0x5': {
+        'type': 'place',
+        'NAME': 'trail',
+        'DESCRIPTION': '',
+        'characters': {
+                       },
+        'exits': {
+                     'moutain':{
+                           'type': 'exit',
+                           'NAME': '',
+                           'DESCRIPTION': ''
+                     },
+                     'forest':{
+                           'type': 'exit',
+                           'NAME': '',
+                           'DESCRIPTION': ''
+                     }
+                 },
+        'items': {
+                    }
+     }
+ },
+ {
+     '0x6': {
+        'type': 'place',
+        'NAME': 'forest',
+        'DESCRIPTION': '',
+        'characters': {
+                       },
+        'exits': {
+                     'trail':{
+                           'type': 'exit',
+                           'NAME': '',
+                           'DESCRIPTION': ''
+                     },
+                     'cave':{
+                           'type': 'exit',
+                           'NAME': '',
+                           'DESCRIPTION': ''
+                     }
+                 },
+        'items': {
+                    }
+     }
+ },
+ {
+     '0x7': {
+        'type': 'place',
+        'NAME': 'cave',
+        'DESCRIPTION': '',
+        'characters': {
+                       },
+        'exits': {
+                     'forest':{
+                           'type': 'exit',
+                           'NAME': '',
+                           'DESCRIPTION': ''
+                     }
+                 },
+        'items': {
+                    }
+     }
+ },
+ {
+     '0x8': {
+        'type': 'place',
+        'NAME': 'moutain',
+        'DESCRIPTION': '',
+        'characters': {
+                       },
+        'exits': {
+                     'trail':{
+                           'type': 'exit',
+                           'NAME': '',
+                           'DESCRIPTION': ''
+                     },
+                     'stream':{
+                           'type': 'fog',
+                           'NAME': '',
+                           'DESCRIPTION': '',
+                           'locked': true
+                     }
+                 },
+        'items': {
+                    }
+     }
+ },
+ {
+     '0x9': {
+        'type': 'place',
+        'NAME': 'stream',
+        'DESCRIPTION': '',
+        'characters': {
+                       },
+        'exits': {
+                     'moutain':{
+                           'type': 'exit',
+                           'NAME': '',
+                           'DESCRIPTION': ''
+                     },
+                     'cave':{
+                           'type': 'waterfall',
+                           'NAME': '',
+                           'DESCRIPTION': '',
+                           'locked': true
+                     }
+                 },
+        'items': {
+                    }
+     }
+ },
+ {
+     '0x10': {
+        'type': 'final place',
+        'NAME': 'cave',
+        'DESCRIPTION': '',
         'characters': {
                        },
         'exits': {
