@@ -107,7 +107,7 @@ public enum Command {
                 }
             }
         }
-        if(arg1 != null && !arg2.isBlank()) {
+        if(arg1 != null && !arg2.isEmpty()) {
             return new String[]{arg1,arg2};
         }else if(arg1 !=null) {
             return new String[]{arg1};

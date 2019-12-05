@@ -21,7 +21,9 @@ public abstract class Warrior extends Character {
     
     public void changeWeapon(String name) {
         Weapon tmp = (Weapon) removeItem(name);
-        addItem(currentWeapon);
+        if(this.currentWeapon != null) {
+            addItem(currentWeapon);
+        }
         this.currentWeapon = tmp;
     }
     
