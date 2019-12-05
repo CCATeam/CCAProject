@@ -15,7 +15,4 @@ public class Wine extends Consumable {
         super(NAME, DESCRIPTION, BAGDESCRIPTION, nbEffect);
     }
     
-    public Wine() {
-        super("wine", "Wine: recup 4 hp", "Wine: recup 4 hp", 4);
-    }
 }

@@ -5,7 +5,6 @@
  */
 package CCAProjectTests;
 
-import game.application.Game;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -19,25 +18,13 @@ import static org.junit.Assert.*;
  */
 public class GameIT {
     
-    private Game game;
-    
     @Before
     public void setUp() {
-        this.game = new Game();
     }
     
-     /**
-     * Test of take method, of class Game.
-     */
-    @Test
-    public void testTake() throws Exception {
-        String ob = null;
-        System.out.println("take test");
-        Game gameInstance = new Game();
-        gameInstance.initializeGame();
-       
-        assertEquals(null, gameInstance.getHeroPlace().getItemByName(ob));
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+    // TODO add test methods here.
+    // The methods must be annotated with annotation @Test. For example:
+    //
+    // @Test
+    // public void hello() {}
 }

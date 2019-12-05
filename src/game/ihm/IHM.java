@@ -3,11 +3,15 @@ package game.ihm;
 import game.application.Command;
 import game.application.Game;
 import game.application.exceptions.InvalidCommandException;
+import game.application.exceptions.InvalidTaget;
 import game.application.interfaces.Lookable;
+import game.application.interfaces.Takeable;
+import game.application.items.Item;
 import game.application.exceptions.LockedExitException;
 import game.application.exceptions.NonAvailableActionException;
 import game.application.exceptions.NonExistantActionnableException;
 import game.application.exceptions.NonExistantPlaceException;
+import game.application.places.Place;
 import game.application.exceptions.NonExistantLookableException;
 import game.application.exceptions.NonExistantTakeableException;
 import game.application.exceptions.NonTakeableException;
@@ -44,9 +48,7 @@ public class IHM {
      * @param text
      */
     public void refreshConsole(String text) {
-        System.out.println("");
         System.out.println(text);
-        System.out.println("------------------------------------------------------------------------");
     }
     
     /**
@@ -114,14 +116,14 @@ public class IHM {
      * @param tabParameters
      */
     public void use (String tabParameters[]) {
-        try {
-            Lookable l = this.game.use(tabParameters);
-            this.refreshConsole(l.lookedInBag());
-        } catch (NonExistantActionnableException ex) {
-            this.refreshConsole("Rien ne se produit ...\n");
-        } catch (NonAvailableActionException ex) {
-            this.refreshConsole(ex.getMessage());
-        } 
+            try {
+                Lookable l = this.game.use(tabParameters);
+                this.refreshConsole(l.lookedInBag());
+            } catch (NonExistantActionnableException ex) {
+                this.refreshConsole("Rien ne se produit ...\n");
+            } catch (NonAvailableActionException ex) {
+                this.refreshConsole(ex.getMessage());
+            } 
     }
     
     /**
@@ -143,8 +145,36 @@ public class IHM {
      * Allows player to exit the game
      */
     public void quit() {
-        this.refreshConsole("Êtes-vous sûr ?\n");
-        Command c;
+            this.refreshConsole("Êtes-vous sûr ?\n");
+            Command c;
+            String answer=this.scan();
+            try {
+                c = Command.getCommand(answer);
+            }catch (InvalidCommandException ex) {
+                c = null;
+            }
+            if (c==Command.YES) {
+//                this.refreshConsole("Voulez-vous sauvegarder ?");
+//                answer=this.scan();
+//                try {
+//                    c = Command.getCommand(answer);
+//                }
+//                catch (InvalidCommandException ex){
+//                    c = null;
+//                }
+//                if (c.equals(Command.YES)) {
+//                    ;  //Eventuelle fonction de sauvegarde
+//                }
+                this.quit=true;
+            }    
+        }
+
+    /**
+     * Stops the game.
+     */
+    public void Die() {
+    	this.refreshConsole("You died....");
+    	Command c;
         String answer=this.scan();
         try {
             c = Command.getCommand(answer);
@@ -165,21 +195,16 @@ public class IHM {
             }
             this.quit=true;
         }    
-    }
-
-
-    public void hasLosed() {
-        if(this.game.hasLoosed()) {
-            this.quit = true;
-            this.refreshConsole("Game Over, you are dead\nTry again.");	
-        }
     	
     }
 
-    public void hasWinned() {
+    /**
+     * Stops the game and prints victory message.
+     */
+    public void Win() {
     	if (this.game.isWin()) {
-            this.quit = true;
-            this.refreshConsole("Bravo vous avez fini le jeu !!");
+    		this.quit = true;
+    		this.refreshConsole("Congratulations, you have finished this game !");
     	}
     }
     
@@ -189,8 +214,7 @@ public class IHM {
      * @param c
      * @param tabParameters
      */
-    public void action(Command c, String[] tabParameters) {   
-        
+    public void action(Command c, String[] tabParameters) {     
         //GO
         if(c.equals(Command.GO)) {
             if (tabParameters.length > 0) {
@@ -236,8 +260,10 @@ public class IHM {
             this.quit();
     }
     
+    
+    
     /**
-     * Main function of our IHM, here show what need to be shown and wait for 
+     * Main function of our IHM, here show what need to be shouw and wait for 
      * a user action.
      */
     public void run() {       
@@ -248,6 +274,7 @@ public class IHM {
         refreshConsole(this.game.getHeroPlace().toString());
         
         do {       
+            System.out.println("------------------------------------------------------------------------");
             System.out.println("");
             line = this.scan();
             try {
@@ -259,10 +286,9 @@ public class IHM {
                 refreshConsole("Commande invalide\n" 
                         + this.game.getHeroPlace().toString());
             }  
-            this.hasLosed();
-            this.hasWinned();
+            
         } while(this.quit == false);
-
+        this.quit = false;
     }
 
     /**

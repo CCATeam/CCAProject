@@ -17,7 +17,7 @@ public enum Command {
     INVALID;
 
     /**
-     * 
+     * Return Command associated with 3 first letters of string
      * @param strScanned
      * @return Command
      * @throws game.application.exceptions.InvalidCommandException
@@ -82,7 +82,7 @@ public enum Command {
     
     
     /**
-     * 
+     * Parses parameters from array of String in order to use in IHM.actions
      * @param s
      * @return 
      */

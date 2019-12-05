@@ -11,6 +11,7 @@ import game.application.interfaces.Usable;
 import game.application.exceptions.NonAvailableActionException;
 import game.application.items.Consumable;
 import game.application.items.weapon.Weapon;
+import underthebeam.application.items.weapons.Sword;
 import game.application.places.Place;
 
 public class Hero extends Warrior implements Actionnable{
@@ -23,12 +24,13 @@ public class Hero extends Warrior implements Actionnable{
     public void action(Usable u) throws NonAvailableActionException{
         if (Consumable.isConsumable(u)) {
             Consumable cons = (Consumable) u;
-            
             if (this.getLife() + cons.getNbEffect() <= this.getMAXLIFE()) {
             	this.setLife(this.getLife() + cons.getNbEffect());
+            	this.removeItem(cons.getNAME());
             }
-            else if (this.getLife() < this.getMAXLIFE()) {
+            if (this.getLife() < this.getMAXLIFE()) {
             	this.setLife(this.getMAXLIFE());
+            	this.removeItem(cons.getNAME());
             }
         }
         

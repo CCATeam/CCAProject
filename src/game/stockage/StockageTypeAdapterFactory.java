@@ -49,14 +49,6 @@ public class StockageTypeAdapterFactory {
                 .registerSubtype(LordDuck.class, "lord duck")
        );
         
-       //Define subtypes for Exit
-        gb.registerTypeAdapterFactory( 
-                RuntimeTypeAdapterFactory
-                .of(Place.class, "type")                
-                .registerSubtype(Place.class, "place")
-                .registerSubtype(FinalPlace.class, "final place")
-        );
-       
         //Define subtypes for Exit
         gb.registerTypeAdapterFactory( 
                 RuntimeTypeAdapterFactory
