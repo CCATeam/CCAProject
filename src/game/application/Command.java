@@ -86,8 +86,33 @@ public enum Command {
      * @param s
      * @return 
      */
-    public static String[] getParameters(String s){
-       String[] tabParams = s.split(" ");
-       return Arrays.copyOfRange(tabParams, 1, tabParams.length);
+    public static String[] getParameters(String s) {
+        String[] tabParams = s.split(" ");
+        int ind = 2;
+        String arg1 = null;
+        String arg2 = "";
+        boolean on = false;
+        if (tabParams.length >= 2) {
+            arg1=tabParams[1];
+            while (ind < tabParams.length && !tabParams[ind].equalsIgnoreCase("on")) {
+                arg1 = arg1 + " " + tabParams[ind];
+                ind++;
+            }
+            ind++;
+            while (ind < tabParams.length) {
+                arg2 = arg2 + tabParams[ind];
+                ind++;
+                if (ind < tabParams.length-1) {
+                    arg2+=" ";
+                }
+            }
+        }
+        if(arg1 != null && !arg2.isBlank()) {
+            return new String[]{arg1,arg2};
+        }else if(arg1 !=null) {
+            return new String[]{arg1};
+        }else 
+            return new String[]{};
+
     }
 }

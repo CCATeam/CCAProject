@@ -24,7 +24,7 @@
         'exits': {
                      'couloir': {
                            'type': 'wooden door',
-                           'NAME': 'woodendoor',
+                           'NAME': 'wooden door',
                            'DESCRIPTION': 'porte en bois qui mène vers un couloir.'
                      }
                   },

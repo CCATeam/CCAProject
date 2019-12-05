@@ -130,7 +130,7 @@ public class Game {
        
         if(params.length > 1) {
             //Get the actionnable from the place
-            String nameActionnable = params[params.length - 1];    
+            String nameActionnable = params[1];    
         
             actionnable = this.getHeroPlace().getActionnable(nameActionnable);    
             if(actionnable == null) {
