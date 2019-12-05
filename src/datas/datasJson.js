@@ -114,18 +114,18 @@
      '0x4': {
         'type': 'place',
         'NAME': 'reception',
-        'DESCRIPTION': 'The reception of the inn.\n The manager look at you nonchalantly and put a key on the counter.\n There is a beam. ',
+        'DESCRIPTION': 'The reception of the inn.\n The manager look at you nonchalantly and put a key on the counter.\n There is a beam, a passage that leads to the corridor and a door which leads to the trail out of the inn.. ',
         'characters': {
                        },
         'exits': {
                      'corridor':{
                            'type': 'exit',
-                           'NAME': '',
+                           'NAME': 'passage',
                            'DESCRIPTION': ''
                      },
                      'trail':{
                            'type': 'exit',
-                           'NAME': '',
+                           'NAME': 'door',
                            'DESCRIPTION': ''
                      }
                   },
