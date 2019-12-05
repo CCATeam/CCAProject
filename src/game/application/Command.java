@@ -100,7 +100,8 @@ public enum Command {
             }
             ind++;
             while (ind < tabParams.length) {
-                arg2 = arg2 + tabParams[ind];
+                arg2 = arg2 + " " + tabParams[ind];
+                ind++;
                 if (ind < tabParams.length-1) {
                     arg2+=" ";
                 }

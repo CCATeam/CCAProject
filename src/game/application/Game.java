@@ -72,8 +72,10 @@ public class Game {
                 if(p.getNAME().equals(location)) {
                     placeOut = p;
                 }
-            }                                               
+            }                                        
+            this.getHeroPlace().removeCharacter(hero);
             this.getHero().setCurrentPlace(placeOut);
+            this.getHeroPlace().addCharacter(this.hero);
         }   
         return placeOut.toString();
     }
@@ -130,7 +132,7 @@ public class Game {
        
         if(params.length > 1) {
             //Get the actionnable from the place
-            String nameActionnable = params[1];    
+            String nameActionnable = params[1].trim();    
         
             actionnable = this.getHeroPlace().getActionnable(nameActionnable);    
             if(actionnable == null) {

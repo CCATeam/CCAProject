@@ -12,14 +12,16 @@ import game.application.items.Item;
 import game.application.places.Place;
 import underthebeam.application.characters.Hero;
 
+/**
+ *
+ * @author Fabien
+ */
+public class ClassicBeam extends Container {
 
-public class TrapedBeam extends Container {
-    
-    private static final int DAMAGE = 3;
-    
-    public TrapedBeam(String NAME, String DESCRIPTION, boolean locked, Item i, Place p) {
+    public ClassicBeam(String NAME, String DESCRIPTION, boolean locked, Item i, Place p) {
         super(NAME, DESCRIPTION, locked, i, p);
     }
+    
     @Override
     public void action(Usable u) throws NonAvailableActionException {
         throw new NonAvailableActionException("Action impossible !");
@@ -27,9 +29,7 @@ public class TrapedBeam extends Container {
 
     @Override
     public String lookedInPlace() {
-        Hero h = (Hero)this.getPlace().getCharacterByName("player");
-        h.takeDamage(DAMAGE);
+        this.getPlace().addItem(this.getContainedItem());
         return super.lookedInPlace(); 
     }
-    
 }

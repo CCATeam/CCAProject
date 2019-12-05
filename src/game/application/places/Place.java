@@ -160,8 +160,7 @@ public class Place {
     
     @Override
     public String toString() {
-        return this.NAME + "\n"
-            + "   Description: " + this.DESCRIPTION;
+        return this.NAME + " " + this.DESCRIPTION;
     }
     
 }

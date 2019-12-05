@@ -23,6 +23,9 @@ import game.application.places.FinalPlace;
 import game.application.places.Place;
 import game.application.characters.Character;
 import underthebeam.application.characters.enemies.LordDuck;
+import underthebeam.application.items.Bread;
+import underthebeam.application.items.ClassicBeam;
+import underthebeam.application.items.TrapedBeam;
 import underthebeam.application.items.Wine;
 import underthebeam.application.items.weapons.BeamWeapon;
 import underthebeam.application.places.FogExit;
@@ -73,6 +76,9 @@ public class StockageTypeAdapterFactory {
                 .registerSubtype(Sword.class, "sword")
                 .registerSubtype(BeamWeapon.class, "beam weapon")
                 .registerSubtype(Wine.class, "wine")
+                .registerSubtype(Bread.class, "bread")
+                .registerSubtype(ClassicBeam.class, "beam classic")
+                .registerSubtype(TrapedBeam.class, "beam traped")
         );
     }
 }
