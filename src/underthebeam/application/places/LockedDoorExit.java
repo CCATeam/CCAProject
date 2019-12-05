@@ -27,7 +27,7 @@ public class LockedDoorExit extends LockedExit{
         }
         
         if(this.isLocked() == false) {
-            throw new NonAvailableActionException("Vous essayez d'ouvrir une porte déjà ouverte ...");
+            throw new NonAvailableActionException("You are trying to unock an open door ...");
         }
         else {
             this.unlock();

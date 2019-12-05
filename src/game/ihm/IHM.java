@@ -120,7 +120,7 @@ public class IHM {
                 Lookable l = this.game.use(tabParameters);
                 this.refreshConsole(l.lookedInBag());
             } catch (NonExistantActionnableException ex) {
-                this.refreshConsole("Rien ne se produit ...\n");
+                this.refreshConsole("Nothing happened ...\n");
             } catch (NonAvailableActionException ex) {
                 this.refreshConsole(ex.getMessage());
             } 

@@ -41,7 +41,7 @@ public class Chest extends Container {
     public String toString() {
         String message;
         if(this.isLocked()) {
-            message = "Un coffre fermé.";
+            message = this.getDESCRIPTION();
         }
         else {
             message = "Un coffre ouvert, il contient: \n " + this.getContainedItem().lookedInPlace();
