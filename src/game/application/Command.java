@@ -105,6 +105,7 @@ public enum Command {
                 if (ind < tabParams.length-1) {
                     arg2+=" ";
                 }
+                ind++;
             }
         }
         if(arg1 != null && !arg2.isEmpty()) {
