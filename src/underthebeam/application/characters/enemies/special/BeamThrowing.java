@@ -1,13 +1,13 @@
 package underthebeam.application.characters.enemies.special;
 
-import game.application.items.weapon.Beam;
+import underthebeam.application.items.weapons.BeamWeapon;
 import game.application.items.weapon.Weapon;
 
 public class BeamThrowing extends Special {
 
 	private final int TIMER = 3;
 	private int count;
-	private Weapon weapon = new Beam();
+	private Weapon weapon = new BeamWeapon();
 	
 	public BeamThrowing() {
 		super(1);

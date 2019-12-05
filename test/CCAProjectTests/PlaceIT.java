@@ -5,20 +5,19 @@ import underthebeam.application.characters.Hero;
 import underthebeam.application.characters.enemies.Orc;
 import game.application.interfaces.Actionnable;
 import game.application.interfaces.Lookable;
-import underthebeam.application.items.Chest;
 import underthebeam.application.items.ChestKey;
 import game.application.items.Item;
-import underthebeam.application.items.weapons.Sword;
 import game.application.characters.Character;
 import game.application.places.Exit;
 import game.application.places.LockedExit;
 import game.application.places.Place;
-import game.application.places.WoodenDoorExit;
+import underthebeam.application.places.WoodenDoorExit;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import underthebeam.application.places.LockedDoorExit;
 
 public class PlaceIT {
     
@@ -34,7 +33,7 @@ public class PlaceIT {
     @Before
     public void setUp() {
         
-        hero = new Hero("player", 100, null);
+        hero = new Hero("player", 100, null, null);
         Orc orc = new Orc("orc1", null);
         this.characters = new HashMap<>();
         this.characters.put(hero.getNAME(), hero);
@@ -50,7 +49,7 @@ public class PlaceIT {
         this.p1 = new Place("chambre", "La chambre", characters, exits1, items);
         
         this.exits2 = new HashMap<>();
-        Exit lockedEx = new LockedExit("Locked exit", "lockedexit", true);
+        Exit lockedEx = new LockedDoorExit("Locked exit", "lockedexit", true);
         this.exits2.put("chambre", lockedEx);
         
         this.p2 = new Place("chambre", "La chambre", characters, exits2, null);
@@ -111,7 +110,7 @@ public class PlaceIT {
     public void testAddCharacter2() {
         this.p1.initialize();
         this.p2.initialize();
-        Character c = new Hero("hero2", 55, p1);
+        Character c = new Hero("hero2", 55, null, p1);
         this.p1.addCharacter(c);      
         assertSame(this.p1.getCharacterByName(c.getNAME()), c);
     }

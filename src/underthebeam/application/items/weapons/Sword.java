@@ -4,8 +4,11 @@ import game.application.items.weapon.Weapon;
 
 public class Sword extends Weapon{
 
-	public Sword() {
-		super("épée", "épée de base plus utilie que belle","Une épée basique qui inflige 4 point de dommages", 4);
+	public Sword(String name, String description, String bagDescription, int damages) {
+		super(name, description, bagDescription, damages);
 	}
 	
+        public Sword() {
+            super("Sword", "A sword", "A sword", 4);
+        }
 }

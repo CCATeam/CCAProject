@@ -20,7 +20,7 @@ public class ExitFinal extends LockedExit implements Lookable, Actionnable{
             throw new NonAvailableActionException("Action impossible !");
         }
         
-        if(this.getLock() == false) {
+        if(this.isLocked() == false) {
             throw new NonAvailableActionException("Vous essayez d'ouvrir une porte d�ja ouverte ...");
         }
         else {

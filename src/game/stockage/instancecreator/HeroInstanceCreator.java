@@ -14,6 +14,6 @@ public class HeroInstanceCreator implements InstanceCreator<Hero>
 
     @Override
     public Hero createInstance(Type type) {
-        return new Hero(null, 0, null);
+        return new Hero(null, 0, null, null);
     }
 }

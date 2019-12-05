@@ -2,7 +2,6 @@
 package underthebeam.ihm;
 
 import game.application.Command;
-import game.application.Game;
 import game.application.exceptions.InvalidTaget;
 import game.application.items.Item;
 import game.ihm.IHM;

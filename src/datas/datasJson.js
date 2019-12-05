@@ -8,6 +8,12 @@
                                'type': 'hero',
                                'NAME': 'player',
                                'life': 30,
+                               'currentWeapon': {
+                                   'type': 'sword',
+                                   'NAME': 'sword',
+                                   'Description': 'a sword',
+                                   'damage': 4
+                               },
                                'currentPlace': '0x1'
                          },
                           'orc1': {
@@ -29,17 +35,24 @@
                      }
                   },
         'items': {
-                         'chest': {
-                               'type': 'chest',
-                               'NAME': 'chest',
-                               'DESCRIPTION': 'un coffre au trésor',
-                               'locked': true,
-                               'containedItem': {             
-                                    'type': 'door key',
-                                    'NAME': 'doorkey',
-                                    'DESCRIPTION': 'Key of a door'
-                                },
-                               'place': '0x1'
+                    'chest': {
+                          'type': 'chest',
+                          'NAME': 'chest',
+                          'DESCRIPTION': 'un coffre au trésor',
+                          'locked': true,
+                          'containedItem': {             
+                               'type': 'door key',
+                               'NAME': 'doorkey',
+                               'DESCRIPTION': 'Key of a door'
+                           },
+                          'place': '0x1'
+
+                    },
+                    'wine': {
+                               'type': 'wine',
+                               'NAME': 'wine',
+                               'DESCRIPTION': 'A bottle of wine that restore 5 HP',
+                               'nbEffect': 4
 
                          }
                   }

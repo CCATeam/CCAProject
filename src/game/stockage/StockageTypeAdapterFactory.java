@@ -16,9 +16,12 @@ import game.application.items.Item;
 import underthebeam.application.items.weapons.Axe;
 import game.application.places.Exit;
 import game.application.places.LockedExit;
-import game.application.places.WoodenDoorExit;
+import underthebeam.application.places.WoodenDoorExit;
 import underthebeam.application.items.weapons.Sword;
 import game.application.items.weapon.Weapon;
+import underthebeam.application.items.Wine;
+import underthebeam.application.places.FogExit;
+import underthebeam.application.places.LockedDoorExit;
 
 public class StockageTypeAdapterFactory {
 
@@ -45,7 +48,8 @@ public class StockageTypeAdapterFactory {
                 .of(Exit.class, "type")
                 .registerSubtype(Exit.class, "exit")
                 .registerSubtype(WoodenDoorExit.class, "wooden door")
-                .registerSubtype(LockedExit.class, "locked exit")
+                .registerSubtype(LockedDoorExit.class, "locked exit")
+                .registerSubtype(FogExit.class, "fog")
         );
 
         //Define subtypes for Item
@@ -56,9 +60,10 @@ public class StockageTypeAdapterFactory {
                 .registerSubtype(DoorKey.class, "door key")
                 .registerSubtype(ChestKey.class, "chest key")
                 .registerSubtype(Chest.class, "chest")
-                .registerSubtype(Axe.class, "axe")
                 .registerSubtype(Weapon.class, "weapon")
+                .registerSubtype(Axe.class, "axe")
                 .registerSubtype(Sword.class, "sword")
+                .registerSubtype(Wine.class, "wine")
         );
     }
 }
